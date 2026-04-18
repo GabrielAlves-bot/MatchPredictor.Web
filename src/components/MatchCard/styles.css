@@ -1,0 +1,117 @@
+.match-card {
+  background-color: var(--surface-container-lowest);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(189, 202, 192, 0.1);
+  position: relative;
+}
+
+.match-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.match-card__info-date {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.match-card__info-venue {
+  font-size: 12px;
+  color: rgba(73, 96, 124, 0.7);
+}
+
+.match-card__status-badge {
+  background-color: rgba(0, 107, 71, 0.1);
+  color: var(--primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.match-card__status-badge .material-symbols-outlined {
+  font-size: 14px;
+  font-variation-settings: "FILL" 1;
+}
+
+.match-card__status-text {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.match-card__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.match-card__team {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.match-card__team-flag {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.match-card__team-name {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.match-card__score {
+  grid-column: span 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.match-card__score-input {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 12px;
+  border: 1px solid rgba(189, 202, 192, 0.3);
+  background-color: var(--surface);
+  padding: 0;
+  outline: none;
+}
+
+.match-card__score-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 107, 71, 0.2);
+}
+
+.match-card__score-divider {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--outline-variant);
+}

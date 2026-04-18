@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
+
+:root {
+  --primary: #006b47;
+  --primary-container: #00875a;
+  --on-primary: #ffffff;
+  --on-primary-container: #ffffff;
+  --secondary: #49607c;
+  --on-secondary: #ffffff;
+  --surface: #f7f9fc;
+  --on-surface: #191c1e;
+  --on-surface-variant: #3e4942;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f2f4f7;
+  --surface-container: #eceef1;
+  --surface-container-high: #e6e8eb;
+  --outline-variant: #bdcac0;
+  --tertiary: #595e62;
+
+  --font-headline: "Lexend", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Lexend", sans-serif;
+
+  --transition-fast: 0.2s ease;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--surface);
+  font-family: var(--font-body);
+  color: var(--on-surface);
+  line-height: 1.5;
+  min-height: 100dvh;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+}
+
+.predictions-page__main {
+  margin-top: 64px;
+  padding: 0 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #020617;
+    --on-surface: #f7f9fc;
+    --surface-container-lowest: #0f172a;
+    --on-surface-variant: #e2e8f0;
+    --surface-container-high: #1e293b;
+    --secondary: #94a3b8;
+  }
+}

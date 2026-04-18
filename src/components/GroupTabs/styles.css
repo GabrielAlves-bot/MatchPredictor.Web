@@ -1,0 +1,32 @@
+.group-tabs {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 16px 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(189, 202, 192, 0.15);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.group-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.group-tabs__btn {
+  flex: 0 0 auto;
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(73, 96, 124, 0.6);
+  background: none;
+  border: none;
+  padding: 0 4px 4px 4px;
+  cursor: pointer;
+}
+
+.group-tabs__btn--active {
+  color: var(--primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--primary);
+}

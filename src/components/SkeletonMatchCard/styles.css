@@ -1,0 +1,70 @@
+.skeleton-match-card {
+  background-color: var(--surface-container-lowest);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(189, 202, 192, 0.1);
+}
+
+.skeleton-match-card__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.skeleton-bar {
+  background-color: var(--surface-container-high);
+  border-radius: 4px;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-match-card__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.skeleton-match-card__team {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.skeleton-match-card__flag {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--surface-container-high);
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-match-card__score {
+  grid-column: span 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.skeleton-match-card__input {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--surface-container-high);
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-match-card__divider {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background-color: var(--surface-container-high);
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
