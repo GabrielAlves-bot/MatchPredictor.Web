@@ -14,6 +14,11 @@ export function TopAppBar({ poolName }: IProps) {
         </span>
         <h1 className="top-app-bar__logo-text">{poolName}</h1>
       </div>
+      <div className="actions">
+        <button className="icon-button">
+          <span className="material-symbols-outlined">notifications</span>
+        </button>
+      </div>
     </header>
   );
 }

@@ -1,0 +1,18 @@
+.match-card__team {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.match-card__team-name {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,14 +1,31 @@
+import type { IMatch } from "../../types/MatchType";
 import "./styles.css";
 
-const GROUPS = ["A", "B", "C", "D", "E", "F", "G", "H"];
+interface IProps {
+  matches: IMatch[];
+}
 
-export function GroupTabs() {
+function getUniqueGroups(matches: IMatch[]): string[] {
+  return Array.from(
+    new Set(
+      matches
+        .map((item) => item.group)
+        .filter((group): group is string => Boolean(group))
+    )
+  );
+}
+
+export function GroupTabs({ matches }: IProps) {
+  const groups = getUniqueGroups(matches);
+
   return (
     <div className="group-tabs">
-      {GROUPS.map((group, index) => (
+      {groups.map((group, index) => (
         <button
           key={group}
-          className={`group-tabs__btn${index === 0 ? " group-tabs__btn--active" : ""}`}
+          className={`group-tabs__btn ${
+            index === 0 ? "group-tabs__btn--active" : ""
+          }`}
         >
           Grupo {group}
         </button>

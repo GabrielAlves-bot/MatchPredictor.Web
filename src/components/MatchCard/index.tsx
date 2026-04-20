@@ -1,77 +1,47 @@
+import { formatMatchDate } from "../../helpers/FormatDate";
+import type { IMatch } from "../../types/MatchType";
+import { MatchStatusBadge } from "../MatchStatusBadge";
+import { TeamDisplay } from "../TeamDisplay";
 import "./styles.css";
 
-interface Team {
-  name: string;
-  flagSrc: string;
-  flagAlt: string;
+interface IProps {
+  match: IMatch
 }
 
-interface MatchCardProps {
-  date: string;
-  venue: string;
-  homeTeam: Team;
-  awayTeam: Team;
-  homeScore?: string;
-  awayScore?: string;
-  saved?: boolean;
-}
-
-export function MatchCard({
-  date,
-  venue,
-  homeTeam,
-  awayTeam,
-  homeScore = "0",
-  awayScore = "0",
-  saved = false,
-}: MatchCardProps) {
+export function MatchCard({ match }: IProps) {
   return (
     <div className="match-card">
       <div className="match-card__header">
         <div>
-          <p className="match-card__info-date">{date}</p>
-          <p className="match-card__info-venue">{venue}</p>
+          <p className="match-card__info-date">
+            {formatMatchDate(match.date)}
+          </p>
+          <p className="match-card__info-venue">{match.stadium}, {match.city}</p>
         </div>
-        {saved && (
-          <div className="match-card__status-badge">
-            <span className="material-symbols-outlined">check_circle</span>
-            <span className="match-card__status-text">SALVO</span>
-          </div>
-        )}
+        <MatchStatusBadge matchStatus={match.status} />
       </div>
 
       <div className="match-card__grid">
-        <div className="match-card__team">
-          <img
-            alt={homeTeam.flagAlt}
-            className="match-card__team-flag"
-            src={homeTeam.flagSrc}
-          />
-          <span className="match-card__team-name">{homeTeam.name}</span>
-        </div>
+        <TeamDisplay shieldUrl={match.homeTeam.shieldUrl} name={match.homeTeam.name} />
 
         <div className="match-card__score">
           <input
+            name="homeGoals"
             className="match-card__score-input"
-            placeholder={homeScore}
+            value={match.homeGoals}
             type="number"
+            disabled
           />
           <span className="match-card__score-divider">X</span>
           <input
+            name="awayGoals"
             className="match-card__score-input"
-            placeholder={awayScore}
+            value={match.awayGoals}
             type="number"
+            disabled
           />
         </div>
-
-        <div className="match-card__team">
-          <img
-            alt={awayTeam.flagAlt}
-            className="match-card__team-flag"
-            src={awayTeam.flagSrc}
-          />
-          <span className="match-card__team-name">{awayTeam.name}</span>
-        </div>
+        <TeamDisplay shieldUrl={match.awayTeam.shieldUrl} name={match.awayTeam.name} />
       </div>
     </div>
   );

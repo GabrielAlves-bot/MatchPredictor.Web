@@ -18,6 +18,11 @@
   --outline-variant: #bdcac0;
   --tertiary: #595e62;
 
+  --text-primary: #4a90e2;
+  --text-warning: #f5a623;
+  --text-success: #006b47;
+  --text-danger: #d0021b;
+
   --font-headline: "Lexend", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-label: "Lexend", sans-serif;

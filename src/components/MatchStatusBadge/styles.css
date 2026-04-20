@@ -1,0 +1,35 @@
+.match-card__status-badge {
+  background-color: rgba(0, 107, 71, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.match-card__status-badge--scheduled {
+  color: var(--text-primary);
+}
+
+.match-card__status-badge--finished {
+  color: var(--text-success);
+}
+
+.match-card__status-badge--cancelled {
+  color: var(--text-danger);
+}
+
+.match-card__status-badge--inProgress{
+  color: var(--text-warning);
+}
+
+.match-card__status-badge .material-symbols-outlined {
+  font-size: 14px;
+  font-variation-settings: "FILL" 1;
+}
+
+.match-card__status-text {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+}

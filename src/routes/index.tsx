@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { MasterPage } from "../page/MasterPage/index.";
 import configData from '../../config.json';
-import { Predictions } from "../features/Predictions/pages";
-import { Matches } from "../features/Matches/pages";
+import { Predictions } from "../pages/Predictions";
+import { Matches } from "../pages/Matches";
+import { MasterPage } from "../pages/MasterPage/index.";
 
 function AppRoutes(){
     return(
         <BrowserRouter basename={`/${configData.appName}`}>
             <Routes>
-                <Route element={<MasterPage />}>
+                <Route element={<MasterPage poolName="Copa Do Mundo 2026" />}>
                     <Route path="/" element={<Navigate to="/Predictions" />} />
                     <Route path="/Predictions" element={<Predictions />} />
                     <Route path="/Matches" element={<Matches />} />
