@@ -1,22 +1,26 @@
+import { MatchPhase } from "../../enums/MatchPhase";
 import "./styles.css";
 
-const PHASES = [
-  "Fase de Grupos",
-  "Oitavas",
-  "Quartas",
-  "Semifinal",
-  "Final",
+const PHASE_OPTIONS = [
+  { label: "Fase de Grupos", value: MatchPhase.GroupStage },
+  { label: "Mata-mata", value: MatchPhase.Knockout },
 ];
 
-export function PhaseTabs() {
+interface IPhaseTabsProps {
+  selectedPhase: MatchPhase;
+  onPhaseChange: (phase: MatchPhase) => void;
+}
+
+export function PhaseTabs({ selectedPhase, onPhaseChange }: IPhaseTabsProps) {
   return (
     <nav className="phase-tabs">
-      {PHASES.map((phase, index) => (
+      {PHASE_OPTIONS.map(({ label, value }) => (
         <button
-          key={phase}
-          className={`phase-tabs__chip${index === 0 ? " phase-tabs__chip--active" : ""}`}
+          key={value}
+          className={`phase-tabs__chip${selectedPhase === value ? " phase-tabs__chip--active" : ""}`}
+          onClick={() => onPhaseChange(value)}
         >
-          {phase}
+          {label}
         </button>
       ))}
     </nav>

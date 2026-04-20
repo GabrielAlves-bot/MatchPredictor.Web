@@ -7,6 +7,14 @@ interface IProps {
 }
 
 export function MatchList({ matches }: IProps) {
+  if (matches.length === 0) {
+    return (
+      <div className="match-list match-list--empty">
+        <p>Sem jogos para esta aba.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="match-list">
       {matches.map((match) => (
