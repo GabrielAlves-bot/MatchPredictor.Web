@@ -1,4 +1,4 @@
-const icons = {
+const ICONS = {
     save: "save",
     ball: "sports_soccer",
     event: "event",
@@ -7,4 +7,4 @@ const icons = {
     cancel: "cancel"
 };
 
-export default icons;
+export default ICONS;

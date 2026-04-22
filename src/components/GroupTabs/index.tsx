@@ -1,7 +1,7 @@
 import type { IMatch } from "../../types/MatchType";
 import "./styles.css";
 
-interface IGroupTabsProps {
+interface IProps {
   matches: IMatch[];
   selectedGroup: string;
   onGroupChange: (group: string) => void;
@@ -17,7 +17,7 @@ function getUniqueGroups(matches: IMatch[]): string[] {
   ).sort((a, b) => a.localeCompare(b));
 }
 
-export function GroupTabs({ matches, selectedGroup, onGroupChange }: IGroupTabsProps) {
+export function GroupTabs({ matches, selectedGroup, onGroupChange }: IProps) {
   const groups = getUniqueGroups(matches);
 
   return (

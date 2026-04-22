@@ -1,5 +1,5 @@
 import "./styles.css";
-import icons from "../../constants/icons";
+import ICONS from "../../constants/Icons";
 
 interface IProps {
   poolName: string
@@ -10,7 +10,7 @@ export function TopAppBar({ poolName }: IProps) {
     <header className="top-app-bar">
       <div className="top-app-bar__logo-section">
         <span className="material-symbols-outlined top-app-bar__logo-icon">
-          {icons.ball}
+          {ICONS.ball}
         </span>
         <h1 className="top-app-bar__logo-text">{poolName}</h1>
       </div>

@@ -1,17 +1,13 @@
+import PHASE_OPTIONS from "../../constants/PhaseOptions";
 import { MatchPhase } from "../../enums/MatchPhase";
 import "./styles.css";
 
-const PHASE_OPTIONS = [
-  { label: "Fase de Grupos", value: MatchPhase.GroupStage },
-  { label: "Mata-mata", value: MatchPhase.Knockout },
-];
-
-interface IPhaseTabsProps {
+interface IProps {
   selectedPhase: MatchPhase;
   onPhaseChange: (phase: MatchPhase) => void;
 }
 
-export function PhaseTabs({ selectedPhase, onPhaseChange }: IPhaseTabsProps) {
+export function PhaseTabs({ selectedPhase, onPhaseChange }: IProps) {
   return (
     <nav className="phase-tabs">
       {PHASE_OPTIONS.map(({ label, value }) => (

@@ -1,4 +1,4 @@
-import icons from "../../constants/icons";
+import ICONS from "../../constants/Icons";
 import { MatchStatus } from "../../enums/MatchStatus";
 import { getMatchStatusLabel } from "../../helpers/MatchStatusLabel";
 import "./styles.css";
@@ -15,19 +15,19 @@ export function MatchStatusBadge({ matchStatus }: IProps) {
 
     switch (matchStatus) {
         case MatchStatus.Scheduled:
-            icon = icons.event;
+            icon = ICONS.event;
             modifier = "scheduled"
             break;
         case MatchStatus.Finished:
-            icon = icons.check;
+            icon = ICONS.check;
             modifier = "finished"
             break;
         case MatchStatus.Cancelled:
-            icon = icons.cancel;
+            icon = ICONS.cancel;
             modifier = "cancelled"
             break;
         case MatchStatus.InProgress:
-            icon = icons.play;
+            icon = ICONS.play;
             modifier = "inProgress"
             break;
         default:

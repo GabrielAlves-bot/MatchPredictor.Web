@@ -1,22 +1,14 @@
-import { KnockoutStage } from "../../enums/KnockoutStage";
+import KNOCKOUT_LABELS from "../../constants/KnockoutLabels";
 import { getKnockoutStages } from "../../helpers/helpers";
 import type { IMatch } from "../../types/MatchType";
 
-const KNOCKOUT_LABELS: Record<number, string> = {
-  [KnockoutStage.RoundOf32]: "Segunda Fase",
-  [KnockoutStage.RoundOf16]: "Oitavas",
-  [KnockoutStage.QuarterFinal]: "Quartas",
-  [KnockoutStage.SemiFinal]: "Semifinal",
-  [KnockoutStage.Final]: "Final",
-};
-
-interface IKnockoutTabsProps {
+interface IProps {
   matches: IMatch[];
   selectedStage: string;
   onStageChange: (stage: string) => void;
 }
 
-export function KnockoutTabs({ matches, selectedStage, onStageChange }: IKnockoutTabsProps) {
+export function KnockoutTabs({ matches, selectedStage, onStageChange }: IProps) {
   const stages = getKnockoutStages(matches);
 
   return (
