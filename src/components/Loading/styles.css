@@ -20,16 +20,6 @@
   z-index: 100;
 }
 
-.loading__pattern {
-  position: absolute;
-  right: -16px;
-  top: -16px;
-  font-size: 80px;
-  opacity: 0.1;
-  color: white;
-  animation: loading-spin 8s linear infinite;
-}
-
 .loading__spinner {
   width: 36px;
   height: 36px;

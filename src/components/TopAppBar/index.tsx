@@ -1,5 +1,8 @@
 import "./styles.css";
-import ICONS from "../../constants/Icons";
+
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+
 
 interface IProps {
   poolName: string
@@ -10,13 +13,13 @@ export function TopAppBar({ poolName }: IProps) {
     <header className="top-app-bar">
       <div className="top-app-bar__logo-section">
         <span className="material-symbols-outlined top-app-bar__logo-icon">
-          {ICONS.ball}
+          <SportsSoccerIcon/>
         </span>
         <h1 className="top-app-bar__logo-text">{poolName}</h1>
       </div>
       <div className="actions">
         <button className="icon-button">
-          <span className="material-symbols-outlined">notifications</span>
+          <NotificationsIcon/>
         </button>
       </div>
     </header>

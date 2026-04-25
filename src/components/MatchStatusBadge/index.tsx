@@ -1,6 +1,10 @@
-import ICONS from "../../constants/Icons";
 import { MatchStatus } from "../../enums/MatchStatus";
 import { getMatchStatusLabel } from "../../helpers/MatchStatusLabel";
+import EventIcon from '@mui/icons-material/Event';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+
 import "./styles.css";
 
 interface IProps {
@@ -8,35 +12,35 @@ interface IProps {
 }
 
 export function MatchStatusBadge({ matchStatus }: IProps) {
-    let icon;
-    let modifier;
+    let IconComponent: React.ElementType;
+    let modifier: string;
 
-    let text = getMatchStatusLabel(matchStatus);;
+    const text = getMatchStatusLabel(matchStatus);
 
     switch (matchStatus) {
         case MatchStatus.Scheduled:
-            icon = ICONS.event;
-            modifier = "scheduled"
+            IconComponent = EventIcon;
+            modifier = "scheduled";
             break;
         case MatchStatus.Finished:
-            icon = ICONS.check;
-            modifier = "finished"
+            IconComponent = CheckCircleIcon;
+            modifier = "finished";
             break;
         case MatchStatus.Cancelled:
-            icon = ICONS.cancel;
-            modifier = "cancelled"
+            IconComponent = CancelIcon;
+            modifier = "cancelled";
             break;
         case MatchStatus.InProgress:
-            icon = ICONS.play;
-            modifier = "inProgress"
+            IconComponent = PlayCircleIcon;
+            modifier = "inProgress";
             break;
         default:
             return null;
     }
 
     return (
-    <div className={`match-card__status-badge match-card__status-badge--${modifier}`}>
-            <span className="material-symbols-outlined">{icon}</span>
+        <div className={`match-card__status-badge match-card__status-badge--${modifier}`}>
+            <IconComponent />
             <span className="match-card__status-text">{text}</span>
         </div>
     );
