@@ -1,0 +1,6 @@
+fly.toml
+node_modules
+dist
+*.log
+.git
+.DS_Store

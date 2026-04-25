@@ -2,7 +2,7 @@ import "./styles.css";
 import { PhaseTabs } from "../../components/PhaseTabs";
 import { GroupTabs } from "../../components/GroupTabs";
 import { MatchList } from "../../components/MatchList";
-import { get } from "../../services/MatchService";
+import { getMatches } from "../../services/MatchService";
 import type { IMatch } from "../../types/MatchType";
 import { useEffect, useState } from "react";
 import { Loading } from "../../components/Loading";
@@ -19,7 +19,7 @@ export function Matches() {
   async function loadMatches() {
     try {
       setIsLoading(true);
-      const response = await get();
+      const response = await getMatches();
       setMatches(response);
     } catch {
       console.log("error");
@@ -32,13 +32,11 @@ export function Matches() {
     loadMatches();
   }, []);
 
-  // Resetar aba interna ao trocar de fase
   function handlePhaseChange(phase: MatchPhase) {
     setSelectedPhase(phase);
     setSelectedTab("");
   }
 
-  // Derivar aba padrão assim que matches carregar
   useEffect(() => {
     if (matches.length === 0) return;
     if (selectedPhase === MatchPhase.GroupStage) {

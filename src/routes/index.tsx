@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import configData from '../../config.json';
-import { Predictions } from "../pages/Predictions";
 import { Matches } from "../pages/Matches";
 import { MasterPage } from "../pages/MasterPage/index.";
+import { Predictions } from "../pages/Predictions";
 
 function AppRoutes(){
     return(

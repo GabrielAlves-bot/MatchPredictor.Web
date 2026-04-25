@@ -17,7 +17,7 @@ export function KnockoutTabs({ matches, selectedStage, onStageChange }: IProps) 
         <button
           key={stage}
           className={`group-tabs__btn${selectedStage === stage ? " group-tabs__btn--active" : ""}`}
-          onClick={() => onStageChange(stage)}
+          onClick={() => onStageChange?.(stage)}
         >
           {KNOCKOUT_LABELS[Number(stage)] ?? stage}
         </button>

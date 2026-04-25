@@ -1,12 +1,11 @@
-import type { IMatch } from "../types/MatchType";
+import type { IGuess } from "../types/GuessType";
 import { fetchData } from "./BaseRequest";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const BASE_ENDPOINT = `${API_BASE_URL}/Match`;
+const BASE_ENDPOINT = `${API_BASE_URL}/Guess?idPoolParticipant=1`;
 
-export async function getMatches(): Promise<IMatch[]> {
+export async function getGuesses(): Promise<IGuess[]> {
     const response = await fetchData(BASE_ENDPOINT, "GET");
-    console.log(BASE_ENDPOINT);
 
     if (response.status !== 200)
         throw new Error("Error on get matches!");
