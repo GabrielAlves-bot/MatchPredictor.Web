@@ -1,0 +1,35 @@
+.login-page {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background-image:
+    radial-gradient(circle at top right, #00875a10 0%, transparent 70%),
+    radial-gradient(circle at bottom left, #49607c10 0%, transparent 70%);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.login-page__main {
+  width: 100%;
+  max-width: 24rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #020617;
+    --on-surface: #f7f9fc;
+    --surface-container-lowest: #0f172a;
+    --on-surface-variant: #e2e8f0;
+    --surface-container-high: #1e293b;
+    --secondary: #94a3b8;
+  }
+}

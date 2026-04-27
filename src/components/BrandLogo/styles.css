@@ -1,0 +1,38 @@
+.brand-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.brand-logo__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.brand-logo__icon {
+  color: var(--primary);
+  font-size: 1.875rem;
+}
+
+.brand-logo__title {
+  font-family: var(--font-headline);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  font-size: 1.5rem;
+}
+
+.brand-logo__tagline {
+  font-family: var(--font-label);
+  color: var(--secondary);
+  font-size: 0.875rem;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}

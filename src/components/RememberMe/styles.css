@@ -1,0 +1,25 @@
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.remember-me__checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+  background-color: var(--surface-container-low);
+  border: 1px solid rgba(189, 202, 192, 0.3);
+  accent-color: var(--primary-container);
+  cursor: pointer;
+}
+
+.remember-me__label {
+  font-family: var(--font-label);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: normal;
+}

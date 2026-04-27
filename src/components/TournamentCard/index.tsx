@@ -1,4 +1,5 @@
 import "./styles.css";
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 
 interface IProps {
   filled?: number;
@@ -10,9 +11,7 @@ export function TournamentCard({ filled = 0, total = 0 }: IProps) {
 
   return (
     <section className="tournament-card">
-      <span className="material-symbols-outlined tournament-card__bg-pattern">
-        sports_soccer
-      </span>
+      <SportsSoccerIcon className="tournament-card__bg-pattern"/>
       <div className="tournament-card__content">
         <p className="tournament-card__label">Status da Jornada</p>
         <h2 className="tournament-card__title">{filled} / {total}</h2>
