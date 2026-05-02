@@ -5,7 +5,6 @@ import { RememberMe } from "../RememberMe";
 import { SubmitButton } from "../SubmitButton";
 import { useState, type FormEvent } from "react";
 import { useLogin } from "../../hooks/UseLogin";
-import { DotsLoader } from "../DotsLoader";
 
 export function LoginCard() {
   const { error, submit } = useLogin();
@@ -49,9 +48,9 @@ export function LoginCard() {
         <RememberMe id="remember" label="Lembrar de mim" />
 
         {error && <p className="login-card__error">{error}</p>}
+
         <SubmitButton />
       </form>
-
     </div>
   );
 }
