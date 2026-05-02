@@ -9,7 +9,7 @@ import { MatchPhase } from "../../enums/MatchPhase";
 import type { IMatch } from "../../types/MatchType";
 import { getMatches } from "../../services/MatchService";
 import type { IGuess } from "../../types/GuessType";
-import { getGuesses } from "../../services/GuessService";
+import { getGuesses, updateGuesses } from "../../services/GuessService";
 import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { Loading } from "../../components/Loading";
 import { getUniqueGroups, getKnockoutStages } from "../../helpers/helpers";
@@ -55,15 +55,15 @@ export function Predictions() {
     setSelectedTab("");
   }
 
-function handleGuessChange(matchId: number, field: "homeGoals" | "awayGoals", value: number | null) {
-  setGuesses((prev) =>
-    prev.map((g) => (g.matchId === matchId ? { ...g, [field]: value ?? undefined } : g))
-  );
-}
+  function handleGuessChange(matchId: number, field: "homeGoals" | "awayGoals", value: number | null) {
+    setGuesses((prev) =>
+      prev.map((g) => (g.matchId === matchId ? { ...g, [field]: value ?? undefined } : g))
+    );
+  }
 
   async function handleSave() {
     try {
-      console.log(guesses);
+      await updateGuesses(1, guesses)
     } catch {
       console.error("Erro ao salvar palpites");
     }
