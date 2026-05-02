@@ -7,6 +7,8 @@ interface IProps {
   type?: string;
   placeholder?: string;
   required?: boolean;
+  value?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function FormField({
@@ -16,6 +18,8 @@ export function FormField({
   type = "text",
   placeholder,
   required = false,
+  value,
+  onChange,
 }: IProps) {
   return (
     <div className="form-field">
@@ -30,6 +34,8 @@ export function FormField({
         required={required}
         type={type}
         autoComplete="off"
+        value={value}
+        onChange={onChange}
       />
     </div>
   );

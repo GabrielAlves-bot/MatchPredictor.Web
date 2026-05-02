@@ -1,7 +1,8 @@
 import "./styles.css";
 
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import { useAuth } from "../../context/AuthContext";
 
 
 interface IProps {
@@ -9,6 +10,8 @@ interface IProps {
 }
 
 export function TopAppBar({ poolName }: IProps) {
+  const { logout } = useAuth();
+
   return (
     <header className="top-app-bar">
       <div className="top-app-bar__logo-section">
@@ -18,8 +21,8 @@ export function TopAppBar({ poolName }: IProps) {
         <h1 className="top-app-bar__logo-text">{poolName}</h1>
       </div>
       <div className="actions">
-        <button className="icon-button">
-          <NotificationsIcon/>
+        <button className="icon-button" onClick={logout}>
+          <PowerSettingsNewIcon/>
         </button>
       </div>
     </header>

@@ -26,7 +26,7 @@ export function Predictions() {
       setIsLoading(true);
       const [matchesRes, guessesRes] = await Promise.all([
         getMatches(),
-        getGuesses(),
+        getGuesses(1),
       ]);
       setMatches(matchesRes);
       setGuesses(guessesRes);

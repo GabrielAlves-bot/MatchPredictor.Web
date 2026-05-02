@@ -4,25 +4,30 @@ import { Matches } from "../pages/Matches";
 import { MasterPage } from "../pages/MasterPage/index.";
 import { Predictions } from "../pages/Predictions";
 import { Login } from "../pages/Login";
+import paths from "./paths";
+import { AuthProvider } from "../context/AuthContext";
+import { PrivateRouteGuard } from "../guards/PrivateRouteGuard";
+import { PublicOnlyRouteGuard } from "../guards/PublicOnlyRouteGuard";
 
 function AppRoutes() {
     return (
         <BrowserRouter basename={`/${configData.appName}`}>
-            <Routes>
-                <Route element={<MasterPage poolName="Copa Do Mundo 2026" />}>
-                    <Route path="/" element={<Navigate to="/Predictions" />} />
-                    <Route path="/Predictions" element={<Predictions />} />
-                    <Route path="/Matches" element={<Matches />} />
-                </Route>
+            <AuthProvider>
+                <Routes>
+                    <Route element={<PublicOnlyRouteGuard />}>
+                        <Route path={paths.login} element={<Login />} />
+                    </Route>
 
-                <Route>
-                    <Route path="/Login" element={<Login />} />
-                </Route>
+                    <Route element={<PrivateRouteGuard />}>
+                        <Route element={<MasterPage poolName="Copa Do Mundo 2026" />}>
+                            <Route path={paths.predictions} element={<Predictions />} />
+                            <Route path={paths.matches} element={<Matches />} />
+                        </Route>
+                    </Route>
 
-                {/* <Route path="/Error" element={<Error />} />
-                <Route path="/NotFound" element={<NotFound />} />
-                <Route path="*" element={<NotFound />} /> */}
-            </Routes>
+                    <Route path="*" element={<Navigate to={paths.predictions} replace />} />
+                </Routes>
+            </AuthProvider>
         </BrowserRouter>
     )
 }

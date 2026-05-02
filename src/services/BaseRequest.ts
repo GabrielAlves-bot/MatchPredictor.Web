@@ -1,15 +1,20 @@
-import type { RequestMethod } from "../types/RequestMethodType";
+import type { IRequestMethod } from "../types/RequestMethodType";
 
-export async function fetchData(endpoint: string, requestMethod: RequestMethod, jsonBody?: string): Promise<Response>{
-    let requestProperties: RequestInit  = {
-        method: requestMethod,
-        headers: {'Content-Type': 'application/json', },
-    }
+export async function fetchData(endpoint: string, requestMethod: IRequestMethod, jsonBody?: string): Promise<Response> {
+  const token = localStorage.getItem("token");
 
-    if(jsonBody){
-        requestProperties.body = jsonBody;
-    }
+  const requestProperties: RequestInit = {
+    method: requestMethod,
+    headers: {
+      ...(jsonBody && { "Content-Type": "application/json" }),
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+  };
 
-    const response = await fetch(endpoint, requestProperties);
-    return response;
+  if (jsonBody !== undefined) {
+    requestProperties.body = jsonBody;
+  }
+
+  const response = await fetch(endpoint, requestProperties);
+  return response;
 }

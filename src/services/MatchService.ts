@@ -6,7 +6,6 @@ const BASE_ENDPOINT = `${API_BASE_URL}/Match`;
 
 export async function getMatches(): Promise<IMatch[]> {
     const response = await fetchData(BASE_ENDPOINT, "GET");
-    console.log(BASE_ENDPOINT);
 
     if (response.status !== 200)
         throw new Error("Error on get matches!");

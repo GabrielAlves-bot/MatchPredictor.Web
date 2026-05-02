@@ -5,7 +5,8 @@ interface IProps {
   label: string;
   placeholder?: string;
   required?: boolean;
-  forgotPasswordHref?: string;
+    value?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function PasswordField({
@@ -13,7 +14,8 @@ export function PasswordField({
   label,
   placeholder = "••••••••",
   required = false,
-  forgotPasswordHref = "#",
+    value,
+  onChange,
 }: IProps) {
   return (
     <div className="password-field">
@@ -22,9 +24,6 @@ export function PasswordField({
           <span className="material-symbols-outlined">lock</span>
           {label}
         </label>
-        <a className="password-field__forgot" href={forgotPasswordHref}>
-          Esqueceu a senha?
-        </a>
       </div>
       <div className="password-field__wrapper">
         <input
@@ -33,6 +32,8 @@ export function PasswordField({
           placeholder={placeholder}
           required={required}
           type="password"
+          value={value}
+          onChange={onChange}
         />
         <button className="password-field__toggle" type="button">
         </button>
