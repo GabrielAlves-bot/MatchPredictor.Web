@@ -4,4 +4,5 @@ export default {
     predictions: "/Predictions",
     matches: "/Matches",
     login: "/Login",
+    selectPool: "/Select-Pool",
 }

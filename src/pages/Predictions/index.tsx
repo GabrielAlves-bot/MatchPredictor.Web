@@ -13,6 +13,7 @@ import { getGuesses, updateGuesses } from "../../services/GuessService";
 import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { Loading } from "../../components/Loading";
 import { getUniqueGroups, getKnockoutStages } from "../../helpers/helpers";
+import { usePool } from "../../context/PoolContext";
 
 export function Predictions() {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -20,13 +21,14 @@ export function Predictions() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.GroupStage);
   const [selectedTab, setSelectedTab] = useState<string>("");
+   const { activePool } = usePool();
 
   async function loadData() {
     try {
       setIsLoading(true);
       const [matchesRes, guessesRes] = await Promise.all([
         getMatches(),
-        getGuesses(1),
+        getGuesses(activePool?.poolParticipantId ?? 0),
       ]);
       setMatches(matchesRes);
       setGuesses(guessesRes);
@@ -63,7 +65,7 @@ export function Predictions() {
 
   async function handleSave() {
     try {
-      await updateGuesses(1, guesses)
+      await updateGuesses(activePool?.poolParticipantId ?? 0, guesses)
     } catch {
       console.error("Erro ao salvar palpites");
     }

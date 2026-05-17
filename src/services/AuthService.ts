@@ -8,7 +8,6 @@ const BASE_ENDPOINT = `${API_BASE_URL}/Auth`;
 export async function loginRequest(credentials: ILoginRequest): Promise<LoginResponse> {
 
   const jsonBody = JSON.stringify(credentials); 
-  console.log(jsonBody);
   const response = await fetchData(`${BASE_ENDPOINT}/Login`, "POST", jsonBody);
 
   if (!response.ok) {

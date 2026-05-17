@@ -8,28 +8,41 @@ import paths from "./paths";
 import { AuthProvider } from "../context/AuthContext";
 import { PrivateRouteGuard } from "../guards/PrivateRouteGuard";
 import { PublicOnlyRouteGuard } from "../guards/PublicOnlyRouteGuard";
+import { PoolProvider } from "../context/PoolContext";
+import { UserProvider } from "../context/UserContext";
+import { ActivePoolGuard } from "../guards/ActivePoolGuard";
+import { PoolSelector } from "../pages/PoolSelector";
+import { MasterPageWrapper } from "./Wrapper/MasterPageWrapper";
 
 function AppRoutes() {
     return (
         <BrowserRouter basename={`/${configData.appName}`}>
             <AuthProvider>
-                <Routes>
-                    <Route element={<PublicOnlyRouteGuard />}>
-                        <Route path={paths.login} element={<Login />} />
-                    </Route>
+                <UserProvider>
+                    <PoolProvider>
+                        <Routes>
+                            <Route element={<PublicOnlyRouteGuard />}>
+                                <Route path={paths.login} element={<Login />} />
+                            </Route>
 
-                    <Route element={<PrivateRouteGuard />}>
-                        <Route element={<MasterPage poolName="Copa Do Mundo 2026" />}>
-                            <Route path={paths.predictions} element={<Predictions />} />
-                            <Route path={paths.matches} element={<Matches />} />
-                        </Route>
-                    </Route>
+                            <Route element={<PrivateRouteGuard />}>
+                                <Route path={paths.selectPool} element={<PoolSelector />} />
 
-                    <Route path="*" element={<Navigate to={paths.predictions} replace />} />
-                </Routes>
+                                <Route element={<ActivePoolGuard />}>
+                                    <Route element={<MasterPageWrapper />}>
+                                        <Route path={paths.predictions} element={<Predictions />} />
+                                        <Route path={paths.matches} element={<Matches />} />
+                                    </Route>
+                                </Route>
+                            </Route>
+
+                            <Route path="*" element={<Navigate to={paths.predictions} replace />} />
+                        </Routes>
+                    </PoolProvider>
+                </UserProvider>
             </AuthProvider>
         </BrowserRouter>
-    )
+    );
 }
 
 export default AppRoutes;

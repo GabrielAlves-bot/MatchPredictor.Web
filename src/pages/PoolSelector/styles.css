@@ -1,0 +1,23 @@
+.pool-selector {
+  width: 100%;
+  max-width: 448px;
+  padding: 96px 24px 128px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+}
+
+.pool-selector__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pool-selector__title {
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--on-surface);
+  letter-spacing: -0.025em;
+}

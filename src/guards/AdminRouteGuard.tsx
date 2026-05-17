@@ -9,7 +9,7 @@ export function AdminRouteGuard() {
         return <Navigate to={paths.login} replace />;
 
     if (auth.role !== "Admin") 
-        return <Navigate to={paths.matches} replace />;
+        return <Navigate to={paths.predictions} replace />;
 
     return <Outlet />;
 }

@@ -13,6 +13,7 @@ interface AuthContextValue {
     logout: () => void;
 }
 
+const KEYS = ["token", "role", "user", "app:activePool"];
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 function loadFromStorage(): IAuthUser | null {
@@ -33,9 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, []);
 
     const logout = useCallback(() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        localStorage.removeItem("user");
+        KEYS.forEach(k => localStorage.removeItem(k));
         setAuth(null);
     }, []);
 
