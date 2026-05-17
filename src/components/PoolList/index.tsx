@@ -2,12 +2,12 @@ import "./styles.css";
 import { PoolCard } from "../PoolCard";
 import type { IPoolSummary } from "../../types/PoolSummary";
 
-interface PoolListProps {
+interface IProps {
   pools: IPoolSummary[];
   onSelect: (pool: IPoolSummary) => void;
 }
 
-export function PoolList({ pools, onSelect }: PoolListProps) {
+export function PoolList({ pools, onSelect }: IProps) {
   return (
     <div className="pool-list">
       {pools.map((pool, index) => (

@@ -5,6 +5,7 @@ import { Loading } from "../../components/Loading";
 import { usePool } from "../../context/PoolContext";
 import paths from "../../routes/paths";
 import type { IPoolSummary } from "../../types/PoolSummary";
+import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 
 export function PoolSelector() {
   const { pools, setActivePool, isLoading } = usePool();
@@ -15,7 +16,10 @@ export function PoolSelector() {
     navigate(paths.predictions, { replace: true });
   };
 
-  if (isLoading) return <Loading fullscreen text="Carregando bolões..." />;
+  const loading = useMinimumLoading(isLoading);
+
+  if (loading) 
+    return <Loading fullscreen text="Carregando bolões..." />;
 
   return (
     <main className="pool-selector">

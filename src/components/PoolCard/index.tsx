@@ -1,13 +1,13 @@
 import type { IPoolSummary } from "../../types/PoolSummary";
 import "./styles.css";
 
-interface PoolCardProps {
+interface IProps {
   pool: IPoolSummary;
   featured?: boolean;
   onClick: (pool: IPoolSummary) => void;
 }
 
-export function PoolCard({ pool, featured = false, onClick }: PoolCardProps) {
+export function PoolCard({ pool, featured = false, onClick }: IProps) {
   return (
     <button
       className={`pool-card${featured ? " pool-card--featured" : ""}`}
@@ -19,9 +19,9 @@ export function PoolCard({ pool, featured = false, onClick }: PoolCardProps) {
         </div>
         <div className="pool-card__details">
           <h4 className="pool-card__name">{pool.poolName}</h4>
-          {/* <span className="pool-card__meta">
-            {pool.participantsCount} Participantes
-          </span> */}
+          <span className="pool-card__meta">
+            {pool.totalParticipants} Participantes
+          </span>
         </div>
       </div>
       <div className="pool-card__score">

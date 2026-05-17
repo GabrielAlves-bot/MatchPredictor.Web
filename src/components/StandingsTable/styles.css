@@ -1,0 +1,32 @@
+.standings-table__header {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+  font-family: var(--font-headline);
+}
+
+.standings-table__header-rank {
+  grid-column: span 2;
+}
+
+.standings-table__header-user {
+  grid-column: span 5;
+}
+
+.standings-table__header-points {
+  grid-column: span 2;
+  text-align: right;
+}
+
+.standings-table__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

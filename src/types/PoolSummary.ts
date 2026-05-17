@@ -3,4 +3,5 @@ export interface IPoolSummary {
     poolId: number;
     poolName: string;
     score: number;
+    totalParticipants: number;
 }

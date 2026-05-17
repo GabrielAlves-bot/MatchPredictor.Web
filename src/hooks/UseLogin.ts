@@ -22,8 +22,8 @@ export function useLogin(): UseLoginReturn {
     setError(null);
 
     try {
-      const { token, role, userName } = await loginRequest(credentials);
-      login(token, role, userName);
+      const { token, role, user } = await loginRequest(credentials);
+      login(token, role, user);
       navigate("/", { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro inesperado.");

@@ -5,4 +5,5 @@ export default {
     matches: "/Matches",
     login: "/Login",
     selectPool: "/Select-Pool",
+    standings: "/Standings"
 }

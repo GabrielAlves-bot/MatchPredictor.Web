@@ -14,6 +14,7 @@ import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { Loading } from "../../components/Loading";
 import { getUniqueGroups, getKnockoutStages } from "../../helpers/helpers";
 import { usePool } from "../../context/PoolContext";
+import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 
 export function Predictions() {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -21,7 +22,7 @@ export function Predictions() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.GroupStage);
   const [selectedTab, setSelectedTab] = useState<string>("");
-   const { activePool } = usePool();
+  const { activePool } = usePool();
 
   async function loadData() {
     try {
@@ -81,6 +82,8 @@ export function Predictions() {
     (g) => g.homeGoals != null && g.awayGoals != null
   ).length;
 
+  const loading = useMinimumLoading(isLoading);
+
   return (
     <>
       {!isLoading && (
@@ -111,7 +114,7 @@ export function Predictions() {
           />
         </main>
       )}
-      {isLoading && <Loading fullscreen={true} />}
+      {loading && <Loading fullscreen={true} />}
       <SaveBar onSave={handleSave} />
     </>
   );

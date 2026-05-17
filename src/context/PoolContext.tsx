@@ -39,7 +39,7 @@ export function PoolProvider({ children }: { children: ReactNode }) {
         getMyPools()
             .then(data => {
                 setPools(data);
-                if (data.length === 1) setActivePool(data[0]); // auto-seleciona
+                if (data.length === 1) setActivePool(data[0]);
             })
             .catch(() => setPools([]))
             .finally(() => setIsLoading(false));

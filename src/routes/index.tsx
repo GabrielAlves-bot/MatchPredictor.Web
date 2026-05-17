@@ -12,6 +12,7 @@ import { UserProvider } from "../context/UserContext";
 import { ActivePoolGuard } from "../guards/ActivePoolGuard";
 import { PoolSelector } from "../pages/PoolSelector";
 import { MasterPageWrapper } from "./Wrapper/MasterPageWrapper";
+import { Standings } from "../pages/Standings";
 
 function AppRoutes() {
     return (
@@ -31,6 +32,7 @@ function AppRoutes() {
                                     <Route element={<MasterPageWrapper />}>
                                         <Route path={paths.predictions} element={<Predictions />} />
                                         <Route path={paths.matches} element={<Matches />} />
+                                        <Route path={paths.standings} element={<Standings />} />
                                     </Route>
                                 </Route>
                             </Route>

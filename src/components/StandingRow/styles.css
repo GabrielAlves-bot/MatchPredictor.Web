@@ -1,0 +1,115 @@
+.standing-row {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  align-items: center;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--surface-container-lowest);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.standing-row--highlight {
+  background-color: #00875a;
+  box-shadow: 0 10px 15px -3px rgba(0, 107, 71, 0.2);
+  border: 2px solid var(--primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.standing-row--highlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.standing-row__rank {
+  grid-column: span 2;
+}
+
+.standing-row__user {
+  grid-column: span 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.standing-row__points {
+  grid-column: span 2;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--primary);
+}
+
+.standing-row--highlight .standing-row__points {
+  color: white;
+}
+
+.standing-row__badge {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.standing-row__badge--gold {
+  background-color: #facc15;
+  color: #422006;
+}
+
+.standing-row__badge--silver {
+  background-color: #cbd5e1;
+  color: #334155;
+}
+
+.standing-row__badge--user {
+  background-color: white;
+  color: var(--primary);
+}
+
+.standing-row__badge--normal {
+  color: var(--on-surface-variant);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.standing-row__name {
+  font-size: 14px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.standing-row--highlight .standing-row__name {
+  font-weight: 800;
+  color: white;
+}
+
+.standing-row__avatar-container {
+  position: relative;
+}
+
+.standing-row__star-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background-color: white;
+  border-radius: 9999px;
+  padding: 2px;
+  display: flex;
+}
+
+.standing-row__star-badge .material-symbols-outlined {
+  font-size: 10px;
+  color: var(--primary);
+  font-variation-settings: "FILL" 1;
+}

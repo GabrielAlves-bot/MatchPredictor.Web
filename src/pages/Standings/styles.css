@@ -1,0 +1,16 @@
+.standings-page {
+  padding-top: 96px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 128px;
+  max-width: 448px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .standings-page {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}

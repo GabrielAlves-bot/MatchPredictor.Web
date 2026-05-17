@@ -9,6 +9,7 @@ import { Loading } from "../../components/Loading";
 import { MatchPhase } from "../../enums/MatchPhase";
 import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { getKnockoutStages, getUniqueGroups } from "../../helpers/helpers";
+import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 
 export function Matches() {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -54,6 +55,8 @@ export function Matches() {
     return String(m.knockoutStage) === selectedTab;
   });
 
+  const loading = useMinimumLoading(isLoading);
+
   return (
     <>
       {!isLoading && (
@@ -79,7 +82,7 @@ export function Matches() {
           <MatchList matches={filteredMatches} />
         </main>
       )}
-      {isLoading && <Loading fullscreen={true} />}
+      {loading && <Loading fullscreen={true} />}
     </>
   );
 }
