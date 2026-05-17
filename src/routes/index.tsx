@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import configData from '../../config.json';
 import { Matches } from "../pages/Matches";
-import { MasterPage } from "../pages/MasterPage/index.";
 import { Predictions } from "../pages/Predictions";
 import { Login } from "../pages/Login";
 import paths from "./paths";
