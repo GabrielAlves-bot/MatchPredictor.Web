@@ -66,9 +66,12 @@ export function Predictions() {
 
   async function handleSave() {
     try {
+      setIsLoading(true);
       await updateGuesses(activePool?.poolParticipantId ?? 0, guesses)
     } catch {
       console.error("Erro ao salvar palpites");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -86,11 +89,14 @@ export function Predictions() {
 
   return (
     <>
-      {!isLoading && (
+      {!loading && (
         <main className="predictions-page__main">
           <TournamentCard filled={filledCount} total={matches.length} />
 
-          <PhaseTabs selectedPhase={selectedPhase} onPhaseChange={handlePhaseChange} />
+          <PhaseTabs
+            selectedPhase={selectedPhase}
+            onPhaseChange={handlePhaseChange}
+          />
 
           {selectedPhase === MatchPhase.GroupStage && (
             <GroupTabs
@@ -99,6 +105,7 @@ export function Predictions() {
               onGroupChange={setSelectedTab}
             />
           )}
+
           {selectedPhase === MatchPhase.Knockout && (
             <KnockoutTabs
               matches={matches}
@@ -114,7 +121,9 @@ export function Predictions() {
           />
         </main>
       )}
+
       {loading && <Loading fullscreen={true} />}
+
       <SaveBar onSave={handleSave} />
     </>
   );

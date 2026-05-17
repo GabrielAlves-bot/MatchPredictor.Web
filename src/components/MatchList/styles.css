@@ -4,3 +4,7 @@
   gap: 16px;
   padding-top: 8px;
 }
+
+body:has(.save-bar) .match-list {
+  padding-bottom: 36px;
+}

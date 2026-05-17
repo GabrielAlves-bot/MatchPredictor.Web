@@ -30,3 +30,8 @@
 .save-bar__btn:active {
   transform: scale(0.95);
 }
+
+.save-bar__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
