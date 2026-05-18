@@ -3,7 +3,6 @@ import type { IBottomMenuData } from "./types/BottomMenuData";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
-import PersonIcon from "@mui/icons-material/Person";
 
 export const menuData: IBottomMenuData[] = [
   {
@@ -23,11 +22,5 @@ export const menuData: IBottomMenuData[] = [
     icon: FormatListNumberedIcon,
     label: "Classificação",
     destinationPath: "/Standings",
-  },
-  {
-    id: "profile",
-    icon: PersonIcon,
-    label: "Perfil",
-    destinationPath: "/Profile",
   },
 ];
