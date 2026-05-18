@@ -11,10 +11,10 @@ export interface IMatch {
   stadium: string;
   city: string;
   status: MatchStatus
-  homeGoals : number
+  homeGoals: number
   awayGoals: number;
   phase: MatchPhase
-  group?: string; 
-  knockoutStage : KnockoutStage;
+  group?: string;
+  knockoutStage: KnockoutStage;
   saved: boolean;
 }

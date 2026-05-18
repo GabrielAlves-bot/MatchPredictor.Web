@@ -8,10 +8,6 @@ interface StandingsHeroCardProps {
 export function StandingsHeroCard({ position, totalPoints }: StandingsHeroCardProps) {
   return (
     <div className="standings-hero-card">
-      <span className="material-symbols-outlined standings-hero-card__bg-icon">
-        leaderboard
-      </span>
-
       <div className="standings-hero-card__content">
         <div className="standings-hero-card__stats-row">
           <div className="standings-hero-card__stat">

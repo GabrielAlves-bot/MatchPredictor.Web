@@ -17,19 +17,40 @@ export function MatchCard({ match, guess, onGuessChange }: IProps) {
   const isEditable = !!onGuessChange && match.status === MatchStatus.Scheduled;
 
   const [localHome, setLocalHome] = useState<string>(
-    guess?.homeGoals != null ? String(guess.homeGoals) : ""
+    guess?.homeGoals != null
+      ? String(guess.homeGoals)
+      : match.homeGoals != null
+        ? String(match.homeGoals)
+        : ""
   );
+
   const [localAway, setLocalAway] = useState<string>(
-    guess?.awayGoals != null ? String(guess.awayGoals) : ""
+    guess?.awayGoals != null
+      ? String(guess.awayGoals)
+      : match.awayGoals != null
+        ? String(match.awayGoals)
+        : ""
   );
 
   useEffect(() => {
-    setLocalHome(guess?.homeGoals != null ? String(guess.homeGoals) : "");
-  }, [guess?.homeGoals]);
+    setLocalHome(
+      guess?.homeGoals != null
+        ? String(guess.homeGoals)
+        : match.homeGoals != null
+          ? String(match.homeGoals)
+          : ""
+    );
+  }, [guess?.homeGoals, match.homeGoals]);
 
   useEffect(() => {
-    setLocalAway(guess?.awayGoals != null ? String(guess.awayGoals) : "");
-  }, [guess?.awayGoals]);
+    setLocalAway(
+      guess?.awayGoals != null
+        ? String(guess.awayGoals)
+        : match.awayGoals != null
+          ? String(match.awayGoals)
+          : ""
+    );
+  }, [guess?.awayGoals, match.awayGoals]);
 
   function handleChange(
     field: "homeGoals" | "awayGoals",
@@ -50,7 +71,6 @@ export function MatchCard({ match, guess, onGuessChange }: IProps) {
   }
 
   function handleBlur(local: string, setLocal: (v: string) => void) {
-    // campo vazio permanece vazio — não força 0
     if (local === "") {
       setLocal("");
     }
