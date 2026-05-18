@@ -52,3 +52,11 @@
     border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
+
+.bottom-nav__item,
+.bottom-nav__item * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
