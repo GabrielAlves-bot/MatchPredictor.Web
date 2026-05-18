@@ -1,6 +1,8 @@
+import type { SvgIconComponent } from "@mui/icons-material";
+
 export interface IBottomMenuData {
-    id: string,
-    icon: string,
-    label: string,
-    destinationPath: string
+  id: string;
+  icon: SvgIconComponent;
+  label: string;
+  destinationPath: string;
 }

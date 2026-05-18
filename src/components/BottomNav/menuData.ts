@@ -1,31 +1,33 @@
 import type { IBottomMenuData } from "./types/BottomMenuData";
 
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import PersonIcon from "@mui/icons-material/Person";
+
 export const menuData: IBottomMenuData[] = [
-    {
-        id: "matches",
-        icon: "calendar_today",
-        label: "Partidas",
-        destinationPath: "/Matches"
-
-    },
-    {
-        id: "predictions",
-        icon: "edit_note",
-        label: "Palpites",
-        destinationPath: "/Predictions"
-
-    },
-    {
-        id: "standings",
-        icon: "format_list_numbered",
-        label: "Classificação",
-        destinationPath: "/Standings"
-
-    },
-    {
-        id: "profile",
-        icon: "person",
-        label: "Perfil",
-        destinationPath: "/Profile"
-    },
+  {
+    id: "matches",
+    icon: CalendarTodayIcon,
+    label: "Partidas",
+    destinationPath: "/Matches",
+  },
+  {
+    id: "predictions",
+    icon: EditNoteIcon,
+    label: "Palpites",
+    destinationPath: "/Predictions",
+  },
+  {
+    id: "standings",
+    icon: FormatListNumberedIcon,
+    label: "Classificação",
+    destinationPath: "/Standings",
+  },
+  {
+    id: "profile",
+    icon: PersonIcon,
+    label: "Perfil",
+    destinationPath: "/Profile",
+  },
 ];

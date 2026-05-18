@@ -4,13 +4,12 @@ import "./styles.css";
 import type { IBottomMenuData } from "./types/BottomMenuData";
 
 export function BottomNav() {
-
   const location = useLocation();
   const navigate = useNavigate();
 
   function isActive(item: IBottomMenuData) {
     return item.destinationPath === location.pathname;
-  };
+  }
 
   function handleNavigate(path: string) {
     navigate(path);
@@ -18,20 +17,25 @@ export function BottomNav() {
 
   return (
     <nav className="bottom-nav">
-      {menuData.map((item) => (
-        <div
-          key={item.id}
-          onClick={() => handleNavigate(item.destinationPath)}
-          className={`bottom-nav__item${isActive(item) ? " bottom-nav__item--active" : ""}`}
-        >
-          <span
-            className="material-symbols-outlined"
+      {menuData.map((item) => {
+        const Icon = item.icon;
+
+        return (
+          <div
+            key={item.id}
+            onClick={() => handleNavigate(item.destinationPath)}
+            className={`bottom-nav__item${
+              isActive(item) ? " bottom-nav__item--active" : ""
+            }`}
           >
-            {item.icon}
-          </span>
-          <span className="bottom-nav__label">{item.label}</span>
-        </div>
-      ))}
+            <Icon className="bottom-nav__icon" />
+
+            <span className="bottom-nav__label">
+              {item.label}
+            </span>
+          </div>
+        );
+      })}
     </nav>
   );
 }
