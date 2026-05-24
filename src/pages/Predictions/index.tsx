@@ -2,7 +2,7 @@ import "./styles.css";
 import { TournamentCard } from "../../components/TournamentCard";
 import { PhaseTabs } from "../../components/PhaseTabs";
 import { GroupTabs } from "../../components/GroupTabs";
-import { MatchList } from "../../components/MatchList";
+import { PredictionList } from "../../components/PredictionList";
 import { SaveBar } from "../../components/SaveBar";
 import { useEffect, useState } from "react";
 import { MatchPhase } from "../../enums/MatchPhase";
@@ -22,6 +22,7 @@ export function Predictions() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.GroupStage);
   const [selectedTab, setSelectedTab] = useState<string>("");
+
   const { activePool } = usePool();
 
   async function loadData() {
@@ -58,16 +59,22 @@ export function Predictions() {
     setSelectedTab("");
   }
 
-  function handleGuessChange(matchId: number, field: "homeGoals" | "awayGoals", value: number | null) {
+  function handleGuessChange(
+    matchId: number,
+    field: "homeGoals" | "awayGoals",
+    value: number | null
+  ) {
     setGuesses((prev) =>
-      prev.map((g) => (g.matchId === matchId ? { ...g, [field]: value ?? undefined } : g))
+      prev.map((g) =>
+        g.matchId === matchId ? { ...g, [field]: value ?? undefined } : g
+      )
     );
   }
 
   async function handleSave() {
     try {
       setIsLoading(true);
-      await updateGuesses(activePool?.poolParticipantId ?? 0, guesses)
+      await updateGuesses(activePool?.poolParticipantId ?? 0, guesses);
     } catch {
       console.error("Erro ao salvar palpites");
     } finally {
@@ -114,7 +121,7 @@ export function Predictions() {
             />
           )}
 
-          <MatchList
+          <PredictionList
             matches={filteredMatches}
             guesses={guesses}
             onGuessChange={handleGuessChange}

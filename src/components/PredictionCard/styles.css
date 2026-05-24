@@ -1,4 +1,4 @@
-.match-card {
+.prediction-card {
   background-color: var(--surface-container-lowest);
   border-radius: 12px;
   padding: 16px;
@@ -6,14 +6,14 @@
   position: relative;
 }
 
-.match-card__header {
+.prediction-card__header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 16px;
 }
 
-.match-card__info-date {
+.prediction-card__info-date {
   font-family: var(--font-label);
   font-size: 10px;
   font-weight: 600;
@@ -22,19 +22,19 @@
   letter-spacing: 0.05em;
 }
 
-.match-card__info-venue {
+.prediction-card__info-venue {
   font-size: 12px;
   color: rgba(73, 96, 124, 0.7);
 }
 
-.match-card__grid {
+.prediction-card__grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   align-items: center;
   gap: 8px;
 }
 
-.match-card__score {
+.prediction-card__score {
   grid-column: span 3;
   display: flex;
   align-items: center;
@@ -42,7 +42,7 @@
   gap: 8px;
 }
 
-.match-card__score-input {
+.prediction-card__score-input {
   width: 48px;
   height: 48px;
   text-align: center;
@@ -57,25 +57,25 @@
   color: black;
 }
 
-.match-card__score-input:focus {
+.prediction-card__score-input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(0, 107, 71, 0.2);
 }
 
-.match-card__score-divider {
+.prediction-card__score-divider {
   font-family: var(--font-headline);
   font-weight: 700;
   color: var(--outline-variant);
 }
 
-.match-card__score-input::-webkit-inner-spin-button,
-.match-card__score-input::-webkit-outer-spin-button {
+.prediction-card__score-input::-webkit-inner-spin-button,
+.prediction-card__score-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 @media (prefers-color-scheme: dark) {
-  .match-card__score-input {
+  .prediction-card__score-input {
     color: white;
   }
 }

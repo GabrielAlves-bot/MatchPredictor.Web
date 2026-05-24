@@ -1,15 +1,18 @@
-import "./styles.css";
 import { MatchCard } from "../MatchCard";
 import type { IMatch } from "../../types/MatchType";
-import type { IGuess } from "../../types/GuessType";
+import "./styles.css";
 
 interface IProps {
   matches: IMatch[];
-  guesses?: IGuess[];
-  onGuessChange?: (matchId: number, field: "homeGoals" | "awayGoals", value: number | null) => void;
+  isEditable?: boolean;
+  onGoalChange?: (
+    matchId: number,
+    field: "homeGoals" | "awayGoals",
+    value: number | null
+  ) => void;
 }
 
-export function MatchList({ matches, guesses, onGuessChange }: IProps) {
+export function MatchList({ matches, isEditable = false, onGoalChange }: IProps) {
   if (matches.length === 0) {
     return (
       <div className="match-list match-list--empty">
@@ -20,17 +23,14 @@ export function MatchList({ matches, guesses, onGuessChange }: IProps) {
 
   return (
     <div className="match-list">
-      {matches.map((match) => {
-        const guess = guesses?.find((g) => g.matchId === match.id);
-        return (
-          <MatchCard
-            key={match.id}
-            match={match}
-            guess={guess}
-            onGuessChange={onGuessChange}
-          />
-        );
-      })}
+      {matches.map((match) => (
+        <MatchCard
+          key={match.id}
+          match={match}
+          isEditable={isEditable}
+          onGoalChange={onGoalChange}
+        />
+      ))}
     </div>
   );
 }

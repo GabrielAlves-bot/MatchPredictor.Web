@@ -2,7 +2,8 @@ import "./styles.css";
 import { PhaseTabs } from "../../components/PhaseTabs";
 import { GroupTabs } from "../../components/GroupTabs";
 import { MatchList } from "../../components/MatchList";
-import { getMatches } from "../../services/MatchService";
+import { SaveBar } from "../../components/SaveBar";
+import { getMatches, updateMatches } from "../../services/MatchService";
 import type { IMatch } from "../../types/MatchType";
 import { useEffect, useState } from "react";
 import { Loading } from "../../components/Loading";
@@ -10,6 +11,7 @@ import { MatchPhase } from "../../enums/MatchPhase";
 import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { getKnockoutStages, getUniqueGroups } from "../../helpers/helpers";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
+import { useAuth } from "../../context/AuthContext";
 
 export function Matches() {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -17,13 +19,16 @@ export function Matches() {
   const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.GroupStage);
   const [selectedTab, setSelectedTab] = useState<string>("");
 
+  const { auth } = useAuth();
+  const isAdmin = auth?.role === "Admin";
+
   async function loadMatches() {
     try {
       setIsLoading(true);
       const response = await getMatches();
       setMatches(response);
     } catch {
-      console.log("error");
+      console.error("Erro ao carregar partidas");
     } finally {
       setIsLoading(false);
     }
@@ -33,21 +38,47 @@ export function Matches() {
     loadMatches();
   }, []);
 
+useEffect(() => {
+  if (matches.length === 0) 
+    return;
+
+  if (selectedTab !== "") 
+    return;
+  
+  if (selectedPhase === MatchPhase.GroupStage) {
+    setSelectedTab(getUniqueGroups(matches)[0] ?? "");
+  } else {
+    setSelectedTab(getKnockoutStages(matches)[0] ?? "");
+  }
+}, [matches, selectedPhase, selectedTab]);
+
   function handlePhaseChange(phase: MatchPhase) {
     setSelectedPhase(phase);
     setSelectedTab("");
   }
 
-  useEffect(() => {
-    if (matches.length === 0) return;
-    if (selectedPhase === MatchPhase.GroupStage) {
-      const groups = getUniqueGroups(matches);
-      setSelectedTab(groups[0] ?? "");
-    } else {
-      const stages = getKnockoutStages(matches);
-      setSelectedTab(stages[0] ?? "");
+  function handleGoalChange(
+    matchId: number,
+    field: "homeGoals" | "awayGoals",
+    value: number | null
+  ) {
+    setMatches((prev) =>
+      prev.map((m) =>
+        m.id === matchId ? { ...m, [field]: value ?? undefined } : m
+      )
+    );
+  }
+
+  async function handleSave() {
+    try {
+      setIsLoading(true);
+      await updateMatches(matches);
+    } catch {
+      console.error("Erro ao salvar partidas");
+    } finally {
+      setIsLoading(false);
     }
-  }, [matches, selectedPhase]);
+  }
 
   const filteredMatches = matches.filter((m) => {
     if (m.phase !== selectedPhase) return false;
@@ -59,9 +90,12 @@ export function Matches() {
 
   return (
     <>
-      {!isLoading && (
+      {!loading && (
         <main className="predictions-page__main">
-          <PhaseTabs selectedPhase={selectedPhase} onPhaseChange={handlePhaseChange} />
+          <PhaseTabs
+            selectedPhase={selectedPhase}
+            onPhaseChange={handlePhaseChange}
+          />
 
           {selectedPhase === MatchPhase.GroupStage && (
             <GroupTabs
@@ -79,10 +113,17 @@ export function Matches() {
             />
           )}
 
-          <MatchList matches={filteredMatches} />
+          <MatchList
+            matches={filteredMatches}
+            isEditable={isAdmin}
+            onGoalChange={isAdmin ? handleGoalChange : undefined}
+          />
         </main>
       )}
+
       {loading && <Loading fullscreen={true} />}
+
+      {isAdmin && <SaveBar onSave={handleSave} />}
     </>
   );
 }

@@ -1,0 +1,10 @@
+.prediction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+body:has(.save-bar) .prediction-list {
+  padding-bottom: 36px;
+}

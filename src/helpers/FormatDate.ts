@@ -5,7 +5,7 @@ export function formatMatchDate(dateString : string) {
 
   const month = date.toLocaleString("pt-BR", { month: "short" })
     .toUpperCase()
-    .replace(".", ""); // remove ponto do "jun."
+    .replace(".", "");
 
   const hours = date.getHours().toString().padStart(2, "0");
   const minutes = date.getMinutes().toString().padStart(2, "0");

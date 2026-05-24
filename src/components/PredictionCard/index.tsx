@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { MatchStatus } from "../../enums/MatchStatus";
 import { formatMatchDate } from "../../helpers/FormatDate";
+import type { IGuess } from "../../types/GuessType";
 import type { IMatch } from "../../types/MatchType";
 import { MatchStatusBadge } from "../MatchStatusBadge";
 import { TeamDisplay } from "../TeamDisplay";
@@ -7,29 +9,52 @@ import "./styles.css";
 
 interface IProps {
   match: IMatch;
-  isEditable?: boolean;
-  onGoalChange?: (
+  guess?: IGuess;
+  onGuessChange: (
     matchId: number,
     field: "homeGoals" | "awayGoals",
     value: number | null
   ) => void;
 }
 
-export function MatchCard({ match, isEditable = false, onGoalChange }: IProps) {
+export function PredictionCard({ match, guess, onGuessChange }: IProps) {
+  const isEditable = match.status === MatchStatus.Scheduled;
+
   const [localHome, setLocalHome] = useState<string>(
-    match.homeGoals != null ? String(match.homeGoals) : ""
+    guess?.homeGoals != null
+      ? String(guess.homeGoals)
+      : match.homeGoals != null
+        ? String(match.homeGoals)
+        : ""
   );
+
   const [localAway, setLocalAway] = useState<string>(
-    match.awayGoals != null ? String(match.awayGoals) : ""
+    guess?.awayGoals != null
+      ? String(guess.awayGoals)
+      : match.awayGoals != null
+        ? String(match.awayGoals)
+        : ""
   );
 
   useEffect(() => {
-    setLocalHome(match.homeGoals != null ? String(match.homeGoals) : "");
-  }, [match.homeGoals]);
+    setLocalHome(
+      guess?.homeGoals != null
+        ? String(guess.homeGoals)
+        : match.homeGoals != null
+          ? String(match.homeGoals)
+          : ""
+    );
+  }, [guess?.homeGoals, match.homeGoals]);
 
   useEffect(() => {
-    setLocalAway(match.awayGoals != null ? String(match.awayGoals) : "");
-  }, [match.awayGoals]);
+    setLocalAway(
+      guess?.awayGoals != null
+        ? String(guess.awayGoals)
+        : match.awayGoals != null
+          ? String(match.awayGoals)
+          : ""
+    );
+  }, [guess?.awayGoals, match.awayGoals]);
 
   function handleChange(
     field: "homeGoals" | "awayGoals",
@@ -38,7 +63,7 @@ export function MatchCard({ match, isEditable = false, onGoalChange }: IProps) {
   ) {
     if (raw === "") {
       setLocal("");
-      onGoalChange?.(match.id, field, null);
+      onGuessChange(match.id, field, null);
       return;
     }
 
@@ -46,31 +71,35 @@ export function MatchCard({ match, isEditable = false, onGoalChange }: IProps) {
     if (isNaN(parsed) || parsed < 0) return;
 
     setLocal(String(parsed));
-    onGoalChange?.(match.id, field, parsed);
+    onGuessChange(match.id, field, parsed);
+  }
+
+  function handleBlur(local: string, setLocal: (v: string) => void) {
+    if (local === "") setLocal("");
   }
 
   return (
-    <div className="match-card">
-      <div className="match-card__header">
+    <div className="prediction-card">
+      <div className="prediction-card__header">
         <div>
-          <p className="match-card__info-date">{formatMatchDate(match.date)}</p>
-          <p className="match-card__info-venue">
+          <p className="prediction-card__info-date">{formatMatchDate(match.date)}</p>
+          <p className="prediction-card__info-venue">
             {match.stadium}, {match.city}
           </p>
         </div>
         <MatchStatusBadge matchStatus={match.status} />
       </div>
 
-      <div className="match-card__grid">
+      <div className="prediction-card__grid">
         <TeamDisplay
           shieldUrl={match.homeTeam.shieldUrl}
           name={match.homeTeam.name}
         />
 
-        <div className="match-card__score">
+        <div className="prediction-card__score">
           <input
             name="homeGoals"
-            className="match-card__score-input"
+            className="prediction-card__score-input"
             value={localHome}
             type="number"
             min={0}
@@ -78,11 +107,12 @@ export function MatchCard({ match, isEditable = false, onGoalChange }: IProps) {
             onChange={(e) =>
               handleChange("homeGoals", e.target.value, setLocalHome)
             }
+            onBlur={() => handleBlur(localHome, setLocalHome)}
           />
-          <span className="match-card__score-divider">X</span>
+          <span className="prediction-card__score-divider">X</span>
           <input
             name="awayGoals"
-            className="match-card__score-input"
+            className="prediction-card__score-input"
             value={localAway}
             type="number"
             min={0}
@@ -90,6 +120,7 @@ export function MatchCard({ match, isEditable = false, onGoalChange }: IProps) {
             onChange={(e) =>
               handleChange("awayGoals", e.target.value, setLocalAway)
             }
+            onBlur={() => handleBlur(localAway, setLocalAway)}
           />
         </div>
 
