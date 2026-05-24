@@ -127,7 +127,7 @@ useEffect(() => {
 
       {loading && <Loading fullscreen={true} />}
 
-      {isAdmin && <SaveBar onSave={handleSave} />}
+      {isAdmin && <SaveBar onSave={handleSave} title="Salvar Partidas" />}
     </>
   );
 }

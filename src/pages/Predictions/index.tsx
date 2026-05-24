@@ -131,7 +131,7 @@ export function Predictions() {
 
       {loading && <Loading fullscreen={true} />}
 
-      <SaveBar onSave={handleSave} />
+      <SaveBar onSave={handleSave} title="Salvar Palpites" />
     </>
   );
 }
