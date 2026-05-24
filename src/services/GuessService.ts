@@ -26,7 +26,7 @@ export async function updateGuesses(poolParticipantId: number, guesses: IGuess[]
   const response = await fetchData(BASE_ENDPOINT, "PUT", jsonBody);
 
   if (!response.ok)
-    throw new Error("Error on get guesses!");
+    throw new Error("Error on update guesses!");
 
   return response.json();
 }

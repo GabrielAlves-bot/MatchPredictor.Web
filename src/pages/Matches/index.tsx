@@ -12,6 +12,8 @@ import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { getKnockoutStages, getUniqueGroups } from "../../helpers/helpers";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 import { useAuth } from "../../context/AuthContext";
+import { settle } from "../../services/PoolService";
+import { usePool } from "../../context/PoolContext";
 
 export function Matches() {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -20,6 +22,7 @@ export function Matches() {
   const [selectedTab, setSelectedTab] = useState<string>("");
 
   const { auth } = useAuth();
+  const { activePool } = usePool();
   const isAdmin = auth?.role === "Admin";
 
   async function loadMatches() {
@@ -73,6 +76,7 @@ useEffect(() => {
     try {
       setIsLoading(true);
       await updateMatches(matches);
+      settle(activePool?.poolId);
     } catch {
       console.error("Erro ao salvar partidas");
     } finally {

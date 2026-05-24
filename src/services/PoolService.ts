@@ -12,3 +12,11 @@ export async function getPoolRanking(poolId: number): Promise<IPoolRanking[]> {
 
     return await response.json();
 }
+
+export function settle(poolId?: number): void{
+  try {
+     fetchData(`${BASE_ENDPOINT}/${poolId}/settle`, "POST");
+  } catch (error) {
+    console.error("Erro ao executar settle:", error);
+  }
+}

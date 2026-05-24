@@ -20,7 +20,7 @@ export async function updateMatches(matches: IMatch[]): Promise<boolean> {
   const response = await fetchData(BASE_ENDPOINT, "PUT", jsonBody);
 
   if (!response.ok)
-    throw new Error("Error on get guesses!");
+    throw new Error("Error on update matches!");
 
   return response.json();
 }
