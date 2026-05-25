@@ -61,7 +61,6 @@ export function UserPredictions() {
 
   return (
     <main className="user-predictions">
-      {/* Navegação de volta */}
       <div className="user-predictions__back">
         <button
           className="user-predictions__back-btn"
@@ -72,7 +71,6 @@ export function UserPredictions() {
         </button>
       </div>
 
-      {/* Hero card do participante */}
       {participant && (
         <UserStandingCard
           name={participant.userName}
@@ -81,7 +79,6 @@ export function UserPredictions() {
         />
       )}
 
-      {/* Filtros de fase e tab */}
       <PhaseTabs
         selectedPhase={selectedPhase}
         onPhaseChange={handlePhaseChange}
@@ -103,7 +100,6 @@ export function UserPredictions() {
         />
       )}
 
-      {/* Lista de palpites — read-only: sem onGuessChange */}
       <PredictionList
         matches={filteredMatches}
         guesses={guesses}

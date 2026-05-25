@@ -12,7 +12,6 @@
   transition: transform 0.1s ease;
 }
 
-/* Decoração de fundo */
 .user-standing-card::after {
   content: "";
   position: absolute;

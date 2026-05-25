@@ -58,7 +58,6 @@
   margin-top: 0.25rem;
 }
 
-/* Toggle Switch */
 .rule-card__switch {
   position: relative;
   display: inline-block;
@@ -102,7 +101,6 @@
   transform: translateX(20px);
 }
 
-/* Footer */
 .rule-card__footer {
   display: flex;
   justify-content: space-between;
@@ -170,7 +168,6 @@
   opacity: 0.5;
 }
 
-/* remove number input arrows */
 .rule-card__points-input::-webkit-inner-spin-button,
 .rule-card__points-input::-webkit-outer-spin-button {
   -webkit-appearance: none;

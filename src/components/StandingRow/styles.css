@@ -36,7 +36,6 @@
   pointer-events: none;
 }
 
-/* Colunas */
 .standing-row__rank {
   grid-column: span 2;
 }
@@ -79,7 +78,6 @@
   opacity: 0.8;
 }
 
-/* Badge de posição */
 .standing-row__badge {
   width: 24px;
   height: 24px;
@@ -113,7 +111,6 @@
   font-style: normal;
 }
 
-/* Nome */
 .standing-row__name {
   font-size: 14px;
   font-weight: 700;
@@ -128,7 +125,6 @@
   color: var(--on-primary-container);
 }
 
-/* Avatar / star badge */
 .standing-row__avatar-container {
   position: relative;
   flex-shrink: 0;
