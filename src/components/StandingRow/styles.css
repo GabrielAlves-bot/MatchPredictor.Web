@@ -142,3 +142,9 @@
   color: var(--primary-container);
   font-variation-settings: "FILL" 1;
 }
+
+@media (prefers-color-scheme: dark) {
+    .standing-row--clickable:hover {
+        background-color: var(--primary);
+    }
+}
