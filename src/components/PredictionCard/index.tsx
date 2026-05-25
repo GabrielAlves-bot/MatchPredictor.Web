@@ -18,44 +18,42 @@ interface IProps {
   ) => void;
 }
 
-export function PredictionCard({ readonly, match, guess, onGuessChange }: IProps) {
-  const isEditable = !readonly && match.status === MatchStatus.Scheduled;
-  
+export function PredictionCard({
+  readonly,
+  match,
+  guess,
+  onGuessChange,
+}: IProps) {
+  const isEditable =
+    !readonly && match.status === MatchStatus.Scheduled;
+
   const [localHome, setLocalHome] = useState<string>(
     guess?.homeGoals != null
       ? String(guess.homeGoals)
-      : match.homeGoals != null
-        ? String(match.homeGoals)
-        : ""
+      : ""
   );
 
   const [localAway, setLocalAway] = useState<string>(
     guess?.awayGoals != null
       ? String(guess.awayGoals)
-      : match.awayGoals != null
-        ? String(match.awayGoals)
-        : ""
+      : ""
   );
 
   useEffect(() => {
     setLocalHome(
       guess?.homeGoals != null
         ? String(guess.homeGoals)
-        : match.homeGoals != null
-          ? String(match.homeGoals)
-          : ""
+        : ""
     );
-  }, [guess?.homeGoals, match.homeGoals]);
+  }, [guess?.homeGoals]);
 
   useEffect(() => {
     setLocalAway(
       guess?.awayGoals != null
         ? String(guess.awayGoals)
-        : match.awayGoals != null
-          ? String(match.awayGoals)
-          : ""
+        : ""
     );
-  }, [guess?.awayGoals, match.awayGoals]);
+  }, [guess?.awayGoals]);
 
   function handleChange(
     field: "homeGoals" | "awayGoals",
@@ -69,25 +67,35 @@ export function PredictionCard({ readonly, match, guess, onGuessChange }: IProps
     }
 
     const parsed = parseInt(raw, 10);
+
     if (isNaN(parsed) || parsed < 0) return;
 
     setLocal(String(parsed));
     onGuessChange(match.id, field, parsed);
   }
 
-  function handleBlur(local: string, setLocal: (v: string) => void) {
-    if (local === "") setLocal("");
+  function handleBlur(
+    local: string,
+    setLocal: (v: string) => void
+  ) {
+    if (local === "") {
+      setLocal("");
+    }
   }
 
   return (
     <div className="prediction-card">
       <div className="prediction-card__header">
         <div>
-          <p className="prediction-card__info-date">{formatMatchDate(match.date)}</p>
+          <p className="prediction-card__info-date">
+            {formatMatchDate(match.date)}
+          </p>
+
           <p className="prediction-card__info-venue">
             {match.stadium}, {match.city}
           </p>
         </div>
+
         <MatchStatusBadge matchStatus={match.status} />
       </div>
 
@@ -106,11 +114,21 @@ export function PredictionCard({ readonly, match, guess, onGuessChange }: IProps
             min={0}
             disabled={!isEditable}
             onChange={(e) =>
-              handleChange("homeGoals", e.target.value, setLocalHome)
+              handleChange(
+                "homeGoals",
+                e.target.value,
+                setLocalHome
+              )
             }
-            onBlur={() => handleBlur(localHome, setLocalHome)}
+            onBlur={() =>
+              handleBlur(localHome, setLocalHome)
+            }
           />
-          <span className="prediction-card__score-divider">X</span>
+
+          <span className="prediction-card__score-divider">
+            X
+          </span>
+
           <input
             name="awayGoals"
             className="prediction-card__score-input"
@@ -119,9 +137,15 @@ export function PredictionCard({ readonly, match, guess, onGuessChange }: IProps
             min={0}
             disabled={!isEditable}
             onChange={(e) =>
-              handleChange("awayGoals", e.target.value, setLocalAway)
+              handleChange(
+                "awayGoals",
+                e.target.value,
+                setLocalAway
+              )
             }
-            onBlur={() => handleBlur(localAway, setLocalAway)}
+            onBlur={() =>
+              handleBlur(localAway, setLocalAway)
+            }
           />
         </div>
 
