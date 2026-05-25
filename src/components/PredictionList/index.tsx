@@ -4,6 +4,7 @@ import type { IMatch } from "../../types/MatchType";
 import "./styles.css";
 
 interface IProps {
+  readonly?: boolean;
   matches: IMatch[];
   guesses: IGuess[];
   onGuessChange: (
@@ -13,7 +14,7 @@ interface IProps {
   ) => void;
 }
 
-export function PredictionList({ matches, guesses, onGuessChange }: IProps) {
+export function PredictionList({ readonly, matches, guesses, onGuessChange }: IProps) {
   if (matches.length === 0) {
     return (
       <div className="prediction-list prediction-list--empty">
@@ -31,6 +32,7 @@ export function PredictionList({ matches, guesses, onGuessChange }: IProps) {
             key={match.id}
             match={match}
             guess={guess}
+            readonly={readonly}
             onGuessChange={onGuessChange}
           />
         );

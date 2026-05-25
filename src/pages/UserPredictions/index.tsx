@@ -101,6 +101,7 @@ export function UserPredictions() {
       )}
 
       <PredictionList
+        readonly={true}
         matches={filteredMatches}
         guesses={guesses}
         onGuessChange={() => {}}

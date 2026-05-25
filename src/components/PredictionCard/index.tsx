@@ -8,6 +8,7 @@ import { TeamDisplay } from "../TeamDisplay";
 import "./styles.css";
 
 interface IProps {
+  readonly?: boolean;
   match: IMatch;
   guess?: IGuess;
   onGuessChange: (
@@ -17,9 +18,9 @@ interface IProps {
   ) => void;
 }
 
-export function PredictionCard({ match, guess, onGuessChange }: IProps) {
-  const isEditable = match.status === MatchStatus.Scheduled;
-
+export function PredictionCard({ readonly, match, guess, onGuessChange }: IProps) {
+  const isEditable = !readonly && match.status === MatchStatus.Scheduled;
+  
   const [localHome, setLocalHome] = useState<string>(
     guess?.homeGoals != null
       ? String(guess.homeGoals)
