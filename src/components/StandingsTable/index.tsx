@@ -3,9 +3,10 @@ import "./styles.css";
 
 interface StandingsTableProps {
   entries: IStandingEntry[];
+  onRowClick?: (poolParticipantId: number) => void;
 }
 
-export function StandingsTable({ entries }: StandingsTableProps) {
+export function StandingsTable({ entries, onRowClick }: StandingsTableProps) {
   return (
     <>
       <div className="standings-table__header">
@@ -16,7 +17,11 @@ export function StandingsTable({ entries }: StandingsTableProps) {
 
       <div className="standings-table__list">
         {entries.map((entry) => (
-          <StandingRow key={entry.rank} {...entry} />
+          <StandingRow
+            key={entry.rank}
+            {...entry}
+            onClick={onRowClick}
+          />
         ))}
       </div>
     </>

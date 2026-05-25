@@ -1,0 +1,71 @@
+.user-standing-card {
+  background-color: var(--primary-container);
+  border-radius: 24px;
+  padding: 32px 24px;
+  color: var(--on-primary-container);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--primary) 20%, transparent);
+  transition: transform 0.1s ease;
+}
+
+/* Decoração de fundo */
+.user-standing-card::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.user-standing-card__name {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+  z-index: 1;
+  color: var(--on-primary-container);
+}
+
+.user-standing-card__ranking {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.user-standing-card__position {
+  font-family: var(--font-headline);
+  font-size: 84px;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.8;
+  margin: 0;
+  color: var(--on-primary-container);
+  letter-spacing: -4px;
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.08);
+}
+
+.user-standing-card__points {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--on-primary-container);
+}

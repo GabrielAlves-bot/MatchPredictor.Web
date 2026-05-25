@@ -14,6 +14,7 @@ import { PoolSelector } from "../pages/PoolSelector";
 import { MasterPageWrapper } from "./Wrapper/MasterPageWrapper";
 import { Standings } from "../pages/Standings";
 import { Rules } from "../pages/Rules";
+import { UserPredictions } from "../pages/UserPredictions";
 
 function AppRoutes() {
     return (
@@ -35,6 +36,7 @@ function AppRoutes() {
                                         <Route path={paths.matches} element={<Matches />} />
                                         <Route path={paths.standings} element={<Standings />} />
                                         <Route path={paths.rules} element={<Rules />} />
+                                        <Route path={paths.userPredictions} element={<UserPredictions />} />
                                     </Route>
                                 </Route>
                             </Route>

@@ -5,12 +5,24 @@
   padding: 16px;
   border-radius: 12px;
   background-color: var(--surface-container-lowest);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.standing-row--clickable {
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.standing-row--clickable:hover {
+  background-color: var(--surface-container);
+}
+
+.standing-row--clickable:active {
+  transform: scale(0.99);
 }
 
 .standing-row--highlight {
-  background-color: #00875a;
-  box-shadow: 0 10px 15px -3px rgba(0, 107, 71, 0.2);
+  background-color: var(--primary-container);
+  box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--primary) 20%, transparent);
   border: 2px solid var(--primary);
   position: relative;
   overflow: hidden;
@@ -20,10 +32,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.04);
   pointer-events: none;
 }
 
+/* Colunas */
 .standing-row__rank {
   grid-column: span 2;
 }
@@ -33,11 +46,18 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+}
+
+.standing-row__points-group {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
 }
 
 .standing-row__points {
-  grid-column: span 2;
-  text-align: right;
   font-size: 14px;
   font-weight: 900;
   font-style: italic;
@@ -45,9 +65,21 @@
 }
 
 .standing-row--highlight .standing-row__points {
-  color: white;
+  color: var(--on-primary-container);
 }
 
+.standing-row__chevron {
+  font-size: 16px;
+  color: var(--tertiary);
+  flex-shrink: 0;
+}
+
+.standing-row--highlight .standing-row__chevron {
+  color: var(--on-primary-container);
+  opacity: 0.8;
+}
+
+/* Badge de posição */
 .standing-row__badge {
   width: 24px;
   height: 24px;
@@ -66,13 +98,13 @@
 }
 
 .standing-row__badge--silver {
-  background-color: #cbd5e1;
-  color: #334155;
+  background-color: var(--surface-container-high);
+  color: var(--on-surface-variant);
 }
 
 .standing-row__badge--user {
-  background-color: white;
-  color: var(--primary);
+  background-color: var(--on-primary-container);
+  color: var(--primary-container);
 }
 
 .standing-row__badge--normal {
@@ -81,28 +113,29 @@
   font-style: normal;
 }
 
+/* Nome */
 .standing-row__name {
   font-size: 14px;
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: var(--on-surface);
 }
 
 .standing-row--highlight .standing-row__name {
   font-weight: 800;
-  color: white;
+  color: var(--on-primary-container);
 }
 
+/* Avatar / star badge */
 .standing-row__avatar-container {
   position: relative;
+  flex-shrink: 0;
 }
 
 .standing-row__star-badge {
-  position: absolute;
-  bottom: -4px;
-  right: -4px;
-  background-color: white;
+  background-color: var(--on-primary-container);
   border-radius: 9999px;
   padding: 2px;
   display: flex;
@@ -110,6 +143,6 @@
 
 .standing-row__star-badge .material-symbols-outlined {
   font-size: 10px;
-  color: var(--primary);
+  color: var(--primary-container);
   font-variation-settings: "FILL" 1;
 }

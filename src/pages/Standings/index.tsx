@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import type { IStandingEntry } from "../../components/StandingRow";
 import { StandingsHeroCard } from "../../components/StandingsHeroCard";
@@ -13,21 +14,27 @@ export function Standings() {
   const { auth } = useAuth();
   const { ranking, isLoading, error } = usePoolRanking(activePool?.poolId);
   const loading = useMinimumLoading(isLoading);
+  const navigate = useNavigate();
 
-  if (loading) 
+  if (loading)
     return <Loading fullscreen text="Carregando ranking..." />;
 
-  if (error) 
+  if (error)
     return <p>{error}</p>;
 
   const entries: IStandingEntry[] = ranking.map((entry) => ({
     rank: entry.position,
     name: entry.userName,
     points: entry.score,
+    poolParticipantId: entry.idPoolParticipant,
     isCurrentUser: entry.userName === auth?.user,
   }));
 
   const currentUser = entries.find((e) => e.isCurrentUser);
+
+  function handleRowClick(poolParticipantId: number) {
+    navigate(`/User-Predictions/${poolParticipantId}`);
+  }
 
   return (
     <main className="standings-page">
@@ -40,7 +47,7 @@ export function Standings() {
         </section>
       )}
 
-      <StandingsTable entries={entries} />
+      <StandingsTable entries={entries} onRowClick={handleRowClick} />
     </main>
   );
 }
