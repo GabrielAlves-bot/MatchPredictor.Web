@@ -19,16 +19,18 @@ export function useScoringRules(): UseScoringRulesResult {
   const [error, setError] = useState<string | null>(null);
 
   const { activePool } = usePool();
-  console.log("Active Pool in useScoringRules:", activePool);
 
   useEffect(() => {
+    if (!activePool?.poolId) return;
+
     setIsLoading(true);
     setError(null);
-    getScoringRules(1)
+
+    getScoringRules(activePool.poolId)
       .then(setRules)
       .catch((err: Error) => setError(err.message))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [activePool?.poolId]);
 
   const updateRule = useCallback((id: number, changes: Partial<IScoringRule>) => {
     setRules((prev) =>

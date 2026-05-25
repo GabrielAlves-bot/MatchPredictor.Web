@@ -3,9 +3,12 @@ import { useScoringRules } from "../../hooks/useScoringRules";
 import { Loading } from "../../components/Loading";
 import { RuleList } from "../../components/RuleList";
 import { SaveBar } from "../../components/SaveBar";
+import { useAuth } from "../../context/AuthContext";
 
 export function Rules() {
   const { rules, isLoading, isSaving, error, updateRule, save } = useScoringRules();
+  const { auth } = useAuth();
+  const isAdmin = auth?.role === "Admin";
 
   if (isLoading) return <Loading fullscreen text="Carregando regras..." />;
 
@@ -13,15 +16,24 @@ export function Rules() {
     <>
       <main className="rule-page">
         <h2 className="rule-page__title">Configurações de Regras</h2>
-        <p className="rule-page__subtitle">Defina os pontos para cada tipo de acerto</p>
+        <p className="rule-page__subtitle">
+          {isAdmin
+            ? "Defina os pontos para cada tipo de acerto"
+            : "Visualize as regras de pontuação configuradas"}
+        </p>
 
         {error && <p className="rule-page__error">{error}</p>}
 
-        <RuleList rules={rules} onChange={updateRule} />
+        <RuleList
+          rules={rules}
+          isEditable={isAdmin}
+          onChange={updateRule}
+        />
       </main>
-      {isSaving && <Loading fullscreen={true} />}
 
-      <SaveBar onSave={save} title="Salvar Regras" />
+      {isSaving && <Loading fullscreen />}
+
+      {isAdmin && <SaveBar onSave={save} title="Salvar Regras" />}
     </>
   );
 }
