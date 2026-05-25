@@ -12,6 +12,7 @@ export function Rules() {
   const isAdmin = auth?.role === "Admin";
 
   const loading = useMinimumLoading(isLoading);
+  const saving = useMinimumLoading(isSaving);
 
   if (loading) 
     return <Loading fullscreen text="Carregando regras..." />;
@@ -35,7 +36,7 @@ export function Rules() {
         />
       </main>
 
-      {isSaving && <Loading fullscreen />}
+      {saving && <Loading fullscreen text="Salvando Regras..." />}
 
       {isAdmin && <SaveBar onSave={save} title="Salvar Regras" />}
     </>
