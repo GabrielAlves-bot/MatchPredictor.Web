@@ -4,13 +4,17 @@ import { Loading } from "../../components/Loading";
 import { RuleList } from "../../components/RuleList";
 import { SaveBar } from "../../components/SaveBar";
 import { useAuth } from "../../context/AuthContext";
+import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 
 export function Rules() {
   const { rules, isLoading, isSaving, error, updateRule, save } = useScoringRules();
   const { auth } = useAuth();
   const isAdmin = auth?.role === "Admin";
 
-  if (isLoading) return <Loading fullscreen text="Carregando regras..." />;
+  const loading = useMinimumLoading(isLoading);
+
+  if (loading) 
+    return <Loading fullscreen text="Carregando regras..." />;
 
   return (
     <>
