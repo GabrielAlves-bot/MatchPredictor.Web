@@ -1,4 +1,4 @@
-import type { IPoolSummary } from "../types/PoolSummary";
+import type { IPoolSummary } from "../types/PoolSummaryType";
 import { fetchData } from "./BaseRequest";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;

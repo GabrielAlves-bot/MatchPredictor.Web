@@ -1,4 +1,4 @@
-import type { IPoolSummary } from "../../types/PoolSummary";
+import type { IPoolSummary } from "../../types/PoolSummaryType";
 import "./styles.css";
 
 interface IProps {

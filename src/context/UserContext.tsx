@@ -6,7 +6,7 @@ import {
     type ReactNode
 } from "react";
 
-import type { IUserProfile } from "../types/UserProfile";
+import type { IUserProfile } from "../types/UserProfileType";
 import { useAuth } from "./AuthContext";
 import { getMe } from "../services/UserService";
 

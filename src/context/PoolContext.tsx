@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
-import type { IPoolSummary } from "../types/PoolSummary";
+import type { IPoolSummary } from "../types/PoolSummaryType";
 import { useAuth } from "./AuthContext";
 import { getMyPools } from "../services/PoolParticipantService";
 

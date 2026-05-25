@@ -13,6 +13,7 @@ import { ActivePoolGuard } from "../guards/ActivePoolGuard";
 import { PoolSelector } from "../pages/PoolSelector";
 import { MasterPageWrapper } from "./Wrapper/MasterPageWrapper";
 import { Standings } from "../pages/Standings";
+import { Rules } from "../pages/Rules";
 
 function AppRoutes() {
     return (
@@ -33,6 +34,7 @@ function AppRoutes() {
                                         <Route path={paths.predictions} element={<Predictions />} />
                                         <Route path={paths.matches} element={<Matches />} />
                                         <Route path={paths.standings} element={<Standings />} />
+                                        <Route path={paths.rules} element={<Rules />} />
                                     </Route>
                                 </Route>
                             </Route>

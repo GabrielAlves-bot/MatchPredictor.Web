@@ -1,6 +1,6 @@
 import "./styles.css";
 import { PoolCard } from "../PoolCard";
-import type { IPoolSummary } from "../../types/PoolSummary";
+import type { IPoolSummary } from "../../types/PoolSummaryType";
 
 interface IProps {
   pools: IPoolSummary[];

@@ -4,7 +4,7 @@ import { PoolList } from "../../components/PoolList";
 import { Loading } from "../../components/Loading";
 import { usePool } from "../../context/PoolContext";
 import paths from "../../routes/paths";
-import type { IPoolSummary } from "../../types/PoolSummary";
+import type { IPoolSummary } from "../../types/PoolSummaryType";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 
 export function PoolSelector() {

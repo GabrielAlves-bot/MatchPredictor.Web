@@ -1,4 +1,4 @@
-import type { IUserProfile } from "../types/UserProfile";
+import type { IUserProfile } from "../types/UserProfileType";
 import { fetchData } from "./BaseRequest";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
