@@ -17,4 +17,5 @@ export interface IMatch {
   group?: string;
   knockoutStage: KnockoutStage;
   saved: boolean;
+  round?: number;
 }

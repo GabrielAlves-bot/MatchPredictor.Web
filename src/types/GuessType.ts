@@ -3,4 +3,5 @@ export interface IGuess {
     matchId: number;
     homeGoals?: number;
     awayGoals?: number;
+    enabled: boolean;
 }

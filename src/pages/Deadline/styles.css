@@ -1,0 +1,32 @@
+.deadline-page {
+  padding: 1.5rem;
+  padding-top: 96px;
+  padding-bottom: 48px;
+  margin: 0 auto;
+}
+
+.deadline-page__header {
+  margin-bottom: 2rem;
+}
+
+.deadline-page__title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.deadline-page__description {
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  max-width: 90%;
+}
+
+.deadline-page__error {
+  color: var(--text-danger);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}

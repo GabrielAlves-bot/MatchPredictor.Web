@@ -1,7 +1,7 @@
 import "./styles.css";
 import { TournamentCard } from "../../components/TournamentCard";
 import { PhaseTabs } from "../../components/PhaseTabs";
-import { GroupTabs } from "../../components/GroupTabs";
+import { RoundTabs } from "../../components/RoundTabs";
 import { PredictionList } from "../../components/PredictionList";
 import { SaveBar } from "../../components/SaveBar";
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import type { IGuess } from "../../types/GuessType";
 import { getGuesses, updateGuesses } from "../../services/GuessService";
 import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { Loading } from "../../components/Loading";
-import { getUniqueGroups, getKnockoutStages } from "../../helpers/helpers";
+import { getUniqueRounds, getKnockoutStages } from "../../helpers/helpers";
 import { usePool } from "../../context/PoolContext";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 
@@ -48,7 +48,7 @@ export function Predictions() {
   useEffect(() => {
     if (matches.length === 0) return;
     if (selectedPhase === MatchPhase.GroupStage) {
-      setSelectedTab(getUniqueGroups(matches)[0] ?? "");
+      setSelectedTab(getUniqueRounds(matches)[0] ?? "");
     } else {
       setSelectedTab(getKnockoutStages(matches)[0] ?? "");
     }
@@ -84,7 +84,7 @@ export function Predictions() {
 
   const filteredMatches = matches.filter((m) => {
     if (m.phase !== selectedPhase) return false;
-    if (selectedPhase === MatchPhase.GroupStage) return m.group === selectedTab;
+    if (selectedPhase === MatchPhase.GroupStage) return String(m.round) === selectedTab;
     return String(m.knockoutStage) === selectedTab;
   });
 
@@ -106,10 +106,10 @@ export function Predictions() {
           />
 
           {selectedPhase === MatchPhase.GroupStage && (
-            <GroupTabs
+            <RoundTabs
               matches={matches}
-              selectedGroup={selectedTab}
-              onGroupChange={setSelectedTab}
+              selectedRound={selectedTab}
+              onRoundChange={setSelectedTab}
             />
           )}
 

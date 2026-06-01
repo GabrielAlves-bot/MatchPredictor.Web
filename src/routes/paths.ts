@@ -7,5 +7,6 @@ export default {
     selectPool: "/Select-Pool",
     standings: "/Standings",
     rules: "/Rules",
-    userPredictions: "/User-Predictions/:poolParticipantId"
+    userPredictions: "/User-Predictions/:poolParticipantId",
+    deadlines: "/Deadlines"
 }

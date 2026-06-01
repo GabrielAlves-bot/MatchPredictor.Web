@@ -7,16 +7,16 @@ import RuleIcon from "@mui/icons-material/Rule";
 
 export const menuData: IBottomMenuData[] = [
   {
-    id: "matches",
-    icon: CalendarTodayIcon,
-    label: "Partidas",
-    destinationPath: "/Matches",
-  },
-  {
     id: "predictions",
     icon: EditNoteIcon,
     label: "Palpites",
     destinationPath: "/Predictions",
+  },
+  {
+    id: "matches",
+    icon: CalendarTodayIcon,
+    label: "Resultados",
+    destinationPath: "/Matches",
   },
   {
     id: "standings",
@@ -24,10 +24,16 @@ export const menuData: IBottomMenuData[] = [
     label: "Classificação",
     destinationPath: "/Standings",
   },
-    {
+  {
     id: "rules",
     icon: RuleIcon,
     label: "Regras",
     destinationPath: "/Rules",
   },
+  {
+    id: "deadlines",
+    icon: CalendarTodayIcon,
+    label: "Prazos",
+    destinationPath: "/Deadlines",
+  }
 ];

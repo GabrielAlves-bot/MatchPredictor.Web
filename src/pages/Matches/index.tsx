@@ -1,6 +1,6 @@
 import "./styles.css";
 import { PhaseTabs } from "../../components/PhaseTabs";
-import { GroupTabs } from "../../components/GroupTabs";
+import { RoundTabs } from "../../components/RoundTabs";
 import { MatchList } from "../../components/MatchList";
 import { SaveBar } from "../../components/SaveBar";
 import { getMatches, updateMatches } from "../../services/MatchService";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Loading } from "../../components/Loading";
 import { MatchPhase } from "../../enums/MatchPhase";
 import { KnockoutTabs } from "../../components/KnockoutTabs";
-import { getKnockoutStages, getUniqueGroups } from "../../helpers/helpers";
+import { getKnockoutStages, getUniqueRounds } from "../../helpers/helpers";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 import { useAuth } from "../../context/AuthContext";
 import { settle } from "../../services/PoolService";
@@ -41,19 +41,19 @@ export function Matches() {
     loadMatches();
   }, []);
 
-useEffect(() => {
-  if (matches.length === 0) 
-    return;
+  useEffect(() => {
+    if (matches.length === 0)
+      return;
 
-  if (selectedTab !== "") 
-    return;
-  
-  if (selectedPhase === MatchPhase.GroupStage) {
-    setSelectedTab(getUniqueGroups(matches)[0] ?? "");
-  } else {
-    setSelectedTab(getKnockoutStages(matches)[0] ?? "");
-  }
-}, [matches, selectedPhase, selectedTab]);
+    if (selectedTab !== "")
+      return;
+
+    if (selectedPhase === MatchPhase.GroupStage) {
+      setSelectedTab(getUniqueRounds(matches)[0] ?? "");
+    } else {
+      setSelectedTab(getKnockoutStages(matches)[0] ?? "");
+    }
+  }, [matches, selectedPhase, selectedTab]);
 
   function handlePhaseChange(phase: MatchPhase) {
     setSelectedPhase(phase);
@@ -85,8 +85,12 @@ useEffect(() => {
   }
 
   const filteredMatches = matches.filter((m) => {
-    if (m.phase !== selectedPhase) return false;
-    if (selectedPhase === MatchPhase.GroupStage) return m.group === selectedTab;
+    if (m.phase !== selectedPhase)
+      return false;
+
+    if (selectedPhase === MatchPhase.GroupStage)
+      return String(m.round) === selectedTab;
+
     return String(m.knockoutStage) === selectedTab;
   });
 
@@ -102,10 +106,10 @@ useEffect(() => {
           />
 
           {selectedPhase === MatchPhase.GroupStage && (
-            <GroupTabs
+            <RoundTabs
               matches={matches}
-              selectedGroup={selectedTab}
-              onGroupChange={setSelectedTab}
+              selectedRound={selectedTab}
+              onRoundChange={setSelectedTab}
             />
           )}
 

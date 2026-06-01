@@ -9,12 +9,25 @@ export function getUniqueGroups(matches: IMatch[]): string[] {
   return [...new Set(groups)].sort();
 }
 
+export function getUniqueRounds(matches: IMatch[]): string[] {
+  return Array.from(
+    new Set(
+      matches
+        .map((m) => m.round)
+        .filter((r): r is number => r != null)
+    )
+  )
+    .sort((a, b) => a - b)
+    .map(String);
+}
+
 export function getKnockoutStages(matches: IMatch[]): string[] {
   const order = [
     KnockoutStage.RoundOf32,
     KnockoutStage.RoundOf16,
     KnockoutStage.QuarterFinal,
     KnockoutStage.SemiFinal,
+    KnockoutStage.ThirdPlaceMatch,
     KnockoutStage.Final,
   ];
   const present = new Set(

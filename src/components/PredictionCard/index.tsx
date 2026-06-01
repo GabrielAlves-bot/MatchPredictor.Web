@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { MatchStatus } from "../../enums/MatchStatus";
 import { formatMatchDate } from "../../helpers/FormatDate";
 import type { IGuess } from "../../types/GuessType";
 import type { IMatch } from "../../types/MatchType";
@@ -10,7 +9,7 @@ import "./styles.css";
 interface IProps {
   readonly?: boolean;
   match: IMatch;
-  guess?: IGuess;
+  guess: IGuess;
   onGuessChange: (
     matchId: number,
     field: "homeGoals" | "awayGoals",
@@ -25,7 +24,7 @@ export function PredictionCard({
   onGuessChange,
 }: IProps) {
   const isEditable =
-    !readonly && match.status === MatchStatus.Scheduled;
+    !readonly && guess.enabled;
 
   const [localHome, setLocalHome] = useState<string>(
     guess?.homeGoals != null

@@ -15,6 +15,7 @@ import { MasterPageWrapper } from "./Wrapper/MasterPageWrapper";
 import { Standings } from "../pages/Standings";
 import { Rules } from "../pages/Rules";
 import { UserPredictions } from "../pages/UserPredictions";
+import { Deadline } from "../pages/Deadline";
 
 function AppRoutes() {
     return (
@@ -37,6 +38,7 @@ function AppRoutes() {
                                         <Route path={paths.standings} element={<Standings />} />
                                         <Route path={paths.rules} element={<Rules />} />
                                         <Route path={paths.userPredictions} element={<UserPredictions />} />
+                                        <Route path={paths.deadlines} element={<Deadline championshipId={1} />} />
                                     </Route>
                                 </Route>
                             </Route>
