@@ -56,6 +56,10 @@ body {
   padding-bottom: 128px;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --surface: #020617;

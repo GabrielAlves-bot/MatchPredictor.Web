@@ -33,6 +33,7 @@
 /* Input editável */
 .deadline-card__input {
   width: 100%;
+  box-sizing: border-box; /* 👈 isso resolve no iOS */
   padding: 0.75rem 1rem;
   border-radius: 8px;
   border: 1px solid var(--outline-variant);
@@ -42,6 +43,7 @@
   background-color: var(--surface);
   outline: none;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  min-width: 0; /* garante que flex não ignore o limite */
 }
 
 .deadline-card__input:focus {
