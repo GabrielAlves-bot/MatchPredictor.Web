@@ -31,7 +31,7 @@ export function PredictionList({ readonly, matches, guesses, onGuessChange }: IP
           <PredictionCard
             key={match.id}
             match={match}
-            guess={guess}
+            guess={guess!}
             readonly={readonly}
             onGuessChange={onGuessChange}
           />
