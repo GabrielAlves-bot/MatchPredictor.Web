@@ -18,7 +18,7 @@ interface UserContextValue {
 const UserContext = createContext<UserContextValue | null>(null);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-    const { auth } = useAuth();
+    const { auth, logout } = useAuth();
 
     const [profile, setProfile] = useState<IUserProfile | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -36,8 +36,14 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 const userResponse = await getMe();
 
                 setProfile(userResponse);
-            } catch (error) {
+            } catch (error: any) {
                 console.error("Erro ao buscar usuário:", error);
+
+                if (error?.response?.status === 401) {
+                    logout();
+                    return;
+                }
+
                 setProfile(null);
             } finally {
                 setIsLoading(false);
@@ -45,10 +51,15 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
 
         fetchUser();
-    }, [auth?.token]);
+    }, [auth?.token, logout]);
 
     return (
-        <UserContext.Provider value={{ profile, isLoading }}>
+        <UserContext.Provider
+            value={{
+                profile,
+                isLoading,
+            }}
+        >
             {children}
         </UserContext.Provider>
     );

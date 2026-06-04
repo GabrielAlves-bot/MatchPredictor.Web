@@ -14,32 +14,46 @@ interface AuthContextValue {
 }
 
 const KEYS = ["token", "role", "user", "app:activePool"];
+
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 function loadFromStorage(): IAuthUser | null {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
     const user = localStorage.getItem("user");
-    return token && role && user ? { token, role, user } : null;
+
+    return token && role && user
+        ? { token, role, user }
+        : null;
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [auth, setAuth] = useState<IAuthUser | null>(loadFromStorage);
 
-    const login = useCallback((token: string, role: string, user: string) => {
-        localStorage.setItem("token", token);
-        localStorage.setItem("role", role);
-        localStorage.setItem("user", user);
-        setAuth({ token, role, user });
-    }, []);
+    const login = useCallback(
+        (token: string, role: string, user: string) => {
+            localStorage.setItem("token", token);
+            localStorage.setItem("role", role);
+            localStorage.setItem("user", user);
+
+            setAuth({ token, role, user });
+        },
+        []
+    );
 
     const logout = useCallback(() => {
-        KEYS.forEach(k => localStorage.removeItem(k));
+        KEYS.forEach(key => localStorage.removeItem(key));
         setAuth(null);
     }, []);
 
     return (
-        <AuthContext.Provider value={{ auth, login, logout }}>
+        <AuthContext.Provider
+            value={{
+                auth,
+                login,
+                logout,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
@@ -47,6 +61,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 export function useAuth(): AuthContextValue {
     const ctx = useContext(AuthContext);
-    if (!ctx) throw new Error("useAuth must be used inside <AuthProvider>");
+
+    if (!ctx) {
+        throw new Error("useAuth must be used inside <AuthProvider>");
+    }
+
     return ctx;
 }
