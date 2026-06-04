@@ -18,6 +18,8 @@ import { UserPredictions } from "../pages/UserPredictions";
 import { Deadline } from "../pages/Deadline";
 import { Bracket } from "../pages/Bracket";
 import { BracketDeadline } from "../pages/BracketDeadline";
+import { MyGuesses } from "../pages/MyGuesses";
+import { Settings } from "../pages/Settings";
 
 function AppRoutes() {
     return (
@@ -43,6 +45,8 @@ function AppRoutes() {
                                         <Route path={paths.bracket} element={<Bracket />} />
                                         <Route path={paths.deadlines} element={<Deadline championshipId={1} />} />
                                         <Route path={paths.bracketDeadlines} element={<BracketDeadline championshipId={1} />} />
+                                        <Route path={paths.myGuesses} element={<MyGuesses />} />
+                                        <Route path={paths.settings} element={<Settings />} />
                                     </Route>
                                 </Route>
                             </Route>

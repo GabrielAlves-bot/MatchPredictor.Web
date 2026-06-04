@@ -13,7 +13,7 @@ export function BracketProgressCard({ totalSelected, totalSlots }: BracketProgre
     <section className="bracket-progress-card">
       <div className="bracket-progress-card__header">
         <div>
-          <p className="bracket-progress-card__label">Status do Torneio</p>
+          <p className="bracket-progress-card__label">Status do Bolã<option value=""></option></p>
           <h2 className="bracket-progress-card__title">Progresso do Chaveamento</h2>
         </div>
         <div>

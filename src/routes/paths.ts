@@ -11,4 +11,6 @@ export default {
     deadlines: "/Deadlines",
     bracket: "/Bracket",
     bracketDeadlines: "/Bracket-Deadlines",
+    myGuesses: "/My-Guesses",
+    settings: "/Settings",
 }

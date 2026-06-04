@@ -20,7 +20,7 @@ export function Deadline({ championshipId }: DeadlineProps) {
   const loading = useMinimumLoading(isLoading);
   const saving = useMinimumLoading(isSaving);
 
-  if (!loading)
+  if (loading)
     return <Loading fullscreen text="Carregando prazos..." />;
 
   return (
@@ -44,7 +44,7 @@ export function Deadline({ championshipId }: DeadlineProps) {
         />
       </main>
 
-      {!saving && <Loading fullscreen />}
+      {saving && <Loading fullscreen />}
 
       {isAdmin && <SaveBar onSave={save} title="Salvar Prazos" />}
     </>

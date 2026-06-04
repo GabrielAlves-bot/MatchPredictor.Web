@@ -10,7 +10,7 @@ export const menuData: IBottomMenuData[] = [
     id: "predictions",
     icon: EditNoteIcon,
     label: "Palpites",
-    destinationPath: "/Predictions",
+    destinationPath: "/My-Guesses",
   },
   {
     id: "matches",
@@ -28,12 +28,6 @@ export const menuData: IBottomMenuData[] = [
     id: "rules",
     icon: RuleIcon,
     label: "Regras",
-    destinationPath: "/Rules",
+    destinationPath: "/Settings",
   },
-  {
-    id: "deadlines",
-    icon: CalendarTodayIcon,
-    label: "Prazos",
-    destinationPath: "/Deadlines",
-  }
 ];
