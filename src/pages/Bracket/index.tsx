@@ -23,6 +23,7 @@ export function Bracket() {
     totalSlots,
     toggle,
     save,
+    isReadOnly,
   } = useBracket(poolParticipantId);
 
   if (isLoading)
@@ -55,6 +56,7 @@ export function Bracket() {
               group={group}
               isGroupStage={isGroupStage}
               onToggle={toggle}
+              isReadOnly={isReadOnly}
             />
           ))}
         </div>
@@ -62,8 +64,10 @@ export function Bracket() {
 
       {isSaving && <Loading fullscreen text="Salvando" />}
 
-      <SaveBar
-        onSave={() => save(poolParticipantId)} title={"SALVAR CHAVEAMENTO"} />
+      {!isReadOnly && (
+        <SaveBar onSave={() => save(poolParticipantId)} title={"SALVAR CHAVEAMENTO"} />
+      )}
+
     </main>
   );
 }

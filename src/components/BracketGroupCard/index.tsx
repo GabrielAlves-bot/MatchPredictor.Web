@@ -7,12 +7,14 @@ interface BracketGroupCardProps {
   group: BracketGroupView;
   isGroupStage: boolean;
   onToggle: (groupKey: string, teamId: number) => void;
+  isReadOnly: boolean;
 }
 
 export function BracketGroupCard({
   group,
   isGroupStage,
   onToggle,
+  isReadOnly,
 }: BracketGroupCardProps) {
   const {
     key,
@@ -26,7 +28,6 @@ export function BracketGroupCard({
   const selectedSet = new Set(selectedIds);
 
   const groupHasThirdSelected = isGroupStage && selectedIds.length >= MAX_SELECTABLE_PER_GROUP;
-
   const groupFull = isGroupStage && selectedIds.length >= MAX_SELECTABLE_PER_GROUP;
 
   const badgeClass = isComplete
@@ -60,7 +61,7 @@ export function BracketGroupCard({
             selectedIds.length >= GROUP_QUALIFIERS &&
             !isSelected;
 
-          const isDisabled = blockedByGroupFull || blockedByThirdCap;
+          const isDisabled = isReadOnly || blockedByGroupFull || blockedByThirdCap;
 
           return (
             <BracketTeamRow

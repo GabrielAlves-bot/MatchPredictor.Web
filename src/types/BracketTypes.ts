@@ -30,4 +30,5 @@ export interface UseBracketResult {
   totalSlots: number;
   toggle: (groupKey: string, teamId: number) => void;
   save: (poolParticipantId: number) => Promise<void>;
+  isReadOnly: boolean;
 }

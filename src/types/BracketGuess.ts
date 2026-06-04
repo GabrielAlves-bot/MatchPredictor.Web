@@ -7,4 +7,5 @@ export interface IBracketGuess {
     knockoutStage: KnockoutStage
     matchPhase: MatchPhase
     enabled: boolean;
+    blocked?: boolean;
 }

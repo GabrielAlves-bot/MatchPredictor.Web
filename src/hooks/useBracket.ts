@@ -19,6 +19,7 @@ import type { UseBracketResult } from "../types/BracketTypes";
 
 export function useBracket(poolParticipantId: number): UseBracketResult {
   const [groupMatches, setGroupMatches] = useState<IGroupMatch[]>([]);
+  const [savedGuesses, setSavedGuesses] = useState<IBracketGuess[]>([]);
   const [selectionOrder, setSelectionOrder] = useState<Map<string, number[]>>(new Map());
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -34,9 +35,10 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
       getGroupMatches(),
       getBracketGuesses(poolParticipantId),
     ])
-      .then(([matches, savedGuesses]: [IGroupMatch[], IBracketGuess[]]) => {
+      .then(([matches, guesses]: [IGroupMatch[], IBracketGuess[]]) => {
         setGroupMatches(matches);
-        setSelectionOrder(buildSelectionOrder(matches, savedGuesses));
+        setSavedGuesses(guesses);
+        setSelectionOrder(buildSelectionOrder(matches, guesses));
       })
       .catch((err: Error) => setError(err.message))
       .finally(() => setIsLoading(false));
@@ -49,7 +51,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
 
   const phases = useMemo(
     () => [buildGroupStagePhase(groupMatches, selectionOrder, thirdPlaceFull)],
-    [groupMatches, selectionOrder, thirdPlaceFull]
+    [groupMatches, selectionOrder, thirdPlaceFull, savedGuesses]
   );
 
   const { totalSelected, totalSlots } = useMemo(() => {
@@ -68,43 +70,50 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     [groupMatches, selectionOrder]
   );
 
-const toggle = useCallback((groupKey: string, teamId: number) => {
-  setSelectionOrder((prev) => {
-    const current = prev.get(groupKey) ?? [];
-    const isSelected = current.includes(teamId);
+  const isReadOnly = useMemo(
+    () => savedGuesses.length > 0 && savedGuesses.every((g) => g.blocked),
+    [savedGuesses]
+  );
 
-    const totalSelected = Array.from(prev.values()).reduce(
-      (sum, ids) => sum + ids.length,
-      0
-    );
+  const toggle = useCallback((groupKey: string, teamId: number) => {
+    if (isReadOnly) return;
 
-    if (isSelected) {
-      if (totalSelected >= 32 && current.length <= GROUP_QUALIFIERS) {
+    setSelectionOrder((prev) => {
+      const current = prev.get(groupKey) ?? [];
+      const isSelected = current.includes(teamId);
+
+      const totalSelected = Array.from(prev.values()).reduce(
+        (sum, ids) => sum + ids.length,
+        0
+      );
+
+      if (isSelected) {
+        if (totalSelected >= 32 && current.length <= GROUP_QUALIFIERS) {
+          return prev;
+        }
+        return new Map(prev).set(groupKey, current.filter((id) => id !== teamId));
+      }
+
+      if (totalSelected >= 32) {
         return prev;
       }
-      return new Map(prev).set(groupKey, current.filter((id) => id !== teamId));
-    }
 
-    if (totalSelected >= 32) {
-      return prev;
-    }
+      const thirdPlaceCount = countSelectedThirdPlace(groupMatches, prev);
+      const thirdPlaceFull = thirdPlaceCount >= THIRD_PLACE_SLOTS;
+      const groupHasThirdSelected = current.length > GROUP_QUALIFIERS;
 
-    const thirdPlaceCount = countSelectedThirdPlace(groupMatches, prev);
-    const thirdPlaceFull = thirdPlaceCount >= THIRD_PLACE_SLOTS;
-    const groupHasThirdSelected = current.length > GROUP_QUALIFIERS;
+      const maxSelectable =
+        thirdPlaceFull && !groupHasThirdSelected
+          ? GROUP_QUALIFIERS
+          : MAX_SELECTABLE_PER_GROUP;
 
-    const maxSelectable =
-      thirdPlaceFull && !groupHasThirdSelected
-        ? GROUP_QUALIFIERS
-        : MAX_SELECTABLE_PER_GROUP;
+      if (current.length >= maxSelectable) {
+        return prev;
+      }
 
-    if (current.length >= maxSelectable) {
-      return prev;
-    }
-
-    return new Map(prev).set(groupKey, [...current, teamId]);
-  });
-}, [groupMatches]);
+      return new Map(prev).set(groupKey, [...current, teamId]);
+    });
+  }, [groupMatches, isReadOnly]);
 
   const save = useCallback(
     async (participantId: number) => {
@@ -132,5 +141,6 @@ const toggle = useCallback((groupKey: string, teamId: number) => {
     totalSlots,
     toggle,
     save,
+    isReadOnly,
   };
 }
