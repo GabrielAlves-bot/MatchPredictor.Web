@@ -4,9 +4,9 @@ import { Loading } from "../../components/Loading";
 import { BracketProgressCard } from "../../components/BracketProgressCard";
 import { BracketPhaseTabs } from "../../components/BracketPhaseTabs";
 import { BracketGroupCard } from "../../components/BracketGroupCard";
-import { BracketSaveButton } from "../../components/BracketSaveButton";
 import { usePool } from "../../context/PoolContext";
 import { useBracket } from "../../hooks/useBracket";
+import { SaveBar } from "../../components/SaveBar";
 
 export function Bracket() {
   const { activePool } = usePool();
@@ -25,13 +25,15 @@ export function Bracket() {
     save,
   } = useBracket(poolParticipantId);
 
-  if (isLoading) return <Loading fullscreen text="Carregando chaveamento..." />;
+  if (isLoading)
+    return <Loading fullscreen text="Carregando chaveamento..." />;
 
   const activePhase = phases[activeTab];
   const isGroupStage = activePhase?.phase === MatchPhase.GroupStage;
 
   return (
     <main className="bracket-page">
+
       <BracketProgressCard
         totalSelected={totalSelected}
         totalSlots={totalSlots}
@@ -58,10 +60,10 @@ export function Bracket() {
         </div>
       )}
 
-      <BracketSaveButton
-        isSaving={isSaving}
-        onSave={() => save(poolParticipantId)}
-      />
+      {isSaving && <Loading fullscreen text="Salvando" />}
+
+      <SaveBar
+        onSave={() => save(poolParticipantId)} title={"SALVAR CHAVEAMENTO"} />
     </main>
   );
 }

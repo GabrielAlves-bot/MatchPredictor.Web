@@ -15,6 +15,7 @@ import { Loading } from "../../components/Loading";
 import { getUniqueRounds, getKnockoutStages } from "../../helpers/helpers";
 import { usePool } from "../../context/PoolContext";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
+import { BackButton } from "../../components/BackButton";
 
 export function Predictions() {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -98,6 +99,9 @@ export function Predictions() {
     <>
       {!loading && (
         <main className="predictions-page__main">
+
+          <BackButton text="Voltar para Menu de Palpites" />
+
           <TournamentCard filled={filledCount} total={matches.length} />
 
           <PhaseTabs

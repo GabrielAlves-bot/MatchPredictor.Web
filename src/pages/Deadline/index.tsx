@@ -5,6 +5,7 @@ import { DeadlineList } from "../../components/DeadlineList";
 import { SaveBar } from "../../components/SaveBar";
 import { useAuth } from "../../context/AuthContext";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
+import { BackButton } from "../../components/BackButton";
 
 interface DeadlineProps {
   championshipId: number;
@@ -26,6 +27,8 @@ export function Deadline({ championshipId }: DeadlineProps) {
   return (
     <>
       <main className="deadline-page">
+        <BackButton text="Voltar para Menu de Palpites" />
+
         <section className="deadline-page__header">
           <h2 className="deadline-page__title">Prazos das Rodadas</h2>
           <p className="deadline-page__description">

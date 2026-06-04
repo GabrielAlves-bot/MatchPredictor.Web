@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { MatchPhase } from "../../enums/MatchPhase";
 import { Loading } from "../../components/Loading";
 import { PhaseTabs } from "../../components/PhaseTabs";
@@ -13,10 +13,10 @@ import { getUniqueRounds, getKnockoutStages } from "../../helpers/helpers";
 import "./styles.css";
 import { useUserPredictions } from "../../hooks/useUserPredictions";
 import { UserStandingCard } from "../../components/UserStandingCard";
+import { BackButton } from "../../components/BackButton";
 
 export function UserPredictions() {
   const { poolParticipantId } = useParams<{ poolParticipantId: string }>();
-  const navigate = useNavigate();
   const { activePool } = usePool();
 
   const participantId = Number(poolParticipantId);
@@ -59,15 +59,7 @@ export function UserPredictions() {
 
   return (
     <main className="user-predictions">
-      <div className="user-predictions__back">
-        <button
-          className="user-predictions__back-btn"
-          onClick={() => navigate(-1)}
-        >
-          <span className="material-symbols-outlined">chevron_left</span>
-          Voltar para Classificação
-        </button>
-      </div>
+      <BackButton text="Voltar para Classificação" />
 
       {participant && (
         <UserStandingCard

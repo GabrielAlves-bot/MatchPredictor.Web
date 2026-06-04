@@ -1,0 +1,26 @@
+.back-button {
+  margin-bottom: 4px;
+}
+
+.back-button__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-family: var(--font-label);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: opacity var(--transition-fast);
+}
+
+.back-button__button:hover {
+  opacity: 0.75;
+}
+
+.back-button__button .material-symbols-outlined {
+  font-size: 18px;
+}

@@ -4,6 +4,7 @@ import { Loading } from "../../components/Loading";
 import { BracketDeadlineList } from "../../components/BracketDeadlineList";
 import { SaveBar } from "../../components/SaveBar";
 import { useAuth } from "../../context/AuthContext";
+import { BackButton } from "../../components/BackButton";
 
 interface BracketDeadlineProps {
   championshipId: number;
@@ -22,6 +23,8 @@ export function BracketDeadline({ championshipId }: BracketDeadlineProps) {
   return (
     <>
       <main className="bracket-deadline-page">
+        <BackButton text="Voltar para Menu de Palpites" />
+
         <section className="bracket-deadline-page__header">
           <h2 className="bracket-deadline-page__title">Prazos do Chaveamento</h2>
           <p className="bracket-deadline-page__description">
