@@ -3,10 +3,12 @@ import configData from '../../config.json';
 import { Matches } from "../pages/Matches";
 import { Predictions } from "../pages/Predictions";
 import { Login } from "../pages/Login";
+import { ChangePassword } from "../pages/ChangePassword";
 import paths from "./paths";
 import { AuthProvider } from "../context/AuthContext";
 import { PrivateRouteGuard } from "../guards/PrivateRouteGuard";
 import { PublicOnlyRouteGuard } from "../guards/PublicOnlyRouteGuard";
+import { ChangePasswordGuard } from "../guards/ChangePasswordGuard";
 import { PoolProvider } from "../context/PoolContext";
 import { UserProvider } from "../context/UserContext";
 import { ActivePoolGuard } from "../guards/ActivePoolGuard";
@@ -33,20 +35,26 @@ function AppRoutes() {
                             </Route>
 
                             <Route element={<PrivateRouteGuard />}>
-                                <Route path={paths.selectPool} element={<PoolSelector />} />
+                                <Route path={paths.changePassword} element={<ChangePassword />} />
+                            </Route>
 
-                                <Route element={<ActivePoolGuard />}>
-                                    <Route element={<MasterPageWrapper />}>
-                                        <Route path={paths.predictions} element={<Predictions />} />
-                                        <Route path={paths.matches} element={<Matches />} />
-                                        <Route path={paths.standings} element={<Standings />} />
-                                        <Route path={paths.rules} element={<Rules />} />
-                                        <Route path={paths.userPredictions} element={<UserPredictions />} />
-                                        <Route path={paths.bracket} element={<Bracket />} />
-                                        <Route path={paths.deadlines} element={<Deadline championshipId={1} />} />
-                                        <Route path={paths.bracketDeadlines} element={<BracketDeadline championshipId={1} />} />
-                                        <Route path={paths.myGuesses} element={<MyGuesses />} />
-                                        <Route path={paths.settings} element={<Settings />} />
+                            <Route element={<PrivateRouteGuard />}>
+                                <Route element={<ChangePasswordGuard />}>
+                                    <Route path={paths.selectPool} element={<PoolSelector />} />
+
+                                    <Route element={<ActivePoolGuard />}>
+                                        <Route element={<MasterPageWrapper />}>
+                                            <Route path={paths.predictions} element={<Predictions />} />
+                                            <Route path={paths.matches} element={<Matches />} />
+                                            <Route path={paths.standings} element={<Standings />} />
+                                            <Route path={paths.rules} element={<Rules />} />
+                                            <Route path={paths.userPredictions} element={<UserPredictions />} />
+                                            <Route path={paths.bracket} element={<Bracket />} />
+                                            <Route path={paths.deadlines} element={<Deadline championshipId={1} />} />
+                                            <Route path={paths.bracketDeadlines} element={<BracketDeadline championshipId={1} />} />
+                                            <Route path={paths.myGuesses} element={<MyGuesses />} />
+                                            <Route path={paths.settings} element={<Settings />} />
+                                        </Route>
                                     </Route>
                                 </Route>
                             </Route>

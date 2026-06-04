@@ -1,0 +1,17 @@
+.password-strength-bar {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.password-strength-bar__segment {
+    height: 4px;
+    flex: 1;
+    background-color: var(--surface-container-high);
+    border-radius: 2px;
+    transition: background-color 0.3s;
+}
+
+.password-strength-bar__segment--active {
+    background-color: var(--primary);
+}

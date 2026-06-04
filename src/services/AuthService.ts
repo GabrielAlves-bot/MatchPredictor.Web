@@ -17,3 +17,16 @@ export async function loginRequest(credentials: ILoginRequest): Promise<LoginRes
 
   return response.json();
 }
+
+export async function changePasswordRequest(data: { currentPassword: string; newPassword: string }): Promise<void> {
+
+  const jsonBody = JSON.stringify(data); 
+  const response = await fetchData(`${BASE_ENDPOINT}/ChangePassword`, "POST", jsonBody);
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ message: "Erro ao alterar senha." }));
+    throw new Error(error?.message ?? "Erro ao alterar senha.");
+  }
+
+  return response.json();
+}

@@ -9,8 +9,10 @@ import type { IAuthUser } from "../types/Auth/AuthUserType";
 
 interface AuthContextValue {
     auth: IAuthUser | null;
-    login: (token: string, role: string, user: string) => void;
+    mustChangePassword: boolean;
+    login: (token: string, role: string, user: string, mustChangePassword: boolean) => void;
     logout: () => void;
+    clearMustChangePassword: () => void;
 }
 
 const KEYS = ["token", "role", "user", "app:activePool"];
@@ -29,14 +31,16 @@ function loadFromStorage(): IAuthUser | null {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [auth, setAuth] = useState<IAuthUser | null>(loadFromStorage);
+    const [mustChangePassword, setMustChangePassword] = useState(false);
 
     const login = useCallback(
-        (token: string, role: string, user: string) => {
+        (token: string, role: string, user: string, mustChangePassword: boolean) => {
             localStorage.setItem("token", token);
             localStorage.setItem("role", role);
             localStorage.setItem("user", user);
 
             setAuth({ token, role, user });
+            setMustChangePassword(mustChangePassword);
         },
         []
     );
@@ -44,14 +48,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const logout = useCallback(() => {
         KEYS.forEach(key => localStorage.removeItem(key));
         setAuth(null);
+        setMustChangePassword(false);
+    }, []);
+
+    const clearMustChangePassword = useCallback(() => {
+        setMustChangePassword(false);
     }, []);
 
     return (
         <AuthContext.Provider
             value={{
                 auth,
+                mustChangePassword,
                 login,
                 logout,
+                clearMustChangePassword,
             }}
         >
             {children}

@@ -13,4 +13,5 @@ export default {
     bracketDeadlines: "/Bracket-Deadlines",
     myGuesses: "/My-Guesses",
     settings: "/Settings",
+    changePassword: "/change-password",
 }

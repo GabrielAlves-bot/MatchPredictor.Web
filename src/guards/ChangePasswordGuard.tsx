@@ -2,14 +2,16 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import paths from "../routes/paths";
 
-export function AdminRouteGuard() {
-    const { auth } = useAuth();
+export function ChangePasswordGuard() {
+    const { auth, mustChangePassword } = useAuth();
 
-    if (!auth?.token) 
+    if (!auth) {
         return <Navigate to={paths.login} replace />;
+    }
 
-    if (auth.role !== "Admin") 
-        return <Navigate to={paths.myGuesses} replace />;
+    if (mustChangePassword) {
+        return <Navigate to={paths.changePassword} replace />;
+    }
 
     return <Outlet />;
 }
