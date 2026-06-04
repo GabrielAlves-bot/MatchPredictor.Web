@@ -17,6 +17,7 @@ import { Rules } from "../pages/Rules";
 import { UserPredictions } from "../pages/UserPredictions";
 import { Deadline } from "../pages/Deadline";
 import { Bracket } from "../pages/Bracket";
+import { BracketDeadline } from "../pages/BracketDeadline";
 
 function AppRoutes() {
     return (
@@ -41,6 +42,7 @@ function AppRoutes() {
                                         <Route path={paths.userPredictions} element={<UserPredictions />} />
                                         <Route path={paths.bracket} element={<Bracket />} />
                                         <Route path={paths.deadlines} element={<Deadline championshipId={1} />} />
+                                        <Route path={paths.bracketDeadlines} element={<BracketDeadline championshipId={1} />} />
                                     </Route>
                                 </Route>
                             </Route>

@@ -10,4 +10,5 @@ export default {
     userPredictions: "/User-Predictions/:poolParticipantId",
     deadlines: "/Deadlines",
     bracket: "/Bracket",
+    bracketDeadlines: "/Bracket-Deadlines",
 }

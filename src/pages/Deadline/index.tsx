@@ -4,6 +4,7 @@ import { Loading } from "../../components/Loading";
 import { DeadlineList } from "../../components/DeadlineList";
 import { SaveBar } from "../../components/SaveBar";
 import { useAuth } from "../../context/AuthContext";
+import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 
 interface DeadlineProps {
   championshipId: number;
@@ -16,7 +17,10 @@ export function Deadline({ championshipId }: DeadlineProps) {
   const { auth } = useAuth();
   const isAdmin = auth?.role === "Admin";
 
-  if (isLoading)
+  const loading = useMinimumLoading(isLoading);
+  const saving = useMinimumLoading(isSaving);
+
+  if (!loading)
     return <Loading fullscreen text="Carregando prazos..." />;
 
   return (
@@ -40,7 +44,7 @@ export function Deadline({ championshipId }: DeadlineProps) {
         />
       </main>
 
-      {isSaving && <Loading fullscreen />}
+      {!saving && <Loading fullscreen />}
 
       {isAdmin && <SaveBar onSave={save} title="Salvar Prazos" />}
     </>
