@@ -1,0 +1,91 @@
+/* BracketMatchCard/styles.css */
+
+.bracket-match-card {
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── time (botão clicável) ─────────────────── */
+.bracket-match-card__team {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--on-surface);
+  transition: background var(--transition-fast);
+  text-align: left;
+}
+
+.bracket-match-card__team:hover {
+  background: var(--surface-container-high);
+}
+
+.bracket-match-card__team--winner {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.bracket-match-card__team--winner:hover {
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+.bracket-match-card__team--loser {
+  opacity: 0.4;
+}
+
+/* ── info interna do time ──────────────────── */
+.bracket-match-card__team-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bracket-match-card__shield {
+  width: 36px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.bracket-match-card__shield-placeholder {
+  width: 36px;
+  height: 24px;
+  border-radius: 2px;
+  background: var(--surface-container-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--secondary);
+}
+
+.bracket-match-card__team-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+.bracket-match-card__check {
+  font-size: 20px;
+  color: var(--primary);
+}
+
+/* ── divisor VS ────────────────────────────── */
+.bracket-match-card__vs {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--secondary);
+  padding: 2px 0;
+  background: var(--surface-container-low);
+  border-top: 1px solid var(--outline-variant);
+  border-bottom: 1px solid var(--outline-variant);
+}

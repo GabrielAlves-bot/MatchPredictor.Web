@@ -3,7 +3,7 @@ import { FormField } from "../FormField";
 import { PasswordField } from "../PasswordField";
 import { RememberMe } from "../RememberMe";
 import { SubmitButton } from "../SubmitButton";
-import { Loading } from "../Loading"; // IMPORT FALTANDO
+import { Loading } from "../Loading";
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { useLogin } from "../../hooks/UseLogin";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";

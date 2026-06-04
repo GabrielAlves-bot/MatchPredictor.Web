@@ -1,0 +1,43 @@
+/* BracketSaveButton/styles.css */
+
+.bracket-save-button {
+  position: fixed;
+  bottom: 100px;
+  left: 0;
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.bracket-save-button__btn {
+  width: 100%;
+  max-width: 450px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  color: var(--on-primary);
+  border: none;
+  padding: 16px;
+  border-radius: 99px;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.1s, opacity var(--transition-fast);
+}
+
+.bracket-save-button__btn:active {
+  transform: scale(0.97);
+}
+
+.bracket-save-button__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

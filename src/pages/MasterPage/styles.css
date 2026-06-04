@@ -64,9 +64,17 @@ body {
   :root {
     --surface: #020617;
     --on-surface: #f7f9fc;
-    --surface-container-lowest: #0f172a;
     --on-surface-variant: #e2e8f0;
-    --surface-container-high: #1e293b;
     --secondary: #94a3b8;
+    --tertiary: #94a3b8;
+    --outline-variant: #1e293b;
+
+    --surface-container-lowest: #0f172a;
+    --surface-container-low:    #131f31;
+    --surface-container:        #172033;
+    --surface-container-high:   #1e293b;
+
+    --text-success: #4ade80;
+    --text-danger:  #f87171;
   }
 }

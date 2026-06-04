@@ -1,3 +1,4 @@
+import type { IGroupMatch } from "../types/GroupMatch";
 import type { IMatch } from "../types/MatchType";
 import { fetchData } from "./BaseRequest";
 
@@ -12,6 +13,16 @@ export async function getMatches(): Promise<IMatch[]> {
 
     return await response.json();
 }
+
+export async function getGroupMatches(): Promise<IGroupMatch[]> {
+    const response = await fetchData(`${BASE_ENDPOINT}/group-matches`, "GET");
+
+    if (response.status !== 200)
+        throw new Error("Error on get group matches!");
+
+    return await response.json();
+}
+
 
 export async function updateMatches(matches: IMatch[]): Promise<boolean> {
 

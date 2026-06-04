@@ -1,0 +1,46 @@
+/* BracketPhaseTabs/styles.css */
+
+.bracket-phase-tabs {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 0 4px 12px;
+  border-bottom: 1px solid var(--outline-variant);
+  margin-bottom: 24px;
+  scrollbar-width: none;
+}
+
+.bracket-phase-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.bracket-phase-tabs__tab {
+  white-space: nowrap;
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--secondary);
+  background: none;
+  border: none;
+  padding-bottom: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.bracket-phase-tabs__tab--active {
+  color: var(--primary);
+}
+
+.bracket-phase-tabs__tab--active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+}

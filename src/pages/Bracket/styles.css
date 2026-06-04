@@ -1,0 +1,28 @@
+/* Bracket/styles.css */
+
+.bracket-page {
+  margin: 0 auto;
+  padding: 0 16px 50px;
+  background-color: var(--surface-container-lowest);
+  min-height: 100dvh;
+  color: var(--on-surface);
+}
+
+.bracket-page__group-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bracket-page__error {
+  color: var(--text-danger);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 0;
+}
+
+.bracket-page__match-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

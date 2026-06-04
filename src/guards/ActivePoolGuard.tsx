@@ -5,7 +5,7 @@ import paths from "../routes/paths";
 export function ActivePoolGuard() {
     const { activePool, isLoading } = usePool();
 
-    if (isLoading) return null; // ou um spinner
+    if (isLoading) return null;
 
     return activePool
         ? <Outlet />

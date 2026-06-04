@@ -1,0 +1,81 @@
+/* BracketProgressCard/styles.css */
+
+.bracket-progress-card {
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 73px;
+  margin-bottom: 26px;
+}
+
+.bracket-progress-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.bracket-progress-card__label {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.bracket-progress-card__title {
+  font-family: var(--font-headline);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin: 0;
+}
+
+.bracket-progress-card__value {
+  font-family: var(--font-headline);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
+  display: block;
+  text-align: right;
+}
+
+.bracket-progress-card__value-label {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--secondary);
+  text-align: right;
+}
+
+.bracket-progress-card__bar-bg {
+  height: 8px;
+  background: var(--surface-container-high);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.bracket-progress-card__bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-container) 100%);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.bracket-progress-card__info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-success);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.bracket-progress-card__info .material-symbols-outlined {
+  font-size: 16px;
+  font-variation-settings: "FILL" 1;
+}

@@ -1,0 +1,3 @@
+export const GROUP_QUALIFIERS = 2;
+export const THIRD_PLACE_SLOTS = 8;
+export const MAX_SELECTABLE_PER_GROUP = GROUP_QUALIFIERS + 1;

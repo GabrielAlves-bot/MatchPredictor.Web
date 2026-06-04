@@ -8,5 +8,6 @@ export default {
     standings: "/Standings",
     rules: "/Rules",
     userPredictions: "/User-Predictions/:poolParticipantId",
-    deadlines: "/Deadlines"
+    deadlines: "/Deadlines",
+    bracket: "/Bracket",
 }
