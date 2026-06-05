@@ -31,7 +31,7 @@ export function ChangePassword() {
     useEffect(() => {
         if (success) {
             clearMustChangePassword();
-            const timer = setTimeout(() => navigate(paths.predictions, { replace: true }), 1800);
+            const timer = setTimeout(() => navigate(paths.myGuesses, { replace: true }), 1800);
             return () => clearTimeout(timer);
         }
     }, [success, clearMustChangePassword, navigate]);

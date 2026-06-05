@@ -32,6 +32,7 @@ export function Settings() {
               ? "Configure pontuações e critérios."
               : "Visualize as pontuações e critérios."
           }
+          label={isAdmin ? "Gerenciar" : "Visualizar"}
           onClick={() => navigate("/Rules")}
         />
 
@@ -43,6 +44,7 @@ export function Settings() {
               ? "Defina os períodos para envio dos palpites."
               : "Consulte os períodos para envio dos palpites."
           }
+          label={isAdmin ? "Gerenciar" : "Visualizar"}
           onClick={() => navigate("/Deadlines")}
         />
 
@@ -54,6 +56,8 @@ export function Settings() {
               ? "Configure as datas das fases eliminatórias."
               : "Visualize as datas das fases eliminatórias."
           }
+          label={isAdmin ? "Gerenciar" : "Visualizar"}
+
           onClick={() => navigate("/Bracket-Deadlines")}
         />
       </div>
