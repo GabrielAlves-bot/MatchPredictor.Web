@@ -1,5 +1,13 @@
 import type { IRequestMethod } from "../types/RequestMethodType";
 
+type UnauthorizedCallback = () => void;
+
+let onUnauthorizedCallback: UnauthorizedCallback | null = null;
+
+export function registerUnauthorizedCallback(callback: UnauthorizedCallback): void {
+  onUnauthorizedCallback = callback;
+}
+
 export async function fetchData(endpoint: string, requestMethod: IRequestMethod, jsonBody?: string): Promise<Response> {
   const token = localStorage.getItem("token");
 
@@ -16,5 +24,10 @@ export async function fetchData(endpoint: string, requestMethod: IRequestMethod,
   }
 
   const response = await fetch(endpoint, requestProperties);
+
+  if (response.status === 401) {
+    onUnauthorizedCallback?.();
+  }
+
   return response;
 }

@@ -8,7 +8,7 @@ import { BackButton } from "../../components/BackButton";
 
 export function TopScorer() {
   const { activePool } = usePool();
-  const { playerName, isLoading, isSaving, error, setPlayerName, save } =
+  const { playerName, isLoading, isSaving, setPlayerName, save } =
     useTopScorerGuess(activePool?.poolParticipantId ?? 0);
 
   if (isLoading)
