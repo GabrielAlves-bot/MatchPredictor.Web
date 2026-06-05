@@ -14,4 +14,5 @@ export default {
     myGuesses: "/My-Guesses",
     settings: "/Settings",
     changePassword: "/change-password",
+    topScorerGuess: "/Top-Scorer-Guess"
 }

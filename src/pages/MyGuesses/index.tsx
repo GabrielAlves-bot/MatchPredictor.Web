@@ -17,7 +17,7 @@ export function MyGuesses() {
 
       <div className="my-guesses-page__grid">
         <GuessCard
-          icon="sports_soccer"
+          icon="emoji_events"
           title="Palpites de Jogos"
           description="Defina os placares de cada partida do torneio."
           onClick={() => navigate("/Predictions")}
@@ -28,6 +28,13 @@ export function MyGuesses() {
           title="Palpites do Chaveamento"
           description="Selecione os times que avançam em cada fase das eliminatórias."
           onClick={() => navigate("/Bracket")}
+        />
+
+        <GuessCard
+          icon="sports_soccer"
+          title="Artilheiro do Torneio"
+          description="Indique o jogador que você acredita que será o artilheiro do torneio."
+          onClick={() => navigate("/Top-Scorer-Guess")}
         />
       </div>
     </main>

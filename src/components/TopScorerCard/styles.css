@@ -1,0 +1,123 @@
+.top-scorer-card {
+  background-color: var(--surface-container-lowest);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--outline-variant);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Title */
+.top-scorer-card__title {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  letter-spacing: -0.02em;
+}
+
+/* Field */
+.top-scorer-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.top-scorer-card__label {
+  font-family: var(--font-headline);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--on-surface-variant);
+}
+
+.top-scorer-card__input {
+  width: 100%;
+  height: 3.5rem;
+  padding: 0 1rem;
+  background-color: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--on-surface);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.top-scorer-card__input::placeholder {
+  color: var(--on-surface-variant);
+  opacity: 0.5;
+}
+
+.top-scorer-card__input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.top-scorer-card__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button */
+.top-scorer-card__button {
+  width: 100%;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-headline);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease,
+    opacity 0.2s ease;
+}
+
+.top-scorer-card__button:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--primary) 85%, black);
+}
+
+.top-scorer-card__button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.top-scorer-card__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Spin animation for saving icon */
+.top-scorer-card__button-icon--spin {
+  font-size: 18px;
+  animation: top-scorer-spin 1s linear infinite;
+}
+
+@keyframes top-scorer-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Description */
+.top-scorer-card__description {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  text-align: center;
+  line-height: 1.6;
+}
