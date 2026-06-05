@@ -25,8 +25,6 @@ export function TopScorer() {
         </p>
       </section>
 
-      {error && <p className="top-scorer-page__error">{error}</p>}
-
       <TopScorerCard
         playerName={playerName}
         isSaving={isSaving}
