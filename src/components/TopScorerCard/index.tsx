@@ -1,3 +1,6 @@
+import { useMinimumLoading } from "../../hooks/useMinimumLoading";
+import { Loading } from "../Loading";
+import { SaveBar } from "../SaveBar";
 import "./styles.css";
 
 interface TopScorerCardProps {
@@ -13,6 +16,8 @@ export function TopScorerCard({
   onChange,
   onSave,
 }: TopScorerCardProps) {
+  const saving = useMinimumLoading(isSaving);
+
   return (
     <div className="top-scorer-card">
       <h2 className="top-scorer-card__title">Palpite do Artilheiro</h2>
@@ -32,22 +37,9 @@ export function TopScorerCard({
         />
       </div>
 
-      <button
-        className="top-scorer-card__button"
-        onClick={onSave}
-        disabled={isSaving || !playerName.trim()}
-      >
-        {isSaving ? (
-          <>
-            <span className="material-symbols-outlined top-scorer-card__button-icon--spin">
-              sync
-            </span>
-            Gravando...
-          </>
-        ) : (
-          "Confirmar Palpite"
-        )}
-      </button>
+      {saving && <Loading fullscreen text="Salvando Palpite..." />}
+
+      <SaveBar onSave={onSave} title="Confirmar Palpite" />
 
       <p className="top-scorer-card__description">
         Digite o nome do seu candidato para o prêmio de artilheiro da Copa do
