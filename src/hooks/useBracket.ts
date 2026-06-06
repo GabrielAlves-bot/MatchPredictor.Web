@@ -27,11 +27,6 @@ export const SLOTS_PER_STAGE: Record<KnockoutStage, number> = {
   [KnockoutStage.Champion]: 1,
 };
 
-/**
- * Which stage feeds teams into each stage.
- * RoundOf32 has no predecessor — uses all teams.
- * ThirdPlaceMatch and Final both draw from SemiFinal losers/winners.
- */
 export const PREDECESSOR_STAGE: Partial<Record<KnockoutStage, KnockoutStage>> = {
   [KnockoutStage.RoundOf16]: KnockoutStage.RoundOf32,
   [KnockoutStage.QuarterFinal]: KnockoutStage.RoundOf16,
@@ -54,7 +49,6 @@ export interface StageView {
   slots: BracketSlot[];
   filledCount: number;
   totalSlots: number;
-  /** Teams available to pick for this stage (filtered by predecessor + no duplicates) */
   availableTeams: ITeam[];
 }
 
@@ -75,7 +69,6 @@ function stageKey(stage: KnockoutStage, slotIndex: number) {
   return `${stage}_${slotIndex}`;
 }
 
-/** Returns all non-null teams selected in a given stage */
 function getTeamsInStage(slots: Map<string, BracketSlot>, stage: KnockoutStage): ITeam[] {
   const count = SLOTS_PER_STAGE[stage];
   const result: ITeam[] = [];
@@ -150,24 +143,19 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
           }
       );
 
-      // Teams already chosen in this stage (excluding the slot being edited — handled at select time)
       const pickedIdsInStage = new Set(
         stageSlots.map((s) => s.team?.id).filter((id): id is number => id != null)
       );
 
-      // Determine the pool of selectable teams for this stage
       const predecessorStage = PREDECESSOR_STAGE[stage];
       let teamPool: ITeam[];
 
       if (!predecessorStage) {
-        // RoundOf32: can pick from ALL teams
         teamPool = teams;
       } else {
-        // Later stages: can only pick teams that advanced from the predecessor stage
         teamPool = getTeamsInStage(slots, predecessorStage);
       }
 
-      // Remove teams already used in this stage
       const availableTeams = teamPool.filter((t) => !pickedIdsInStage.has(t.id));
 
       return {
@@ -184,14 +172,12 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
   const selectTeam = useCallback(
     (stage: KnockoutStage, slotIndex: number, team: ITeam) => {
       setSlots((prev) => {
-        // Guard: team must not already be picked in this stage (in a different slot)
         const count = SLOTS_PER_STAGE[stage];
         for (let i = 0; i < count; i++) {
           if (i === slotIndex) continue;
           if (prev.get(stageKey(stage, i))?.team?.id === team.id) return prev;
         }
 
-        // Guard: team must exist in predecessor stage (if applicable)
         const predecessorStage = PREDECESSOR_STAGE[stage];
         if (predecessorStage) {
           const predecessorTeams = getTeamsInStage(prev, predecessorStage);
@@ -209,10 +195,6 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     []
   );
 
-  /**
-   * When a team is removed from a stage, it may have been picked in later stages too.
-   * This cascades the clear downward to keep data consistent.
-   */
   const clearSlotCascading = useCallback((stage: KnockoutStage, slotIndex: number) => {
     setSlots((prev) => {
       const next = new Map(prev);
@@ -223,7 +205,6 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
       const removedTeamId = existing.team.id;
       next.set(key, { ...existing, team: null });
 
-      // Cascade: clear this team from all subsequent stages
       const stageIdx = STAGE_ORDER.indexOf(stage);
       for (let s = stageIdx + 1; s < STAGE_ORDER.length; s++) {
         const laterStage = STAGE_ORDER[s];

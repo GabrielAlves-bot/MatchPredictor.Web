@@ -5,8 +5,8 @@ interface BracketTeamRowProps {
   team: ITeam;
   rank?: number;
   isSelected: boolean;
-  isAuto: boolean;       // first 2 in group — auto-classified, not togglable
-  isDisabled: boolean;   // max reached or API locked
+  isAuto: boolean;
+  isDisabled: boolean;
   onToggle: (teamId: number) => void;
 }
 

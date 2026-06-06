@@ -48,9 +48,6 @@ export function Bracket() {
     setPendingSlot(null);
   }
 
-  // Teams available for the active stage:
-  // - RoundOf32: todos os times
-  // - Fases seguintes: apenas times escolhidos na fase anterior, sem repetição
   const availableTeams = activeView.availableTeams;
 
   return (
