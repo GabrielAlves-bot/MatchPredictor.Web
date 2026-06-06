@@ -7,6 +7,7 @@ const KNOCKOUT_LABELS: Record<number, string> = {
   [KnockoutStage.SemiFinal]: "Semifinal",
   [KnockoutStage.ThirdPlaceMatch]: "Disputa 3º Lugar",
   [KnockoutStage.Final]: "Final",
+  [KnockoutStage.Champion]: "Campeão",
 };
 
 export default KNOCKOUT_LABELS;

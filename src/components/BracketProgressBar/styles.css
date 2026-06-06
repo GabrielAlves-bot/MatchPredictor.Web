@@ -1,0 +1,42 @@
+.bracket-progress-bar {
+  background-color: var(--surface-container-lowest);
+  padding: 16px;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(189, 202, 192, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.bracket-progress-bar__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.bracket-progress-bar__label {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.bracket-progress-bar__count {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.bracket-progress-bar__track {
+  height: 8px;
+  width: 100%;
+  background-color: var(--surface-container);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.bracket-progress-bar__fill {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+}

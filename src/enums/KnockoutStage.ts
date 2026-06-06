@@ -5,5 +5,6 @@ export enum KnockoutStage {
         QuarterFinal,
         SemiFinal,
         ThirdPlaceMatch,
-        Final
+        Final,
+        Champion,
 }

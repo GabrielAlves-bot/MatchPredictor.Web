@@ -1,6 +1,5 @@
-import type { BracketPhaseView } from "../../types/BracketTypes";
 import "./styles.css";
-
+import type { BracketPhaseView } from "../../types/BracketTypes";
 interface BracketPhaseTabsProps {
   phases: BracketPhaseView[];
   activeTab: number;

@@ -17,6 +17,7 @@ const KNOCKOUT_LABEL: Record<KnockoutStage, string> = {
   [KnockoutStage.SemiFinal]: "Semifinal",
   [KnockoutStage.ThirdPlaceMatch]: "Disputa do 3º lugar",
   [KnockoutStage.Final]: "Final",
+  [KnockoutStage.Champion]: "Campeão",
 };
 
 function getLabel(deadline: IBracketGuessDeadline): string {

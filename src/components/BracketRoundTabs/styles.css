@@ -1,0 +1,40 @@
+.bracket-round-tabs {
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  background-color: var(--surface);
+  border-bottom: 1px solid rgba(189, 202, 192, 0.2);
+}
+
+.bracket-round-tabs__scroll {
+  display: flex;
+  overflow-x: auto;
+  padding: 16px;
+  gap: 24px;
+  scrollbar-width: none;
+}
+
+.bracket-round-tabs__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.bracket-round-tabs__btn {
+  white-space: nowrap;
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--secondary);
+  opacity: 0.6;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 4px;
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.bracket-round-tabs__btn--active {
+  color: var(--primary);
+  opacity: 1;
+  font-weight: 700;
+  border-bottom: 2px solid var(--primary);
+}

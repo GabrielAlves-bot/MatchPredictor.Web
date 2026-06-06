@@ -1,12 +1,9 @@
-/* BracketProgressCard/styles.css */
-
 .bracket-progress-card {
-  background: var(--surface-container);
-  border: 1px solid var(--outline-variant);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   padding: 20px;
-  margin-top: 73px;
-  margin-bottom: 26px;
+  margin: 24px 0;
 }
 
 .bracket-progress-card__header {
@@ -21,7 +18,7 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--secondary);
+  color: #94a3b8;
   margin-bottom: 4px;
 }
 
@@ -29,7 +26,7 @@
   font-family: var(--font-headline);
   font-size: 20px;
   font-weight: 700;
-  color: var(--on-surface);
+  color: #f7f9fc;
   margin: 0;
 }
 
@@ -37,7 +34,7 @@
   font-family: var(--font-headline);
   font-size: 24px;
   font-weight: 800;
-  color: var(--primary);
+  color: #71dba6;
   display: block;
   text-align: right;
 }
@@ -47,13 +44,13 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--secondary);
+  color: #94a3b8;
   text-align: right;
 }
 
 .bracket-progress-card__bar-bg {
   height: 8px;
-  background: var(--surface-container-high);
+  background: #334155;
   border-radius: 99px;
   overflow: hidden;
   margin-bottom: 12px;
@@ -61,7 +58,7 @@
 
 .bracket-progress-card__bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-container) 100%);
+  background: linear-gradient(90deg, #006b47 0%, #71dba6 100%);
   border-radius: 99px;
   transition: width 0.4s ease;
 }
@@ -70,7 +67,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-success);
+  color: #71dba6;
   font-size: 12px;
   font-weight: 500;
 }

@@ -1,0 +1,105 @@
+.bracket-slot-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--surface-container-lowest);
+  padding: 20px;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(189, 202, 192, 0.2);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.bracket-slot-card:active {
+  transform: scale(0.98);
+}
+
+.bracket-slot-card--filled {
+  background-color: rgba(0, 107, 71, 0.05);
+  border-color: rgba(0, 107, 71, 0.2);
+}
+
+.bracket-slot-card__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bracket-slot-card__number-box {
+  border-right: 1px solid rgba(189, 202, 192, 0.3);
+  padding-right: 16px;
+  text-align: center;
+  min-width: 40px;
+}
+
+.bracket-slot-card__number-label {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: rgba(73, 96, 124, 0.4);
+  line-height: 1;
+  display: block;
+}
+
+.bracket-slot-card__number {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--secondary);
+  margin-top: 2px;
+  display: block;
+}
+
+.bracket-slot-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bracket-slot-card__flag {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+
+.bracket-slot-card__team-name {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--on-surface);
+}
+
+.bracket-slot-card__team-name--filled {
+  color: var(--primary);
+}
+
+.bracket-slot-card__team-name--empty {
+  color: var(--on-surface-variant);
+  font-weight: 500;
+}
+
+.bracket-slot-card__action {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background-color: var(--surface-container-low);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+}
+
+.bracket-slot-card:hover .bracket-slot-card__action {
+  background-color: rgba(0, 107, 71, 0.1);
+}
+
+.bracket-slot-card__action .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 24px;
+}

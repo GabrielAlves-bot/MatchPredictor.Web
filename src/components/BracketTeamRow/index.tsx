@@ -5,7 +5,8 @@ interface BracketTeamRowProps {
   team: ITeam;
   rank?: number;
   isSelected: boolean;
-  isDisabled: boolean;
+  isAuto: boolean;       // first 2 in group — auto-classified, not togglable
+  isDisabled: boolean;   // max reached or API locked
   onToggle: (teamId: number) => void;
 }
 
@@ -13,19 +14,21 @@ export function BracketTeamRow({
   team,
   rank,
   isSelected,
+  isAuto,
   isDisabled,
   onToggle,
 }: BracketTeamRowProps) {
   const classNames = [
     "bracket-team-row",
-    isSelected               ? "bracket-team-row--selected"  : "",
-    isDisabled && !isSelected ? "bracket-team-row--disabled"  : "",
+    isSelected ? "bracket-team-row--selected" : "",
+    isAuto ? "bracket-team-row--auto" : "",
+    isDisabled && !isAuto ? "bracket-team-row--disabled" : "",
   ]
     .filter(Boolean)
     .join(" ");
 
   function handleClick() {
-    if (isDisabled && !isSelected) return;
+    if (isAuto || isDisabled) return;
     onToggle(team.id);
   }
 
@@ -44,14 +47,8 @@ export function BracketTeamRow({
         <span className="bracket-team-row__name">{team.name}</span>
       </div>
 
-      <div
-        className={`bracket-team-row__action${
-          isSelected ? "" : " bracket-team-row__action--unselected"
-        }`}
-      >
-        {rank !== undefined && (
-          <span className="bracket-team-row__rank">{rank}º</span>
-        )}
+      <div className={`bracket-team-row__action${isSelected ? "" : " bracket-team-row__action--unselected"}`}>
+        {rank && <span className="bracket-team-row__rank">{rank}º</span>}
         <span
           className="material-symbols-outlined"
           style={isSelected ? { fontVariationSettings: "'FILL' 1" } : undefined}

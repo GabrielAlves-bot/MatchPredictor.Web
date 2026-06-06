@@ -1,28 +1,95 @@
-/* Bracket/styles.css */
-
 .bracket-page {
-  margin: 0 auto;
-  padding: 0 16px 50px;
-  background-color: var(--surface-container-lowest);
-  min-height: 100dvh;
+  padding-top: 160px;
+  padding-bottom: 38px;
+  padding-left: 16px;
+  padding-right: 16px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bracket-page__header {
+  margin-bottom: 32px;
+}
+
+.bracket-page__header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.bracket-page__label {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--secondary);
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.bracket-page__title {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.025em;
   color: var(--on-surface);
 }
 
-.bracket-page__group-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .bracket-page__error {
-  color: var(--text-danger);
+  color: var(--error, #ba1a1a);
   font-size: 14px;
   font-weight: 600;
-  padding: 12px 0;
+  margin-bottom: 12px;
 }
 
-.bracket-page__match-grid {
+.bracket-page__save-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 24px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 50;
+}
+
+.bracket-page__save-btn {
+  width: 100%;
+  height: 56px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #006b47 0%, #00875a 100%);
+  border: none;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(0, 107, 71, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.bracket-page__save-btn:active {
+  transform: scale(0.97);
+}
+
+.bracket-page__save-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.bracket-page__save-btn span {
+  color: white;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 14px;
+}
+
+.bracket-page__save-btn .material-symbols-outlined {
+  font-variation-settings: "FILL" 1;
 }

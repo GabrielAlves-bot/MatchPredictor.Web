@@ -1,73 +1,103 @@
+import { useState } from "react";
 import "./styles.css";
-import { MatchPhase } from "../../enums/MatchPhase";
-import { Loading } from "../../components/Loading";
-import { BracketProgressCard } from "../../components/BracketProgressCard";
-import { BracketPhaseTabs } from "../../components/BracketPhaseTabs";
-import { BracketGroupCard } from "../../components/BracketGroupCard";
-import { usePool } from "../../context/PoolContext";
 import { useBracket } from "../../hooks/useBracket";
+import type { BracketSlot } from "../../hooks/useBracket";
+import type { ITeam } from "../../types/TeamType";
+import { Loading } from "../../components/Loading";
+import { BracketRoundTabs } from "../../components/BracketRoundTabs";
+import { BracketProgressBar } from "../../components/BracketProgressBar";
+import { BracketSlotGrid } from "../../components/BracketSlotGrid";
+import { TeamSearchModal } from "../../components/TeamSearchModal";
+import KNOCKOUT_LABELS from "../../constants/KnockoutLabels";
+import { usePool } from "../../context/PoolContext";
 import { SaveBar } from "../../components/SaveBar";
 
 export function Bracket() {
   const { activePool } = usePool();
-  const poolParticipantId = activePool!.poolParticipantId;
 
   const {
-    phases,
-    activeTab,
-    setActiveTab,
+    stages,
+    activeStage,
+    setActiveStage,
     isLoading,
     isSaving,
     error,
-    totalSelected,
-    totalSlots,
-    toggle,
+    selectTeam,
+    clearSlot,
     save,
-    isReadOnly,
-  } = useBracket(poolParticipantId);
+  } = useBracket(activePool?.poolParticipantId ?? 0);
+
+  const [pendingSlot, setPendingSlot] = useState<BracketSlot | null>(null);
 
   if (isLoading)
     return <Loading fullscreen text="Carregando chaveamento..." />;
 
-  const activePhase = phases[activeTab];
-  const isGroupStage = activePhase?.phase === MatchPhase.GroupStage;
+  const activeView = stages.find((s) => s.stage === activeStage) ?? stages[0];
+
+  function handleSlotSelect(slot: BracketSlot) {
+    setPendingSlot(slot);
+  }
+
+  function handleSlotClear(slot: BracketSlot) {
+    clearSlot(slot.stage, slot.slotIndex);
+  }
+
+  function handleTeamSelect(team: ITeam) {
+    if (!pendingSlot) return;
+    selectTeam(pendingSlot.stage, pendingSlot.slotIndex, team);
+    setPendingSlot(null);
+  }
+
+  // Teams available for the active stage:
+  // - RoundOf32: todos os times
+  // - Fases seguintes: apenas times escolhidos na fase anterior, sem repetição
+  const availableTeams = activeView.availableTeams;
 
   return (
-    <main className="bracket-page">
-
-      <BracketProgressCard
-        totalSelected={totalSelected}
-        totalSlots={totalSlots}
+    <>
+      <BracketRoundTabs
+        stages={stages}
+        activeStage={activeStage}
+        onStageChange={setActiveStage}
       />
 
-      {error && <p className="bracket-page__error">{error}</p>}
+      <main className="bracket-page">
+        <header className="bracket-page__header">
+          <div className="bracket-page__header-top">
+            <div>
+              <p className="bracket-page__label">Chaveamento</p>
+              <h1 className="bracket-page__title">
+                {KNOCKOUT_LABELS[activeStage] ?? "Fase"}
+              </h1>
+            </div>
+          </div>
 
-      <BracketPhaseTabs
-        phases={phases}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-      />
+          <BracketProgressBar
+            filled={activeView.filledCount}
+            total={activeView.totalSlots}
+          />
+        </header>
 
-      {activePhase && (
-        <div className="bracket-page__group-grid">
-          {activePhase.groups.map((group) => (
-            <BracketGroupCard
-              key={group.key}
-              group={group}
-              isGroupStage={isGroupStage}
-              onToggle={toggle}
-              isReadOnly={isReadOnly}
-            />
-          ))}
-        </div>
+        {error && <p className="bracket-page__error">{error}</p>}
+
+        <BracketSlotGrid
+          slots={activeView.slots}
+          onSelect={handleSlotSelect}
+          onClear={handleSlotClear}
+        />
+      </main>
+      {isSaving && <Loading fullscreen text="Salvando palpite..." />}
+
+      <SaveBar onSave={save} title="Salvar Palpite" />
+
+
+      {pendingSlot && (
+        <TeamSearchModal
+          teams={availableTeams}
+          onSelect={handleTeamSelect}
+          onClose={() => setPendingSlot(null)}
+        />
       )}
-
-      {isSaving && <Loading fullscreen text="Salvando" />}
-
-      {!isReadOnly && (
-        <SaveBar onSave={() => save(poolParticipantId)} title={"SALVAR CHAVEAMENTO"} />
-      )}
-
-    </main>
+    </>
   );
 }
