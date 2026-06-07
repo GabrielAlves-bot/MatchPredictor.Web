@@ -30,7 +30,7 @@ export const SLOTS_PER_STAGE: Record<KnockoutStage, number> = {
 export const PREDECESSOR_STAGE: Partial<Record<KnockoutStage, KnockoutStage>> = {
   [KnockoutStage.RoundOf16]: KnockoutStage.RoundOf32,
   [KnockoutStage.QuarterFinal]: KnockoutStage.RoundOf16,
-  [KnockoutStage.SemiFinal]: KnockoutStage.QuarterFinal,  
+  [KnockoutStage.SemiFinal]: KnockoutStage.QuarterFinal,
   [KnockoutStage.ThirdPlaceMatch]: KnockoutStage.SemiFinal,
   [KnockoutStage.Final]: KnockoutStage.SemiFinal,
   [KnockoutStage.Champion]: KnockoutStage.Final,
@@ -82,13 +82,13 @@ function getTeamsInStage(slots: Map<string, BracketSlot>, stage: KnockoutStage):
 export function useBracket(poolParticipantId: number): UseBracketResult {
   const [slots, setSlots] = useState<Map<string, BracketSlot>>(new Map());
   const [teams, setTeams] = useState<ITeam[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!!poolParticipantId && poolParticipantId > 0);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeStage, setActiveStage] = useState<KnockoutStage>(KnockoutStage.RoundOf32);
 
   useEffect(() => {
-    if (poolParticipantId == null) return;
+    if (!poolParticipantId || poolParticipantId <= 0) return;
 
     setIsLoading(true);
     setError(null);
@@ -101,11 +101,17 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
         const map = new Map<string, BracketSlot>();
 
         for (const stage of STAGE_ORDER) {
-          const stageGuesses = guesses
-            .filter((g) => g.knockoutStage === stage)
-            .sort((a, b) => a.id - b.id);
+          const stageGuesses = guesses.filter((g) => g.knockoutStage === stage);
 
-          stageGuesses.forEach((g, idx) => {
+          const filled = stageGuesses
+            .filter((g) => g.teamId != null)
+            .sort((a, b) => a.id - b.id);
+          const empty = stageGuesses
+            .filter((g) => g.teamId == null)
+            .sort((a, b) => a.id - b.id);
+          const ordered = [...filled, ...empty];
+
+          ordered.forEach((g, idx) => {
             const key = stageKey(stage, idx);
             map.set(key, {
               slotIndex: idx,
@@ -116,7 +122,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
           });
 
           const expected = SLOTS_PER_STAGE[stage];
-          for (let i = stageGuesses.length; i < expected; i++) {
+          for (let i = ordered.length; i < expected; i++) {
             const key = stageKey(stage, i);
             if (!map.has(key)) {
               map.set(key, { slotIndex: i, stage, team: null, guessId: 0 });

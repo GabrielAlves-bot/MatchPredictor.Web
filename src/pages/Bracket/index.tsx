@@ -15,6 +15,8 @@ import { SaveBar } from "../../components/SaveBar";
 export function Bracket() {
   const { activePool } = usePool();
 
+  const poolParticipantId = activePool?.poolParticipantId ?? 0;
+
   const {
     stages,
     activeStage,
@@ -25,11 +27,14 @@ export function Bracket() {
     selectTeam,
     clearSlot,
     save,
-  } = useBracket(activePool?.poolParticipantId ?? 0);
+  } = useBracket(poolParticipantId);
 
   const [pendingSlot, setPendingSlot] = useState<BracketSlot | null>(null);
 
-  if (isLoading)
+  if (!activePool) 
+    return <Loading fullscreen text="Carregando bolão..." />;
+
+  if (isLoading) 
     return <Loading fullscreen text="Carregando chaveamento..." />;
 
   const activeView = stages.find((s) => s.stage === activeStage) ?? stages[0];
@@ -86,7 +91,6 @@ export function Bracket() {
       {isSaving && <Loading fullscreen text="Salvando palpite..." />}
 
       <SaveBar onSave={save} title="Salvar Palpite" />
-
 
       {pendingSlot && (
         <TeamSearchModal
