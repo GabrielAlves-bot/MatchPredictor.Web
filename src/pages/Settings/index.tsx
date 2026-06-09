@@ -50,7 +50,7 @@ export function Settings() {
 
         <SettingsCard
           icon="account_tree"
-          title="Prazos do Chaveamento"
+          title="Prazo dos Palpites de Pontos Extra"
           description={
             isAdmin
               ? "Configure as datas das fases eliminatórias."

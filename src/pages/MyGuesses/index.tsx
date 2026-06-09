@@ -25,7 +25,7 @@ export function MyGuesses() {
 
         <GuessCard
           icon="account_tree"
-          title="Palpites do Chaveamento"
+          title="Palpites Pontos Extra"
           description="Selecione os times que avançam em cada fase das eliminatórias."
           onClick={() => navigate("/Bracket")}
         />
