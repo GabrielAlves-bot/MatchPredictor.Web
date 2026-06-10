@@ -20,6 +20,15 @@
   border-color: rgba(0, 107, 71, 0.2);
 }
 
+.bracket-slot-card--readonly {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.bracket-slot-card--readonly:active {
+  transform: none;
+}
+
 .bracket-slot-card__left {
   display: flex;
   align-items: center;
@@ -95,11 +104,16 @@
   transition: background-color 0.2s;
 }
 
-.bracket-slot-card:hover .bracket-slot-card__action {
+.bracket-slot-card:not(.bracket-slot-card--readonly):hover .bracket-slot-card__action {
   background-color: rgba(0, 107, 71, 0.1);
 }
 
 .bracket-slot-card__action .material-symbols-outlined {
   color: var(--primary);
   font-size: 24px;
+}
+
+.bracket-slot-card--readonly .bracket-slot-card__action .material-symbols-outlined {
+  color: var(--on-surface-variant);
+  opacity: 0.5;
 }

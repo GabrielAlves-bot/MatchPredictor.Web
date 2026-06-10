@@ -24,3 +24,12 @@ export async function updateBracketGuessDeadlines(bracketGuessDeadlines: IBracke
 
   return response.json();
 }
+
+export async function hasGuessDeadlinePassed(): Promise<boolean> {
+  const response = await fetchData(`${BASE_ENDPOINT}/is-within-deadline`, "GET");
+
+  if (!response.ok)
+    throw new Error("Error on check if guess deadline has passed!");
+
+  return response.json();
+}

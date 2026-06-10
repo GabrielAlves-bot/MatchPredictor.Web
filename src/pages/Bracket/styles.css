@@ -45,6 +45,27 @@
   margin-bottom: 12px;
 }
 
+.bracket-page__readonly-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(186, 26, 26, 0.08);
+  border: 1px solid rgba(186, 26, 26, 0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff6b6b;
+}
+
+.bracket-page__readonly-notice .material-symbols-outlined {
+  font-size: 16px;
+  font-variation-settings: "FILL" 1;
+  flex-shrink: 0;
+}
+
 .bracket-page__save-bar {
   position: fixed;
   bottom: 0;

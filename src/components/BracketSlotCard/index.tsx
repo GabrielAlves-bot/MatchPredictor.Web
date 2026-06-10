@@ -3,22 +3,25 @@ import type { BracketSlot } from "../../hooks/useBracket";
 
 interface BracketSlotCardProps {
   slot: BracketSlot;
+  isReadOnly: boolean;
   onSelect: (slot: BracketSlot) => void;
   onClear: (slot: BracketSlot) => void;
 }
 
-export function BracketSlotCard({ slot, onSelect, onClear }: BracketSlotCardProps) {
+export function BracketSlotCard({ slot, isReadOnly, onSelect, onClear }: BracketSlotCardProps) {
   const slotLabel = String(slot.slotIndex + 1).padStart(2, "0");
   const isFilled = slot.team !== null;
 
   const classNames = [
     "bracket-slot-card",
     isFilled ? "bracket-slot-card--filled" : "",
+    isReadOnly ? "bracket-slot-card--readonly" : "",
   ]
     .filter(Boolean)
     .join(" ");
 
   function handleClick() {
+    if (isReadOnly) return;
     if (isFilled) onClear(slot);
     else onSelect(slot);
   }
@@ -53,7 +56,7 @@ export function BracketSlotCard({ slot, onSelect, onClear }: BracketSlotCardProp
 
       <div className="bracket-slot-card__action">
         <span className="material-symbols-outlined">
-          {isFilled ? "close" : "add"}
+          {isReadOnly ? "lock" : isFilled ? "close" : "add"}
         </span>
       </div>
     </div>

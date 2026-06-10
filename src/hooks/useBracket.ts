@@ -5,6 +5,7 @@ import type { IBracketGuess } from "../types/BracketGuess";
 import type { ITeam } from "../types/TeamType";
 import { getBracketGuesses, updateBracketGuesses } from "../services/BracketGuessService";
 import { getTeams } from "../services/TeamService";
+import { hasGuessDeadlinePassed } from "../services/BracketGuessDeadlineService";
 import KNOCKOUT_LABELS from "../constants/KnockoutLabels";
 
 export const STAGE_ORDER: KnockoutStage[] = [
@@ -59,6 +60,7 @@ interface UseBracketResult {
   teams: ITeam[];
   isLoading: boolean;
   isSaving: boolean;
+  isReadOnly: boolean;
   error: string | null;
   selectTeam: (stage: KnockoutStage, slotIndex: number, team: ITeam) => void;
   clearSlot: (stage: KnockoutStage, slotIndex: number) => void;
@@ -84,6 +86,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
   const [teams, setTeams] = useState<ITeam[]>([]);
   const [isLoading, setIsLoading] = useState(!!poolParticipantId && poolParticipantId > 0);
   const [isSaving, setIsSaving] = useState(false);
+  const [isReadOnly, setIsReadOnly] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeStage, setActiveStage] = useState<KnockoutStage>(KnockoutStage.RoundOf32);
 
@@ -93,9 +96,11 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     setIsLoading(true);
     setError(null);
 
-    Promise.all([getTeams(), getBracketGuesses(poolParticipantId)])
-      .then(([allTeams, guesses]) => {
+    Promise.all([getTeams(), getBracketGuesses(poolParticipantId), hasGuessDeadlinePassed()])
+      .then(([allTeams, guesses, deadlinePassed]) => {
         setTeams(allTeams);
+        setIsReadOnly(deadlinePassed);
+
         const teamMap = new Map(allTeams.map((t) => [t.id, t]));
 
         const map = new Map<string, BracketSlot>();
@@ -177,6 +182,8 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
 
   const selectTeam = useCallback(
     (stage: KnockoutStage, slotIndex: number, team: ITeam) => {
+      if (isReadOnly) return;
+
       setSlots((prev) => {
         const count = SLOTS_PER_STAGE[stage];
         for (let i = 0; i < count; i++) {
@@ -198,10 +205,12 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
         return next;
       });
     },
-    []
+    [isReadOnly]
   );
 
   const clearSlotCascading = useCallback((stage: KnockoutStage, slotIndex: number) => {
+    if (isReadOnly) return;
+
     setSlots((prev) => {
       const next = new Map(prev);
       const key = stageKey(stage, slotIndex);
@@ -226,9 +235,11 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
 
       return next;
     });
-  }, []);
+  }, [isReadOnly]);
 
   const save = useCallback(async () => {
+    if (isReadOnly) return;
+
     setIsSaving(true);
     setError(null);
     try {
@@ -251,7 +262,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     } finally {
       setIsSaving(false);
     }
-  }, [slots, poolParticipantId]);
+  }, [isReadOnly, slots, poolParticipantId]);
 
   return {
     stages,
@@ -260,6 +271,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     teams,
     isLoading,
     isSaving,
+    isReadOnly,
     error,
     selectTeam,
     clearSlot: clearSlotCascading,

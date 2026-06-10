@@ -23,6 +23,7 @@ export function Bracket() {
     setActiveStage,
     isLoading,
     isSaving,
+    isReadOnly,
     error,
     selectTeam,
     clearSlot,
@@ -31,19 +32,21 @@ export function Bracket() {
 
   const [pendingSlot, setPendingSlot] = useState<BracketSlot | null>(null);
 
-  if (!activePool) 
+  if (!activePool)
     return <Loading fullscreen text="Carregando bolão..." />;
 
-  if (isLoading) 
+  if (isLoading)
     return <Loading fullscreen text="Carregando chaveamento..." />;
 
   const activeView = stages.find((s) => s.stage === activeStage) ?? stages[0];
 
   function handleSlotSelect(slot: BracketSlot) {
+    if (isReadOnly) return;
     setPendingSlot(slot);
   }
 
   function handleSlotClear(slot: BracketSlot) {
+    if (isReadOnly) return;
     clearSlot(slot.stage, slot.slotIndex);
   }
 
@@ -82,15 +85,24 @@ export function Bracket() {
 
         {error && <p className="bracket-page__error">{error}</p>}
 
+        {isReadOnly && (
+          <p className="bracket-page__readonly-notice">
+            <span className="material-symbols-outlined">lock</span>
+            Prazo encerrado. Palpites bloqueados.
+          </p>
+        )}
+
         <BracketSlotGrid
           slots={activeView.slots}
+          isReadOnly={isReadOnly}
           onSelect={handleSlotSelect}
           onClear={handleSlotClear}
         />
       </main>
+
       {isSaving && <Loading fullscreen text="Salvando palpite..." />}
 
-      <SaveBar onSave={save} title="Salvar Palpite" />
+      {!isReadOnly && <SaveBar onSave={save} title="Salvar Palpite" />}
 
       {pendingSlot && (
         <TeamSearchModal
