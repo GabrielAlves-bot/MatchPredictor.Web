@@ -29,3 +29,12 @@ export async function updateTopScorerGuesses(playerName: string, poolParticipant
 
   return response.json();
 }
+
+export async function hasTopScorerGuessDeadlinePassed(): Promise<boolean> {
+  const response = await fetchData(`${BASE_ENDPOINT}/is-within-deadline`, "GET");
+
+  if (!response.ok)
+    throw new Error("Error on check if top scorer guess deadline has passed!");
+
+  return response.json();
+}

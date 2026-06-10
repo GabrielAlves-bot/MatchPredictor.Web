@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { ITopScorerGuess } from "../types/TopScorerGuessType";
 import {
   getTopScorerGuess,
+  hasTopScorerGuessDeadlinePassed,
   updateTopScorerGuesses,
 } from "../services/TopScorerGuessService";
 
@@ -10,6 +11,7 @@ interface UseTopScorerGuessReturn {
   playerName: string;
   isLoading: boolean;
   isSaving: boolean;
+  isReadonly: boolean;
   error: string | null;
   setPlayerName: (name: string) => void;
   save: () => Promise<void>;
@@ -22,6 +24,7 @@ export function useTopScorerGuess(
   const [playerName, setPlayerName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isReadonly, setIsReadonly] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -31,10 +34,14 @@ export function useTopScorerGuess(
       setIsLoading(true);
       setError(null);
       try {
-        const data = await getTopScorerGuess(poolParticipantId);
+        const [data, deadlinePassed] = await Promise.all([
+          getTopScorerGuess(poolParticipantId),
+          hasTopScorerGuessDeadlinePassed(),
+        ]);
         if (!cancelled) {
           setGuess(data);
           setPlayerName(data.playerName ?? "");
+          setIsReadonly(deadlinePassed);
         }
       } catch {
         if (!cancelled)
@@ -51,7 +58,7 @@ export function useTopScorerGuess(
   }, [poolParticipantId]);
 
   const save = useCallback(async () => {
-    if (!playerName.trim()) return;
+    if (!playerName.trim() || isReadonly) return;
     setIsSaving(true);
     setError(null);
     try {
@@ -61,7 +68,7 @@ export function useTopScorerGuess(
     } finally {
       setIsSaving(false);
     }
-  }, [playerName, poolParticipantId]);
+  }, [playerName, poolParticipantId, isReadonly]);
 
-  return { guess, playerName, isLoading, isSaving, error, setPlayerName, save };
+  return { guess, playerName, isLoading, isSaving, isReadonly, error, setPlayerName, save };
 }

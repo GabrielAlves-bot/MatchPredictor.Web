@@ -8,7 +8,7 @@ import { BackButton } from "../../components/BackButton";
 
 export function TopScorer() {
   const { activePool } = usePool();
-  const { playerName, isLoading, isSaving, setPlayerName, save } =
+  const { playerName, isLoading, isSaving, isReadonly, setPlayerName, save } =
     useTopScorerGuess(activePool?.poolParticipantId ?? 0);
 
   if (isLoading)
@@ -16,8 +16,8 @@ export function TopScorer() {
 
   return (
     <main className="top-scorer-page">
-            <BackButton text="Voltar para menu de palpites" />
-      
+      <BackButton text="Voltar para menu de palpites" />
+
       <section className="top-scorer-page__header">
         <h2 className="top-scorer-page__title">Artilheiro do Torneio</h2>
         <p className="top-scorer-page__description">
@@ -28,6 +28,7 @@ export function TopScorer() {
       <TopScorerCard
         playerName={playerName}
         isSaving={isSaving}
+        isReadonly={isReadonly}
         onChange={setPlayerName}
         onSave={save}
       />

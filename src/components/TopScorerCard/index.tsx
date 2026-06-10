@@ -6,6 +6,7 @@ import "./styles.css";
 interface TopScorerCardProps {
   playerName: string;
   isSaving: boolean;
+  isReadonly: boolean;
   onChange: (value: string) => void;
   onSave: () => void;
 }
@@ -13,6 +14,7 @@ interface TopScorerCardProps {
 export function TopScorerCard({
   playerName,
   isSaving,
+  isReadonly,
   onChange,
   onSave,
 }: TopScorerCardProps) {
@@ -33,18 +35,27 @@ export function TopScorerCard({
           placeholder="Ex: Kylian Mbappé"
           value={playerName}
           onChange={(e) => onChange(e.target.value)}
-          disabled={isSaving}
+          disabled={isSaving || isReadonly}
+          readOnly={isReadonly}
         />
       </div>
 
+      {isReadonly && (
+        <p className="top-scorer-card__deadline-warning">
+          O prazo para palpites encerrou. Não é mais possível alterar sua escolha.
+        </p>
+      )}
+
       {saving && <Loading fullscreen text="Salvando Palpite..." />}
 
-      <SaveBar onSave={onSave} title="Confirmar Palpite" />
+      <SaveBar onSave={onSave} title="Confirmar Palpite" disabled={isReadonly} />
 
-      <p className="top-scorer-card__description">
-        Digite o nome do seu candidato para o prêmio de artilheiro da Copa do
-        Mundo de 2026.
-      </p>
+      {!isReadonly && (
+        <p className="top-scorer-card__description">
+          Digite o nome do seu candidato para o prêmio de artilheiro da Copa do
+          Mundo de 2026.
+        </p>
+      )}
     </div>
   );
 }
