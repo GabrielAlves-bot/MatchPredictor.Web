@@ -8,6 +8,7 @@ import type { IMatch } from "../../types/MatchType";
 import { useEffect, useState } from "react";
 import { Loading } from "../../components/Loading";
 import { MatchPhase } from "../../enums/MatchPhase";
+import { MatchStatus } from "../../enums/MatchStatus";
 import { KnockoutTabs } from "../../components/KnockoutTabs";
 import { getKnockoutStages, getUniqueRounds } from "../../helpers/helpers";
 import { useMinimumLoading } from "../../hooks/useMinimumLoading";
@@ -72,6 +73,12 @@ export function Matches() {
     );
   }
 
+  function handleStatusChange(matchId: number, status: MatchStatus) {
+    setMatches((prev) =>
+      prev.map((m) => (m.id === matchId ? { ...m, status } : m))
+    );
+  }
+
   async function handleSave() {
     try {
       setIsLoading(true);
@@ -125,6 +132,7 @@ export function Matches() {
             matches={filteredMatches}
             isEditable={isAdmin}
             onGoalChange={isAdmin ? handleGoalChange : undefined}
+            onStatusChange={isAdmin ? handleStatusChange : undefined}
           />
         </main>
       )}

@@ -1,5 +1,6 @@
 import { MatchCard } from "../MatchCard";
 import type { IMatch } from "../../types/MatchType";
+import { MatchStatus } from "../../enums/MatchStatus";
 import "./styles.css";
 
 interface IProps {
@@ -10,9 +11,10 @@ interface IProps {
     field: "homeGoals" | "awayGoals",
     value: number | null
   ) => void;
+  onStatusChange?: (matchId: number, status: MatchStatus) => void;
 }
 
-export function MatchList({ matches, isEditable = false, onGoalChange }: IProps) {
+export function MatchList({ matches, isEditable = false, onGoalChange, onStatusChange }: IProps) {
   if (matches.length === 0) {
     return (
       <div className="match-list match-list--empty">
@@ -29,6 +31,7 @@ export function MatchList({ matches, isEditable = false, onGoalChange }: IProps)
           match={match}
           isEditable={isEditable}
           onGoalChange={onGoalChange}
+          onStatusChange={onStatusChange}
         />
       ))}
     </div>

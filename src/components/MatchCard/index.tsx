@@ -3,6 +3,7 @@ import { formatMatchDate } from "../../helpers/FormatDate";
 import type { IMatch } from "../../types/MatchType";
 import { MatchStatusBadge } from "../MatchStatusBadge";
 import { TeamDisplay } from "../TeamDisplay";
+import { MatchStatus } from "../../enums/MatchStatus";
 import "./styles.css";
 
 interface IProps {
@@ -13,9 +14,10 @@ interface IProps {
     field: "homeGoals" | "awayGoals",
     value: number | null
   ) => void;
+  onStatusChange?: (matchId: number, status: MatchStatus) => void;
 }
 
-export function MatchCard({ match, isEditable = false, onGoalChange }: IProps) {
+export function MatchCard({ match, isEditable = false, onGoalChange, onStatusChange }: IProps) {
   const [localHome, setLocalHome] = useState<string>(
     match.homeGoals != null ? String(match.homeGoals) : ""
   );
@@ -58,7 +60,11 @@ export function MatchCard({ match, isEditable = false, onGoalChange }: IProps) {
             {match.stadium}, {match.city}
           </p>
         </div>
-        <MatchStatusBadge matchStatus={match.status} />
+        <MatchStatusBadge
+          matchStatus={match.status}
+          isEditable={isEditable}
+          onStatusChange={(status) => onStatusChange?.(match.id, status)}
+        />
       </div>
 
       <div className="match-card__grid">
