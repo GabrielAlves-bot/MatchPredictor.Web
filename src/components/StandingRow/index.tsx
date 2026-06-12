@@ -20,7 +20,9 @@ function RankBadge({ rank, isCurrentUser }: RankBadgeProps) {
       ? "standing-row__badge--gold"
       : rank === 2
         ? "standing-row__badge--silver"
-        : "standing-row__badge--normal";
+        : rank === 3
+          ? "standing-row__badge--bronze"
+          : "standing-row__badge--normal";
 
   return (
     <span className={`standing-row__badge ${badgeClass}`}>{rank}</span>

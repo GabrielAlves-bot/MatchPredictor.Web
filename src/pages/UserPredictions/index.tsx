@@ -59,7 +59,7 @@ export function UserPredictions() {
 
   return (
     <main className="user-predictions">
-      <BackButton text="Voltar para Classificação" />
+      <BackButton text="Voltar para o Menu" />
 
       {participant && (
         <UserStandingCard

@@ -37,8 +37,8 @@ const RULE_META: Record<ScoringRule, { icon: string; title: string; desc: string
   },
   [ScoringRule.GoalCountOnly]: {
     icon: "scoreboard",
-    title: "Apenas Total de Gols",
-    desc: "Acerto do somatório de gols das duas equipes.",
+    title: "Apenas Gol de Uma das Seleções",
+    desc: "Acerto apenas a quantidade de gols de uma das selecões.",
   },
 };
 

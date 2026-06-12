@@ -23,6 +23,9 @@ import { BracketDeadline } from "../pages/BracketDeadline";
 import { MyGuesses } from "../pages/MyGuesses";
 import { Settings } from "../pages/Settings";
 import { TopScorer } from "../pages/TopScorer";
+import { UserBracketPredictions } from "../pages/UserBracketPredictions";
+import { UserGuesses } from "../pages/UserGuesses";
+import { UserTopScorerPredictions } from "../pages/UserTopScorerPredictions";
 
 function AppRoutes() {
     return (
@@ -55,7 +58,10 @@ function AppRoutes() {
                                             <Route path={paths.bracketDeadlines} element={<BracketDeadline championshipId={1} />} />
                                             <Route path={paths.myGuesses} element={<MyGuesses />} />
                                             <Route path={paths.settings} element={<Settings />} />
-                                            <Route path={paths.topScorerGuess} element={<TopScorer  />} />
+                                            <Route path={paths.topScorerGuess} element={<TopScorer />} />
+                                            <Route path={paths.userGuesses} element={<UserGuesses />} />
+                                            <Route path={paths.userBracketPredictions} element={<UserBracketPredictions />} />
+                                            <Route path={paths.userTopScorerPredictions} element={<UserTopScorerPredictions />} />
                                         </Route>
                                     </Route>
                                 </Route>

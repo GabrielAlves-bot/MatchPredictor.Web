@@ -1,0 +1,46 @@
+.user-top-scorer-page {
+  padding: 1.5rem;
+  padding-top: 96px;
+  padding-bottom: 48px;
+  margin: 0 auto;
+}
+
+.user-top-scorer-page__header {
+  margin-bottom: 1.5rem;
+}
+
+.user-top-scorer-page__title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.user-top-scorer-page__description {
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  max-width: 90%;
+}
+
+.user-top-scorer-page__readonly-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.user-top-scorer-page__readonly-notice .material-symbols-outlined {
+  font-size: 16px;
+  font-variation-settings: "FILL" 1;
+  flex-shrink: 0;
+}

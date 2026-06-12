@@ -96,7 +96,12 @@
 }
 
 .standing-row__badge--silver {
-  background-color: var(--surface-container-high);
+  background-color: #C4C4C4;
+  color: var(--on-surface-variant);
+}
+
+.standing-row__badge--bronze {
+  background-color: #CE8946;
   color: var(--on-surface-variant);
 }
 

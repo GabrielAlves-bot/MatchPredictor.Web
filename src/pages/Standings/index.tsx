@@ -33,7 +33,7 @@ export function Standings() {
   const currentUser = entries.find((e) => e.isCurrentUser);
 
   function handleRowClick(poolParticipantId: number) {
-    navigate(`/User-Predictions/${poolParticipantId}`);
+    navigate(`/User-Guesses/${poolParticipantId}`);
   }
 
   return (

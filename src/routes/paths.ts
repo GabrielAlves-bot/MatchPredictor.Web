@@ -14,5 +14,8 @@ export default {
     myGuesses: "/My-Guesses",
     settings: "/Settings",
     changePassword: "/change-password",
-    topScorerGuess: "/Top-Scorer-Guess"
+    topScorerGuess: "/Top-Scorer-Guess",
+    userGuesses: "/User-Guesses/:poolParticipantId",
+    userBracketPredictions: "/User-Bracket-Predictions/:poolParticipantId",
+    userTopScorerPredictions: "/User-Top-Scorer-Predictions/:poolParticipantId",
 }

@@ -18,7 +18,7 @@ export function StandingsTable({ entries, onRowClick }: StandingsTableProps) {
       <div className="standings-table__list">
         {entries.map((entry) => (
           <StandingRow
-            key={entry.rank}
+            key={entry.poolParticipantId}
             {...entry}
             onClick={onRowClick}
           />

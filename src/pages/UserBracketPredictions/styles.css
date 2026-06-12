@@ -1,0 +1,64 @@
+.user-bracket-page {
+  padding-top: 80px;
+  padding-bottom: 38px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.user-bracket-page__header {
+  margin-bottom: 32px;
+}
+
+.user-bracket-page__header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.user-bracket-page__label {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--secondary);
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.user-bracket-page__title {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.025em;
+  color: var(--on-surface);
+}
+
+.user-bracket-page__error {
+  color: var(--error, #ba1a1a);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.user-bracket-page__readonly-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.user-bracket-page__readonly-notice .material-symbols-outlined {
+  font-size: 16px;
+  font-variation-settings: "FILL" 1;
+  flex-shrink: 0;
+}

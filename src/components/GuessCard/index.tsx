@@ -4,10 +4,11 @@ interface GuessCardProps {
   icon: string;
   title: string;
   description: string;
+  readonly?: boolean;
   onClick: () => void;
 }
 
-export function GuessCard({ icon, title, description, onClick }: GuessCardProps) {
+export function GuessCard({ icon, title, description, readonly, onClick }: GuessCardProps) {
   return (
     <button className="guess-card" onClick={onClick}>
       <div className="guess-card__icon">
@@ -20,7 +21,7 @@ export function GuessCard({ icon, title, description, onClick }: GuessCardProps)
       </div>
 
       <div className="guess-card__action">
-        <span className="guess-card__action-label">Palpitar</span>
+        <span className="guess-card__action-label">{readonly ? "Visualizar" : "Palpitar"}</span>
         <span className="material-symbols-outlined guess-card__chevron">
           chevron_right
         </span>
