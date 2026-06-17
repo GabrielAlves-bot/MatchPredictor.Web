@@ -33,7 +33,7 @@ const RULE_META: Record<ScoringRule, { icon: string; title: string; desc: string
   [ScoringRule.WinnerOnly]: {
     icon: "emoji_events",
     title: "Apenas Vencedor",
-    desc: "Acerto exclusivo de quem venceu a partida (ou empate).",
+    desc: "Acerto exclusivo de quem venceu a partida.",
   },
   [ScoringRule.GoalCountOnly]: {
     icon: "scoreboard",
