@@ -15,9 +15,10 @@ interface IProps {
     value: number | null
   ) => void;
   onStatusChange?: (matchId: number, status: MatchStatus) => void;
+  onMatchClick?: (matchId: number) => void;
 }
 
-export function MatchCard({ match, isEditable = false, onGoalChange, onStatusChange }: IProps) {
+export function MatchCard({ match, isEditable = false, onGoalChange, onStatusChange, onMatchClick }: IProps) {
   const [localHome, setLocalHome] = useState<string>(
     match.homeGoals != null ? String(match.homeGoals) : ""
   );
@@ -104,6 +105,18 @@ export function MatchCard({ match, isEditable = false, onGoalChange, onStatusCha
           name={match.awayTeam.name}
         />
       </div>
+
+      {onMatchClick && (
+        <button
+          className="match-card__guesses-btn"
+          onClick={() => onMatchClick(match.id)}
+          aria-label="Ver palpites da partida"
+        >
+          <span className="material-symbols-outlined">groups</span>
+          <span className="match-card__guesses-btn-label">Ver palpites</span>
+          <span className="material-symbols-outlined match-card__guesses-btn-chevron">chevron_right</span>
+        </button>
+      )}
     </div>
   );
 }

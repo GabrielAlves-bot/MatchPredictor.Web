@@ -26,6 +26,7 @@ import { TopScorer } from "../pages/TopScorer";
 import { UserBracketPredictions } from "../pages/UserBracketPredictions";
 import { UserGuesses } from "../pages/UserGuesses";
 import { UserTopScorerPredictions } from "../pages/UserTopScorerPredictions";
+import { MatchGuesses } from "../pages/MatchGuesses";
 
 function AppRoutes() {
     return (
@@ -62,6 +63,7 @@ function AppRoutes() {
                                             <Route path={paths.userGuesses} element={<UserGuesses />} />
                                             <Route path={paths.userBracketPredictions} element={<UserBracketPredictions />} />
                                             <Route path={paths.userTopScorerPredictions} element={<UserTopScorerPredictions />} />
+                                            <Route path={paths.matchGuesses} element={<MatchGuesses />} />
                                         </Route>
                                     </Route>
                                 </Route>

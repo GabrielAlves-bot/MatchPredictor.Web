@@ -1,0 +1,106 @@
+.match-hero-card {
+  /* background-color: var(--primary-container);
+  color: var(--on-primary-container); */
+  border-radius: 2rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px color-mix(in srgb, var(--primary) 35%, transparent);
+  margin-bottom: 2rem;
+}
+
+.match-hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.match-hero-card__info {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.match-hero-card__date {
+  font-family: var(--font-headline);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.match-hero-card__venue {
+  font-family: var(--font-headline);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.match-hero-card__teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  gap: 0.5rem;
+}
+
+.match-hero-card__team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  width: 30%;
+}
+
+.match-hero-card__shield {
+  width: 64px;
+  height: 64px;
+}
+
+.match-hero-card__team-name {
+  font-family: var(--font-headline);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.match-hero-card__score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.match-hero-card__score {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-headline);
+  font-size: 2.25rem;
+  font-weight: 900;
+}
+
+.match-hero-card__score-vs {
+  font-size: 1.25rem;
+  opacity: 0.4;
+}
+
+/* Override MatchStatusBadge to fit on the hero card */
+.match-hero-card .match-status-badge {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: var(--on-primary-container) !important;
+  border: none !important;
+}

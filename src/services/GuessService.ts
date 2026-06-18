@@ -1,3 +1,4 @@
+import type { IGuessDetails } from "../types/GuessDetails";
 import type { IGuess } from "../types/GuessType";
 import type { IUpdateGuessRequest } from "../types/UpdateGuessRequest";
 import { fetchData } from "./BaseRequest";
@@ -10,6 +11,15 @@ export async function getGuesses(idPoolParticipant: number): Promise<IGuess[]> {
 
   if (!response.ok)
     throw new Error("Error on get guesses!");
+
+  return response.json();
+}
+
+export async function getGuessesByMatch(poolId: number, matchId: number): Promise<IGuessDetails[]> {
+  const response = await fetchData(`${BASE_ENDPOINT}/details?poolId=${poolId}&matchId=${matchId}`, "GET");
+
+  if (!response.ok)
+    throw new Error("Error on get guesses by match!");
 
   return response.json();
 }

@@ -14,6 +14,15 @@ export async function getMatches(): Promise<IMatch[]> {
     return await response.json();
 }
 
+export async function getMatchById(id: number): Promise<IMatch> {
+    const response = await fetchData(`${BASE_ENDPOINT}/${id}`, "GET");
+
+    if (response.status !== 200)
+        throw new Error("Error on get group matches!");
+
+    return await response.json();
+}
+
 export async function getGroupMatches(): Promise<IGroupMatch[]> {
     const response = await fetchData(`${BASE_ENDPOINT}/group-matches`, "GET");
 
@@ -23,15 +32,14 @@ export async function getGroupMatches(): Promise<IGroupMatch[]> {
     return await response.json();
 }
 
-
 export async function updateMatches(matches: IMatch[]): Promise<boolean> {
 
-  const jsonBody = JSON.stringify(matches);
+    const jsonBody = JSON.stringify(matches);
 
-  const response = await fetchData(BASE_ENDPOINT, "PUT", jsonBody);
+    const response = await fetchData(BASE_ENDPOINT, "PUT", jsonBody);
 
-  if (!response.ok)
-    throw new Error("Error on update matches!");
+    if (!response.ok)
+        throw new Error("Error on update matches!");
 
-  return response.json();
+    return response.json();
 }

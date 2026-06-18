@@ -1,0 +1,166 @@
+.guess-details-card {
+  background-color: var(--surface-container-lowest);
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--outline-variant);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.guess-details-card:active {
+  transform: scale(0.99);
+  background-color: var(--surface-container);
+}
+
+/* Left — user */
+.guess-details-card__user {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-width: 0;
+}
+
+.guess-details-card__avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.guess-details-card__avatar .material-symbols-outlined {
+  font-size: 1.375rem;
+}
+
+.guess-details-card__name {
+  font-family: var(--font-headline);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Right — prediction + pts */
+.guess-details-card__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.guess-details-card__prediction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.guess-details-card__pred-value {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--secondary);
+}
+
+.guess-details-card__pred-value--empty {
+  opacity: 0.35;
+}
+
+.guess-details-card__pred-label {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  opacity: 0.6;
+}
+
+/* Points badge */
+.guess-details-card__pts-badge {
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
+  border: 1px solid color-mix(in srgb, var(--primary) 15%, transparent);
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  min-width: 56px;
+  justify-content: center;
+}
+
+.guess-details-card__pts-badge--low {
+  background-color: var(--surface-container-high);
+  color: var(--on-surface-variant);
+  border-color: transparent;
+}
+
+.guess-details-card__pts-badge--none {
+  background-color: color-mix(in srgb, #ba1a1a 8%, transparent);
+  color: #ba1a1a;
+  border-color: color-mix(in srgb, #ba1a1a 12%, transparent);
+}
+
+.guess-details-card__pts-value {
+  font-family: var(--font-headline);
+  font-size: 0.9375rem;
+  font-weight: 900;
+}
+
+.guess-details-card__pts-unit {
+  font-family: var(--font-headline);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.guess-details-card__pts-badge--score-6 {
+  color: #2e7d32;
+  border-color: color-mix(in srgb, #2e7d32 18%, transparent);
+  background-color: color-mix(in srgb, #2e7d32 12%, transparent);
+}
+
+.guess-details-card__pts-badge--score-5 {
+  color: #558b2f;
+  border-color: color-mix(in srgb, #558b2f 18%, transparent);
+  background-color: color-mix(in srgb, #558b2f 12%, transparent);
+}
+
+.guess-details-card__pts-badge--score-4 {
+  color: #f9a825;
+  border-color: color-mix(in srgb, #f9a825 18%, transparent);
+  background-color: color-mix(in srgb, #f9a825 12%, transparent);
+}
+
+.guess-details-card__pts-badge--score-3 {
+  color: #ef6c00;
+  border-color: color-mix(in srgb, #ef6c00 18%, transparent);
+  background-color: color-mix(in srgb, #ef6c00 12%, transparent);
+}
+
+.guess-details-card__pts-badge--score-2 {
+  color: #e57373;
+  border-color: color-mix(in srgb, #e57373 18%, transparent);
+  background-color: color-mix(in srgb, #e57373 12%, transparent);
+}
+
+.guess-details-card__pts-badge--score-1 {
+  color: var(--on-surface-variant);
+  border-color: color-mix(in srgb,var(--on-surface-variant) 18%,transparent);
+  background-color: color-mix(in srgb,var(--on-surface-variant) 12%,transparent);
+}
+
+.guess-details-card__pts-badge--score-0 {
+  color: #ba1a1a;
+  border-color: color-mix(in srgb, #ba1a1a 18%, transparent);
+  background-color: color-mix(in srgb, #ba1a1a 12%, transparent);
+}

@@ -12,9 +12,10 @@ interface IProps {
     value: number | null
   ) => void;
   onStatusChange?: (matchId: number, status: MatchStatus) => void;
+  onMatchClick?: (matchId: number) => void;
 }
 
-export function MatchList({ matches, isEditable = false, onGoalChange, onStatusChange }: IProps) {
+export function MatchList({ matches, isEditable = false, onGoalChange, onStatusChange, onMatchClick }: IProps) {
   if (matches.length === 0) {
     return (
       <div className="match-list match-list--empty">
@@ -32,6 +33,7 @@ export function MatchList({ matches, isEditable = false, onGoalChange, onStatusC
           isEditable={isEditable}
           onGoalChange={onGoalChange}
           onStatusChange={onStatusChange}
+          onMatchClick={onMatchClick}
         />
       ))}
     </div>

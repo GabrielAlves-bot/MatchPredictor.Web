@@ -74,6 +74,54 @@
   margin: 0;
 }
 
+/* Guesses footer button */
+.match-card__guesses-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--outline-variant);
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  background: none;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.match-card__guesses-btn:hover {
+  color: var(--primary);
+}
+
+.match-card__guesses-btn .material-symbols-outlined {
+  font-size: 16px;
+  font-variation-settings: "FILL" 0;
+  flex-shrink: 0;
+}
+
+.match-card__guesses-btn-label {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 600;
+  flex: 1;
+  text-align: left;
+}
+
+.match-card__guesses-btn-chevron {
+  font-size: 16px !important;
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+}
+
+.match-card__guesses-btn:hover .match-card__guesses-btn-chevron {
+  transform: translateX(2px);
+  opacity: 0.8;
+}
+
 @media (prefers-color-scheme: dark) {
   .match-card__score-input {
     color: white;

@@ -15,6 +15,8 @@ import { useMinimumLoading } from "../../hooks/useMinimumLoading";
 import { useAuth } from "../../context/AuthContext";
 import { settle } from "../../services/PoolService";
 import { usePool } from "../../context/PoolContext";
+import { useNavigate } from "react-router-dom";
+import paths from "../../routes/paths";
 
 export function Matches() {
   const [matches, setMatches] = useState<IMatch[]>([]);
@@ -25,6 +27,7 @@ export function Matches() {
   const { auth } = useAuth();
   const { activePool } = usePool();
   const isAdmin = auth?.role === "Admin";
+  const navigate = useNavigate();
 
   async function loadMatches() {
     try {
@@ -50,7 +53,7 @@ export function Matches() {
       return;
 
     if (selectedPhase === MatchPhase.GroupStage) {
-      setSelectedTab(getUniqueRounds(matches)[0] ?? "");
+      setSelectedTab(getUniqueRounds(matches)[1] ?? "");
     } else {
       setSelectedTab(getKnockoutStages(matches)[0] ?? "");
     }
@@ -89,6 +92,10 @@ export function Matches() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleMatchClick(matchId: number) {
+    navigate(paths.matchGuesses.replace(":matchId", String(matchId)));
   }
 
   const filteredMatches = matches.filter((m) => {
@@ -133,6 +140,7 @@ export function Matches() {
             isEditable={isAdmin}
             onGoalChange={isAdmin ? handleGoalChange : undefined}
             onStatusChange={isAdmin ? handleStatusChange : undefined}
+            onMatchClick={handleMatchClick}
           />
         </main>
       )}
