@@ -18,5 +18,7 @@ export default {
     userGuesses: "/User-Guesses/:poolParticipantId",
     userBracketPredictions: "/User-Bracket-Predictions/:poolParticipantId",
     userTopScorerPredictions: "/User-Top-Scorer-Predictions/:poolParticipantId",
-    matchGuesses: "/Match-Guesses/:matchId"
+    matchGuesses: "/Match-Guesses/:matchId",
+    bracketQualifierRules: "/Bracket-Qualifier-Rules",
+    BracketQualifier: "/Bracket-Qualifier"
 }

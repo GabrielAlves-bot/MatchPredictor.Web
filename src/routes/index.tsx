@@ -27,6 +27,8 @@ import { UserBracketPredictions } from "../pages/UserBracketPredictions";
 import { UserGuesses } from "../pages/UserGuesses";
 import { UserTopScorerPredictions } from "../pages/UserTopScorerPredictions";
 import { MatchGuesses } from "../pages/MatchGuesses";
+import { BracketQualifierRules } from "../pages/BracketQualifierRules";
+import { BracketQualifier } from "../pages/BracketQualifier";
 
 function AppRoutes() {
     return (
@@ -64,6 +66,8 @@ function AppRoutes() {
                                             <Route path={paths.userBracketPredictions} element={<UserBracketPredictions />} />
                                             <Route path={paths.userTopScorerPredictions} element={<UserTopScorerPredictions />} />
                                             <Route path={paths.matchGuesses} element={<MatchGuesses />} />
+                                            <Route path={paths.bracketQualifierRules} element={<BracketQualifierRules />} />
+                                            <Route path={paths.BracketQualifier} element={<BracketQualifier />} />
                                         </Route>
                                     </Route>
                                 </Route>

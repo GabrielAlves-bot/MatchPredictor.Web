@@ -24,7 +24,7 @@ export function PredictionCard({
   onGuessChange,
 }: IProps) {
   const isEditable =
-    !readonly && guess.enabled;
+    !readonly && guess?.enabled;
 
   const [localHome, setLocalHome] = useState<string>(
     guess?.homeGoals != null

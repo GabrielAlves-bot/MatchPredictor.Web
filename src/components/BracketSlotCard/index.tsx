@@ -11,6 +11,7 @@ interface BracketSlotCardProps {
 export function BracketSlotCard({ slot, isReadOnly, onSelect, onClear }: BracketSlotCardProps) {
   const slotLabel = String(slot.slotIndex + 1).padStart(2, "0");
   const isFilled = slot.team !== null;
+  const hasPoints = slot.pointsEarned != null;
 
   const classNames = [
     "bracket-slot-card",
@@ -54,10 +55,27 @@ export function BracketSlotCard({ slot, isReadOnly, onSelect, onClear }: Bracket
         </div>
       </div>
 
-      <div className="bracket-slot-card__action">
-        <span className="material-symbols-outlined">
-          {isReadOnly ? "lock" : isFilled ? "close" : "add"}
-        </span>
+      <div className="bracket-slot-card__right">
+        {hasPoints && (
+          <div
+            className={`bracket-slot-card__pts-badge${
+              slot.pointsEarned! !== 0
+                ? " bracket-slot-card__pts-badge--positive"
+                : " bracket-slot-card__pts-badge--zero"
+            }`}
+          >
+            <span className="bracket-slot-card__pts-value">
+              {slot.pointsEarned! > 0 ? `+${slot.pointsEarned}` : slot.pointsEarned}
+            </span>
+            <span className="bracket-slot-card__pts-unit">pts</span>
+          </div>
+        )}
+
+        <div className="bracket-slot-card__action">
+          <span className="material-symbols-outlined">
+            {isReadOnly ? "lock" : isFilled ? "close" : "add"}
+          </span>
+        </div>
       </div>
     </div>
   );

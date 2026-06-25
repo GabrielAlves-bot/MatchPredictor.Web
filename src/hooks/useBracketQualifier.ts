@@ -1,61 +1,36 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { KnockoutStage } from "../enums/KnockoutStage";
 import { MatchPhase } from "../enums/MatchPhase";
-import type { IBracketGuess } from "../types/BracketGuess";
+import type { IBracketQualifier } from "../types/BracketQualifierType";
 import type { ITeam } from "../types/TeamType";
-import { getBracketGuesses, updateBracketGuesses } from "../services/BracketGuessService";
+import { getBracketQualifiers, updateBracketQualifiers } from "../services/BracketQualifierService";
 import { getTeams } from "../services/TeamService";
-import { hasGuessDeadlinePassed } from "../services/BracketGuessDeadlineService";
 import KNOCKOUT_LABELS from "../constants/KnockoutLabels";
+import {
+  STAGE_ORDER,
+  SLOTS_PER_STAGE,
+  PREDECESSOR_STAGE,
+} from "./useBracket";
+import { settle } from "../services/PoolService";
 
-export const STAGE_ORDER: KnockoutStage[] = [
-  KnockoutStage.RoundOf32,
-  KnockoutStage.RoundOf16,
-  KnockoutStage.QuarterFinal,
-  KnockoutStage.SemiFinal,
-  KnockoutStage.Final,
-  KnockoutStage.Champion
-];
-
-export const SLOTS_PER_STAGE: Record<KnockoutStage, number> = {
-  [KnockoutStage.None]: 0,
-  [KnockoutStage.RoundOf32]: 32,
-  [KnockoutStage.RoundOf16]: 16,
-  [KnockoutStage.QuarterFinal]: 8,
-  [KnockoutStage.SemiFinal]: 4,
-  [KnockoutStage.ThirdPlaceMatch]: 2,
-  [KnockoutStage.Final]: 2,
-  [KnockoutStage.Champion]: 1,
-};
-
-export const PREDECESSOR_STAGE: Partial<Record<KnockoutStage, KnockoutStage>> = {
-  [KnockoutStage.RoundOf16]: KnockoutStage.RoundOf32,
-  [KnockoutStage.QuarterFinal]: KnockoutStage.RoundOf16,
-  [KnockoutStage.SemiFinal]: KnockoutStage.QuarterFinal,
-  [KnockoutStage.ThirdPlaceMatch]: KnockoutStage.SemiFinal,
-  [KnockoutStage.Final]: KnockoutStage.SemiFinal,
-  [KnockoutStage.Champion]: KnockoutStage.Final,
-};
-
-export interface BracketSlot {
+export interface QualifierSlot {
   slotIndex: number;
   stage: KnockoutStage;
   team: ITeam | null;
-  guessId: number;
-  pointsEarned?: number | null;
+  qualifierId: number;
 }
 
-export interface StageView {
+export interface QualifierStageView {
   stage: KnockoutStage;
   label: string;
-  slots: BracketSlot[];
+  slots: QualifierSlot[];
   filledCount: number;
   totalSlots: number;
   availableTeams: ITeam[];
 }
 
-interface UseBracketResult {
-  stages: StageView[];
+interface UseBracketQualifierResult {
+  stages: QualifierStageView[];
   activeStage: KnockoutStage;
   setActiveStage: (s: KnockoutStage) => void;
   teams: ITeam[];
@@ -72,7 +47,7 @@ function stageKey(stage: KnockoutStage, slotIndex: number) {
   return `${stage}_${slotIndex}`;
 }
 
-function getTeamsInStage(slots: Map<string, BracketSlot>, stage: KnockoutStage): ITeam[] {
+function getTeamsInStage(slots: Map<string, QualifierSlot>, stage: KnockoutStage): ITeam[] {
   const count = SLOTS_PER_STAGE[stage];
   const result: ITeam[] = [];
   for (let i = 0; i < count; i++) {
@@ -82,49 +57,40 @@ function getTeamsInStage(slots: Map<string, BracketSlot>, stage: KnockoutStage):
   return result;
 }
 
-export function useBracket(poolParticipantId: number): UseBracketResult {
-  const [slots, setSlots] = useState<Map<string, BracketSlot>>(new Map());
+export function useBracketQualifier(isAdmin: boolean): UseBracketQualifierResult {
+  const [slots, setSlots] = useState<Map<string, QualifierSlot>>(new Map());
   const [teams, setTeams] = useState<ITeam[]>([]);
-  const [isLoading, setIsLoading] = useState(!!poolParticipantId && poolParticipantId > 0);
+  const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  const [isReadOnly, setIsReadOnly] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeStage, setActiveStage] = useState<KnockoutStage>(KnockoutStage.RoundOf32);
 
-  useEffect(() => {
-    if (!poolParticipantId || poolParticipantId <= 0) return;
+  const isReadOnly = !isAdmin;
 
+  useEffect(() => {
     setIsLoading(true);
     setError(null);
 
-    Promise.all([getTeams(), getBracketGuesses(poolParticipantId), hasGuessDeadlinePassed()])
-      .then(([allTeams, guesses, deadlinePassed]) => {
+    Promise.all([getTeams(), getBracketQualifiers()])
+      .then(([allTeams, qualifiers]) => {
         setTeams(allTeams);
-        setIsReadOnly(deadlinePassed);
-
         const teamMap = new Map(allTeams.map((t) => [t.id, t]));
-
-        const map = new Map<string, BracketSlot>();
+        const map = new Map<string, QualifierSlot>();
 
         for (const stage of STAGE_ORDER) {
-          const stageGuesses = guesses.filter((g) => g.knockoutStage === stage);
+          const stageQualifiers = qualifiers.filter((q) => q.knockoutStage === stage);
 
-          const filled = stageGuesses
-            .filter((g) => g.teamId != null)
-            .sort((a, b) => a.id - b.id);
-          const empty = stageGuesses
-            .filter((g) => g.teamId == null)
-            .sort((a, b) => a.id - b.id);
+          const filled = stageQualifiers.filter((q) => q.teamId != null).sort((a, b) => a.id - b.id);
+          const empty = stageQualifiers.filter((q) => q.teamId == null).sort((a, b) => a.id - b.id);
           const ordered = [...filled, ...empty];
 
-          ordered.forEach((g, idx) => {
+          ordered.forEach((q, idx) => {
             const key = stageKey(stage, idx);
             map.set(key, {
               slotIndex: idx,
               stage,
-              team: g.teamId != null ? (teamMap.get(g.teamId) ?? null) : null,
-              guessId: g.id,
-              pointsEarned: g.pointsEarned,
+              team: q.teamId != null ? (teamMap.get(q.teamId) ?? null) : null,
+              qualifierId: q.id,
             });
           });
 
@@ -132,7 +98,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
           for (let i = ordered.length; i < expected; i++) {
             const key = stageKey(stage, i);
             if (!map.has(key)) {
-              map.set(key, { slotIndex: i, stage, team: null, guessId: 0, pointsEarned: null });
+              map.set(key, { slotIndex: i, stage, team: null, qualifierId: 0 });
             }
           }
         }
@@ -141,9 +107,9 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
       })
       .catch((err: Error) => setError(err.message))
       .finally(() => setIsLoading(false));
-  }, [poolParticipantId]);
+  }, []);
 
-  const stages = useMemo<StageView[]>(() => {
+  const stages = useMemo<QualifierStageView[]>(() => {
     return STAGE_ORDER.map((stage) => {
       const stageSlots = Array.from(
         { length: SLOTS_PER_STAGE[stage] },
@@ -152,8 +118,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
             slotIndex: i,
             stage,
             team: null,
-            guessId: 0,
-            pointsEarned: null,
+            qualifierId: 0,
           }
       );
 
@@ -162,13 +127,9 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
       );
 
       const predecessorStage = PREDECESSOR_STAGE[stage];
-      let teamPool: ITeam[];
-
-      if (!predecessorStage) {
-        teamPool = teams;
-      } else {
-        teamPool = getTeamsInStage(slots, predecessorStage);
-      }
+      const teamPool = predecessorStage
+        ? getTeamsInStage(slots, predecessorStage)
+        : teams;
 
       const availableTeams = teamPool.filter((t) => !pickedIdsInStage.has(t.id));
 
@@ -211,34 +172,36 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     [isReadOnly]
   );
 
-  const clearSlotCascading = useCallback((stage: KnockoutStage, slotIndex: number) => {
-    if (isReadOnly) return;
+  const clearSlot = useCallback(
+    (stage: KnockoutStage, slotIndex: number) => {
+      if (isReadOnly) return;
 
-    setSlots((prev) => {
-      const next = new Map(prev);
-      const key = stageKey(stage, slotIndex);
-      const existing = next.get(key);
-      if (!existing || !existing.team) return prev;
+      setSlots((prev) => {
+        const next = new Map(prev);
+        const key = stageKey(stage, slotIndex);
+        const existing = next.get(key);
+        if (!existing || !existing.team) return prev;
 
-      const removedTeamId = existing.team.id;
-      next.set(key, { ...existing, team: null });
+        const removedTeamId = existing.team.id;
+        next.set(key, { ...existing, team: null });
 
-      const stageIdx = STAGE_ORDER.indexOf(stage);
-      for (let s = stageIdx + 1; s < STAGE_ORDER.length; s++) {
-        const laterStage = STAGE_ORDER[s];
-        const slotCount = SLOTS_PER_STAGE[laterStage];
-        for (let i = 0; i < slotCount; i++) {
-          const lKey = stageKey(laterStage, i);
-          const lSlot = next.get(lKey);
-          if (lSlot?.team?.id === removedTeamId) {
-            next.set(lKey, { ...lSlot, team: null });
+        const stageIdx = STAGE_ORDER.indexOf(stage);
+        for (let s = stageIdx + 1; s < STAGE_ORDER.length; s++) {
+          const laterStage = STAGE_ORDER[s];
+          for (let i = 0; i < SLOTS_PER_STAGE[laterStage]; i++) {
+            const lKey = stageKey(laterStage, i);
+            const lSlot = next.get(lKey);
+            if (lSlot?.team?.id === removedTeamId) {
+              next.set(lKey, { ...lSlot, team: null });
+            }
           }
         }
-      }
 
-      return next;
-    });
-  }, [isReadOnly]);
+        return next;
+      });
+    },
+    [isReadOnly]
+  );
 
   const save = useCallback(async () => {
     if (isReadOnly) return;
@@ -246,27 +209,27 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     setIsSaving(true);
     setError(null);
     try {
-      const guesses: IBracketGuess[] = [];
+      const qualifiers: IBracketQualifier[] = [];
       for (const stage of STAGE_ORDER) {
         for (let i = 0; i < SLOTS_PER_STAGE[stage]; i++) {
           const slot = slots.get(stageKey(stage, i));
           if (!slot) continue;
-          guesses.push({
-            id: slot.guessId,
+          qualifiers.push({
+            id: slot.qualifierId,
             teamId: slot.team?.id ?? null,
             knockoutStage: stage,
             matchPhase: MatchPhase.Knockout,
-            pointsEarned: slot.pointsEarned ?? 0,
           });
         }
       }
-      await updateBracketGuesses(poolParticipantId, guesses);
+      await updateBracketQualifiers(qualifiers);
+      settle(1);
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setIsSaving(false);
     }
-  }, [isReadOnly, slots, poolParticipantId]);
+  }, [isReadOnly, slots]);
 
   return {
     stages,
@@ -278,7 +241,7 @@ export function useBracket(poolParticipantId: number): UseBracketResult {
     isReadOnly,
     error,
     selectTeam,
-    clearSlot: clearSlotCascading,
+    clearSlot,
     save,
   };
 }

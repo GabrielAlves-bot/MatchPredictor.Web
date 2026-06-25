@@ -22,7 +22,7 @@ export function PredictionList({ readonly, matches, guesses, onGuessChange }: IP
       </div>
     );
   }
-
+  
   return (
     <div className="prediction-list">
       {matches.map((match) => {

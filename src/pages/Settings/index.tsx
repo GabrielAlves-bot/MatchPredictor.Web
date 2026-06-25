@@ -37,6 +37,30 @@ export function Settings() {
         />
 
         <SettingsCard
+          icon="stars"
+          title="Regras de Pontos Extras"
+          description={
+            isAdmin
+              ? "Configure os pontos por acertos nas fases eliminatórias."
+              : "Visualize os pontos configurados para as fases eliminatórias."
+          }
+          label={isAdmin ? "Gerenciar" : "Visualizar"}
+          onClick={() => navigate("/Bracket-Qualifier-Rules")}
+        />
+
+        <SettingsCard
+          icon="account_tree"
+          title="Gabarito de Classificados"
+          description={
+            isAdmin
+              ? "Defina os times classificados em cada fase eliminatória."
+              : "Visualize os times classificados em cada fase eliminatória."
+          }
+          label={isAdmin ? "Gerenciar" : "Visualizar"}
+          onClick={() => navigate("/Bracket-Qualifier")}
+        />
+
+        <SettingsCard
           icon="schedule"
           title="Prazo dos Palpites"
           description={

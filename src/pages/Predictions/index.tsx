@@ -49,7 +49,7 @@ export function Predictions() {
   useEffect(() => {
     if (matches.length === 0) return;
     if (selectedPhase === MatchPhase.GroupStage) {
-      setSelectedTab(getUniqueRounds(matches)[1] ?? "");
+      setSelectedTab(getUniqueRounds(matches)[2] ?? "");
     } else {
       setSelectedTab(getKnockoutStages(matches)[0] ?? "");
     }

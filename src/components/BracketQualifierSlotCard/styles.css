@@ -1,4 +1,4 @@
-.bracket-slot-card {
+.bq-slot-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,38 +11,38 @@
   user-select: none;
 }
 
-.bracket-slot-card:active {
+.bq-slot-card:active {
   transform: scale(0.98);
 }
 
-.bracket-slot-card--filled {
+.bq-slot-card--filled {
   background-color: rgba(0, 107, 71, 0.05);
   border-color: rgba(0, 107, 71, 0.2);
 }
 
-.bracket-slot-card--readonly {
+.bq-slot-card--readonly {
   cursor: default;
   opacity: 0.7;
 }
 
-.bracket-slot-card--readonly:active {
+.bq-slot-card--readonly:active {
   transform: none;
 }
 
-.bracket-slot-card__left {
+.bq-slot-card__left {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.bracket-slot-card__number-box {
+.bq-slot-card__number-box {
   border-right: 1px solid rgba(189, 202, 192, 0.3);
   padding-right: 16px;
   text-align: center;
   min-width: 40px;
 }
 
-.bracket-slot-card__number-label {
+.bq-slot-card__number-label {
   font-family: var(--font-headline);
   font-size: 10px;
   font-weight: 900;
@@ -53,7 +53,7 @@
   display: block;
 }
 
-.bracket-slot-card__number {
+.bq-slot-card__number {
   font-family: var(--font-headline);
   font-size: 18px;
   font-weight: 700;
@@ -62,13 +62,13 @@
   display: block;
 }
 
-.bracket-slot-card__info {
+.bq-slot-card__info {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.bracket-slot-card__flag {
+.bq-slot-card__flag {
   width: 24px;
   height: 16px;
   object-fit: cover;
@@ -76,66 +76,22 @@
   margin-bottom: 2px;
 }
 
-.bracket-slot-card__team-name {
+.bq-slot-card__team-name {
   font-family: var(--font-headline);
   font-weight: 700;
   font-size: 18px;
-  color: var(--on-surface);
 }
 
-.bracket-slot-card__team-name--filled {
+.bq-slot-card__team-name--filled {
   color: var(--primary);
 }
 
-.bracket-slot-card__team-name--empty {
+.bq-slot-card__team-name--empty {
   color: var(--on-surface-variant);
   font-weight: 500;
 }
 
-/* Right side: points badge + action button */
-.bracket-slot-card__right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.bracket-slot-card__pts-badge {
-  display: flex;
-  align-items: baseline;
-  gap: 0.2rem;
-  padding: 0.375rem 0.65rem;
-  border-radius: 9999px;
-  min-width: 52px;
-  justify-content: center;
-}
-
-.bracket-slot-card__pts-badge--positive {
-  color: #2e7d32;
-  border: 1px solid color-mix(in srgb, #2e7d32 18%, transparent);
-  background-color: color-mix(in srgb, #2e7d32 12%, transparent);
-}
-
-.bracket-slot-card__pts-badge--zero {
-  color: #ba1a1a;
-  border: 1px solid color-mix(in srgb, #ba1a1a 18%, transparent);
-  background-color: color-mix(in srgb, #ba1a1a 12%, transparent);
-}
-
-.bracket-slot-card__pts-value {
-  font-family: var(--font-headline);
-  font-size: 0.875rem;
-  font-weight: 900;
-}
-
-.bracket-slot-card__pts-unit {
-  font-family: var(--font-headline);
-  font-size: 0.6rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.bracket-slot-card__action {
+.bq-slot-card__action {
   width: 40px;
   height: 40px;
   border-radius: 9999px;
@@ -147,16 +103,16 @@
   transition: background-color 0.2s;
 }
 
-.bracket-slot-card:not(.bracket-slot-card--readonly):hover .bracket-slot-card__action {
+.bq-slot-card:not(.bq-slot-card--readonly):hover .bq-slot-card__action {
   background-color: rgba(0, 107, 71, 0.1);
 }
 
-.bracket-slot-card__action .material-symbols-outlined {
+.bq-slot-card__action .material-symbols-outlined {
   color: var(--primary);
   font-size: 24px;
 }
 
-.bracket-slot-card--readonly .bracket-slot-card__action .material-symbols-outlined {
+.bq-slot-card--readonly .bq-slot-card__action .material-symbols-outlined {
   color: var(--on-surface-variant);
   opacity: 0.5;
 }

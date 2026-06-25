@@ -1,9 +1,13 @@
 import "./styles.css";
 import { KnockoutStage } from "../../enums/KnockoutStage";
-import type { StageView } from "../../hooks/useBracket";
+
+interface StageTab {
+  stage: KnockoutStage;
+  label: string;
+}
 
 interface BracketRoundTabsProps {
-  stages: StageView[];
+  stages: StageTab[];
   activeStage: KnockoutStage;
   onStageChange: (stage: KnockoutStage) => void;
 }
