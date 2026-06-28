@@ -21,7 +21,7 @@ import paths from "../../routes/paths";
 export function Matches() {
   const [matches, setMatches] = useState<IMatch[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.GroupStage);
+  const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.Knockout);
   const [selectedTab, setSelectedTab] = useState<string>("");
 
   const { auth } = useAuth();

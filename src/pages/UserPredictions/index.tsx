@@ -24,7 +24,7 @@ export function UserPredictions() {
   const { matches, guesses, isLoading, error } = useUserPredictions(participantId);
   const { ranking } = usePoolRanking(activePool?.poolId);
 
-  const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.GroupStage);
+  const [selectedPhase, setSelectedPhase] = useState<MatchPhase>(MatchPhase.Knockout);
   const [selectedTab, setSelectedTab] = useState<string>("");
 
   const loading = useMinimumLoading(isLoading);
