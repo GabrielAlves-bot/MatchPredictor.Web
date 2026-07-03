@@ -55,7 +55,7 @@ export function Matches() {
     if (selectedPhase === MatchPhase.GroupStage) {
       setSelectedTab(getUniqueRounds(matches)[2] ?? "");
     } else {
-      setSelectedTab(getKnockoutStages(matches)[1] ?? "");
+      setSelectedTab(getKnockoutStages(matches)[0] ?? "");
     }
   }, [matches, selectedPhase, selectedTab]);
 
