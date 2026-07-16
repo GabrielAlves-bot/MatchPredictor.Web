@@ -8,9 +8,6 @@ interface IProps {
   onClose: () => void;
 }
 
-// TODO: substituir pela chave Pix real
-const PIX_KEY = "sua-chave-pix@email.com";
-
 export function SupportModal({ isOpen, onClose }: IProps) {
   useEffect(() => {
     if (!isOpen) return;
