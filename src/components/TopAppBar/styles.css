@@ -43,3 +43,23 @@
   transform: scale(0.95);
   background-color: #064e3b80;
 }
+
+.icon-button--support {
+  color: var(--primary);
+  animation: top-app-bar-pulse 2s ease infinite;
+}
+
+@keyframes top-app-bar-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

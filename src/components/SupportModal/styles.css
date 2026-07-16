@@ -1,0 +1,170 @@
+.support-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+  animation: support-modal-fade-in 0.2s ease;
+}
+
+@keyframes support-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.support-modal__card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: var(--surface-container-lowest);
+  border-radius: 24px;
+  padding: 32px 20px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.16);
+  animation: support-modal-scale-in 0.2s ease;
+}
+
+@keyframes support-modal-scale-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.support-modal__close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  transition: background-color var(--transition-fast);
+}
+
+.support-modal__close-button:active {
+  background-color: var(--surface-container);
+}
+
+.support-modal__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 20px;
+  border: 4px solid var(--primary);
+}
+
+.support-modal__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.support-modal__name {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--on-surface);
+}
+
+.support-modal__bio {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+  margin-bottom: 24px;
+}
+
+.support-modal__linkedin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  /* Azul de marca do LinkedIn: mantido fixo, fora do sistema de tema */
+  background: #0077b5;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 32px;
+  transition: opacity var(--transition-fast);
+}
+
+.support-modal__linkedin-button:active {
+  opacity: 0.9;
+}
+
+.support-modal__linkedin-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.support-modal__divider {
+  border-top: 1px solid var(--surface-container);
+  padding-top: 32px;
+}
+
+.support-modal__pix-title {
+  font-family: var(--font-label);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+.support-modal__qr-container {
+  background: var(--surface-container-low);
+  padding: 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.support-modal__qr-image {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+.support-modal__pix-button {
+  width: 100%;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.support-modal__pix-button:active {
+  opacity: 0.9;
+}
